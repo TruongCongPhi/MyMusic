@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnl_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/_32dp"
+    tools:ignore="MissingConstraints"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_launcher_foreground"></ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center_horizontal"
+        android:text="Hàng triệu bài hát. Miễn phí trên Music"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"></TextView>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="#73BBC9"
+        android:text="Đăng kí miễn phí"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/btn_login_phonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/custom_button_login"
+        android:drawableLeft="@drawable/ic_phone"
+        android:text="Tiếp tục bắng số điện thoại"
+        android:textSize="@dimen/_16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:id="@+id/btn_login_accountgoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/custom_button_login"
+        android:drawableLeft="@drawable/ic_google"
+        android:text="Tiếp tục bằng Google"
+        android:textSize="@dimen/_16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:id="@+id/btn_loginFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/custom_button_login"
+        android:drawableLeft="@drawable/ic_facebook"
+        android:text="Tiếp tục bằng Facebook"
+        android:textSize="@dimen/_16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+
+        />
+
+    <Button
+        android:id="@+id/btn_login1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:text="Đăng nhập"
+        android:textSize="@dimen/_16sp"
+        android:textStyle="bold"></Button>
+
+
+</LinearLayout>
+
+
