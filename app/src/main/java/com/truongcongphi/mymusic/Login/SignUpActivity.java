@@ -3,9 +3,13 @@ package com.truongcongphi.mymusic.Login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +25,9 @@ import com.truongcongphi.mymusic.R;
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtEmail, edtPasword;
     private Button btnSignUp;
+    ImageButton btnBack;
     private FirebaseAuth mAuth;
+    boolean passwordCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +47,11 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(SignUpActivity.this, "Vui lòng nhập email!",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 if (TextUtils.isEmpty(pass)){
                     Toast.makeText(SignUpActivity.this, "vui lòng nhập password!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 mAuth.createUserWithEmailAndPassword(email,pass ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -60,6 +68,40 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUpActivity.this,HomeLoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+
+            }
+        });
+        edtPasword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int right = 2;
+                if(event.getAction()==MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= edtPasword.getRight() - edtPasword.getCompoundDrawables()[right].getBounds().width()) {
+                        int selection = edtPasword.getSelectionEnd();
+                        if (passwordCheck) {
+                            edtPasword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_not_show_password, 0);
+                            edtPasword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+                            passwordCheck = false;
+                        } else {
+                            edtPasword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_show_password, 0);
+                            edtPasword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordCheck = true;
+                        }
+                        edtPasword.setSelection(selection);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     private void addViews() {
@@ -67,5 +109,6 @@ public class SignUpActivity extends AppCompatActivity {
         edtPasword = (EditText) findViewById(R.id.edt_password);
         btnSignUp = (Button) findViewById(R.id.btn_signup);
         mAuth = FirebaseAuth.getInstance();
+        btnBack = (ImageButton) findViewById(R.id.btn_back);
     }
 }

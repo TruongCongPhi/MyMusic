@@ -51,6 +51,7 @@
         android:text="Tiếp tục bắng số điện thoại"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:backgroundTint="@null" />
 
     <Button
@@ -63,6 +64,7 @@
         android:text="Tiếp tục bằng Google"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:backgroundTint="@null" />
 
     <Button
@@ -71,13 +73,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         android:background="@drawable/custom_button_login"
-        android:drawableLeft="@drawable/ic_facebook"
         android:text="Tiếp tục bằng Facebook"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:backgroundTint="@null"
-
-        />
+        android:drawableLeft="@drawable/ic_facebook" />
 
     <Button
         android:id="@+id/btn_login1"
@@ -87,7 +88,8 @@
         android:backgroundTint="@color/black"
         android:text="Đăng nhập"
         android:textSize="@dimen/_16sp"
-        android:textStyle="bold"></Button>
+        android:textStyle="bold"
+        android:textColor="@color/white"></Button>
 
 
 </LinearLayout>
