@@ -4,21 +4,96 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hãy nhập địa chỉ email?"
+    android:textSize="20dp"
+    android:textStyle="bold|italic"
+    />
     <EditText
         android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="email"
-        android:textSize="36sp"
+        android:textSize="30dp"
         android:inputType="textEmailAddress"></EditText>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Tên tài khoản"
+       android:textSize="20dp"
+       android:textStyle="bold|italic"
+       />
+    <EditText
+        android:id="@+id/edt_tentk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/txt_tendn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên đăng nhập"
+        android:textSize="20dp"
+        android:textStyle="bold|italic"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        android:textColor="#FF0000"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/txt_mk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu"
+        android:textSize="20dp"
+        android:textStyle="bold|italic"
+        />
+    <TextView
+        android:id="@+id/txt_canhbao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="* Mật khẩu bao gồm kí tự đặc biệt, chữ cái in hoa và số..."
+        android:textColor="#FF0000"
+        />
+
     <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
-        android:textSize="36sp"
-        android:inputType="textPassword"></EditText>
+        android:hint=""
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/txt_nhaplai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhập lại mật khẩu"
+        android:textSize="20dp"
+        android:textStyle="bold|italic"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        android:textColor="#FF0000"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:textSize="30dp"
+        />
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
