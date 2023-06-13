@@ -2,107 +2,191 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-<TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:gravity="center"
+    >
+<LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hãy nhập địa chỉ email?"
-    android:textSize="20dp"
-    android:textStyle="bold|italic"
-    />
-    <EditText
-        android:id="@+id/edt_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:inputType="textEmailAddress"></EditText>
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="Tên tài khoản"
-       android:textSize="20dp"
-       android:textStyle="bold|italic"
-       />
-    <EditText
-        android:id="@+id/edt_tentk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        />
-    <TextView
-        android:id="@+id/txt_tendn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tên đăng nhập"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*"
-        android:textColor="#FF0000"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=""
-        android:textSize="30dp"
-        />
-    <TextView
-        android:id="@+id/txt_mk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mật khẩu"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        />
-    <TextView
-        android:id="@+id/txt_canhbao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="* Mật khẩu bao gồm kí tự đặc biệt, chữ cái in hoa và số..."
-        android:textColor="#FF0000"
-        />
+    android:layout_height="match_parent"
+ android:orientation="vertical"
+    android:layout_margin="@dimen/_32dp"
+    >
+ <ImageButton
+     android:layout_width="40dp"
+     android:layout_height="40dp"
+     android:background="@drawable/ic_back"
+     ></ImageButton>
 
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=""
-        android:textSize="30dp"
-        />
-    <TextView
-        android:id="@+id/txt_nhaplai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nhập lại mật khẩu"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*"
-        android:textColor="#FF0000"
-        />
+ <TextView
+     android:layout_marginTop="10dp"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Nhập địa chỉ email?"
+     android:textSize="20dp"
+     android:textStyle="bold|italic"
+     android:textColor="@color/white"
+     />
+ <EditText
+     android:layout_marginTop="10dp"
+     android:background="@drawable/custom_edttext"
+     android:backgroundTint="#423F3E"
+     android:id="@+id/edt_email"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:textSize="20dp"
+     android:inputType="textEmailAddress"
+     android:padding="8dp"
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=""
-        android:textSize="30dp"
-        />
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đăng kí"
-        android:textSize="36sp"></Button>
+     ></EditText>
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal">
+  <TextView
+      android:layout_marginTop="10dp"
+      android:id="@+id/txt_tendn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Tên đăng nhập"
+      android:textSize="20dp"
+      android:textStyle="bold|italic"
+      android:textColor="@color/white"
+      />
+  <TextView
+      android:layout_marginLeft="10dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="*"
+      android:textColor="#FF0000"
+      />
+ </LinearLayout>
+ <EditText
+     android:background="@drawable/custom_edttext"
+     android:backgroundTint="#423F3E"
+     android:layout_marginTop="10dp"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:hint=""
+     android:textSize="20dp"
+     android:padding="8dp"
+
+     />
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     >
+
+  <TextView
+      android:layout_marginTop="10dp"
+      android:id="@+id/txt_mk"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Mật khẩu"
+      android:textSize="20dp"
+      android:textStyle="bold|italic"
+      android:textColor="@color/white"
+      />
+  <TextView
+      android:layout_marginLeft="10dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="*"
+      android:textColor="#FF0000"
+      />
+ </LinearLayout>
+
+ <TextView
+     android:id="@+id/txt_canhbao"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Mật khẩu bao gồm kí tự đặc biệt, chữ cái in hoa và số..."
+     android:textColor="#FF0000"
+     />
+
+ <EditText
+     android:layout_marginTop="10dp"
+     android:padding="8dp"
+     android:background="@drawable/custom_edttext"
+     android:backgroundTint="#423F3E"
+     android:id="@+id/edt_password"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:textSize="20dp"
+     android:inputType="textPassword"
+     />
+ <LinearLayout
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal">
+
+  <TextView
+      android:layout_marginTop="10dp"
+      android:id="@+id/txt_nhaplai"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Nhập lại mật khẩu"
+      android:textSize="20dp"
+      android:textStyle="bold|italic"
+      android:textColor="@color/white"
+      />
+  <TextView
+      android:layout_marginLeft="10dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="*"
+      android:textColor="#FF0000"
+      />
+ </LinearLayout>
 
 
+ <EditText
+     android:layout_marginTop="10dp"
+     android:background="@drawable/custom_edttext"
+     android:backgroundTint="#423F3E"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:hint=""
+     android:textSize="20dp"
+     android:padding="8dp"
+     android:inputType="textPassword"
+     />
+ <Button
+     android:layout_marginTop="20dp"
+     android:id="@+id/btn_signup"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Đăng kí"
+     android:textColor="@color/black"
+     android:textSize="30sp"
+     android:layout_gravity="center"
+     app:backgroundTint="#73bbc9"
+     android:textStyle="bold"
 
+     ></Button>
+
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+
+     >
+
+  <TextView
+
+      android:layout_centerInParent="true"
+      android:layout_alignParentBottom="true"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Không để trống những mục đánh dấu *"
+      android:textColor="#FF0000"
+
+      />
+ </RelativeLayout>
+
+</LinearLayout>
 
 
 
