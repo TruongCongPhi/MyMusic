@@ -2,92 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lnl_login"
+    android:id="@+id/view_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_32dp"
+    tools:context=".Login.LoginActivity"
     android:orientation="vertical"
-    android:background="@color/black"
-    tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="1dp"
-    tools:ignore="MissingConstraints"
-    android:gravity="center">
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/ic_launcher_foreground"
-        android:layout_gravity="center"></ImageView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hàng triệu bài hát. Miễn phí trên Music"
-        android:layout_marginBottom="40dp"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center_horizontal"></TextView>
-
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#73BBC9"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16sp"
-        android:text="Đăng kí miễn phí"
-        android:layout_marginBottom="6dp"
-        />
+    android:background="@color/white">
 
 
-    <Button
-        android:id="@+id/btn_login_phonenumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/custom_button_login"
-        android:drawableLeft="@drawable/ic_phone"
-        android:text="Tiếp tục bắng số điện thoại"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        app:backgroundTint="@null" />
-
-    <Button
-        android:id="@+id/btn_login_accountgoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/custom_button_login"
-        android:text="Tiếp tục bằng Google"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        app:backgroundTint="@null"
-        android:drawableLeft="@drawable/ic_google"/>
-
-    <Button
-        android:id="@+id/btn_loginFacebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_button_login"
-        app:backgroundTint="@null"
-        android:text="Tiếp tục bằng Facebook"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="6dp"
-        android:drawableLeft="@drawable/ic_facebook"
-
-        />
-
-    <Button
-        android:id="@+id/btn_login"
+    <ImageButton
+        android:id="@+id/image_btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/black"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <EditText
+        android:id="@+id/edt_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="email"
+        android:textSize="36sp"
+        android:inputType="textEmailAddress"></EditText>
+    <EditText
+        android:id="@+id/edt_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:textSize="36sp"
+        android:inputType="textPassword"></EditText>
+    <Button
+        android:id="@+id/btn_login2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Đăng nhập"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        ></Button>
+        android:textSize="36sp"></Button>
 </LinearLayout>
 

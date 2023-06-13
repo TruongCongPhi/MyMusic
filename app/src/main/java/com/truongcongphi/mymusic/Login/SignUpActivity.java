@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic;
+package com.truongcongphi.mymusic.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.truongcongphi.mymusic.MainActivity;
+import com.truongcongphi.mymusic.R;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtEmail, edtPasword;
@@ -48,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "tạo tài khoản thành công!",Toast.LENGTH_SHORT).show();
-                            Intent intentHome = new Intent(SignUpActivity.this,MainActivity.class);
+                            Intent intentHome = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intentHome);
                         }else {
                             Toast.makeText(getApplicationContext(), "tạo tài khoản không thành công!",Toast.LENGTH_SHORT).show();
