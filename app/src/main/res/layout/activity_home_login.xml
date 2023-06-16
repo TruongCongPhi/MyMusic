@@ -40,26 +40,12 @@
         android:textSize="@dimen/_16sp"
         android:textStyle="bold" />
 
-
-    <Button
-        android:id="@+id/btn_login_phonenumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/custom_button_login"
-        android:drawableLeft="@drawable/ic_phone"
-        android:text="Tiếp tục bắng số điện thoại"
-        android:textSize="@dimen/_16sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        app:backgroundTint="@null" />
-
     <Button
         android:id="@+id/btn_login_accountgoogle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:background="@drawable/custom_button_login"
+        android:background="@drawable/custom_button_login_home"
         android:drawableLeft="@drawable/ic_google"
         android:text="Tiếp tục bằng Google"
         android:textSize="@dimen/_16sp"
@@ -72,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:background="@drawable/custom_button_login"
+        android:background="@drawable/custom_button_login_home"
         android:text="Tiếp tục bằng Facebook"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"

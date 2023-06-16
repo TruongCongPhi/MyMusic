@@ -1,6 +1,7 @@
-package com.truongcongphi.mymusic.Login;
+package com.truongcongphi.mymusic.Activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -19,11 +20,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.truongcongphi.mymusic.MainActivity;
 import com.truongcongphi.mymusic.R;
 
 public class SignUpActivity extends AppCompatActivity {
-    private EditText edtEmail, edtPasword;
+    private EditText edtEmail, edtPasword, edtPasword2;
     private Button btnSignUp;
     ImageButton btnBack;
     private FirebaseAuth mAuth;
@@ -34,6 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         addViews();
         addEvents();
+
 
     }
 
@@ -102,6 +103,34 @@ public class SignUpActivity extends AppCompatActivity {
                 return false;
             }
         });
+       edtPasword2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int right = 2;
+                if(event.getAction()==MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= edtPasword.getRight() - edtPasword.getCompoundDrawables()[right].getBounds().width()) {
+                        int selection = edtPasword.getSelectionEnd();
+                        if (passwordCheck) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                                edtPasword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_not_show_password, 0);
+                            }
+                            edtPasword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+                            passwordCheck = false;
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                                edtPasword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_show_password, 0);
+                            }
+                            edtPasword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordCheck = true;
+                        }
+                        edtPasword.setSelection(selection);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     private void addViews() {
@@ -110,5 +139,6 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btn_signup);
         mAuth = FirebaseAuth.getInstance();
         btnBack = (ImageButton) findViewById(R.id.btn_back);
+        edtPasword2 = (EditText) findViewById(R.id.edt_password2);
     }
 }

@@ -1,8 +1,11 @@
-package com.truongcongphi.mymusic;
+package com.truongcongphi.mymusic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+
+import com.truongcongphi.mymusic.R;
 
 public class MainActivity extends AppCompatActivity {
 
