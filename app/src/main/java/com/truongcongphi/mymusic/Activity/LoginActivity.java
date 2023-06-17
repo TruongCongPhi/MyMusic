@@ -1,9 +1,13 @@
-package com.truongcongphi.mymusic.Login;
+package com.truongcongphi.mymusic.Activity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
@@ -20,7 +24,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.truongcongphi.mymusic.MainActivity;
 import com.truongcongphi.mymusic.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,17 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email, pass;
                 email = edtEmail.getText().toString();
                 pass = edtPasword.getText().toString();
-
-                if (TextUtils.isEmpty(email)){
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập email!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (TextUtils.isEmpty(pass)){
-                    Toast.makeText(LoginActivity.this, "vui lòng nhập password!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                mAuth.signInWithEmailAndPassword(email,pass ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
@@ -63,24 +56,25 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intentHome = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intentHome);
                         }else {
-                            Toast.makeText(getApplicationContext(), "Đăng nhập không thành công!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu không chính xác!",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
             }
         });
+
+        // button quay lại
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,HomeLoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-
             }
         });
 
+        // ẩn-hiện password
         edtPasword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -109,6 +103,48 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // bắt buộc nhap đủ email-pass mới hiển thị button
+        edtEmail.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                boolean isEnabled = !TextUtils.isEmpty(s.toString()) && !TextUtils.isEmpty(edtPasword.getText().toString());
+                btnLogin2.setEnabled(isEnabled);
+                if (isEnabled) {
+                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+                } else {
+                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#423F3E")));
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        edtPasword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                boolean isEnabled =!TextUtils.isEmpty(s.toString()) && !TextUtils.isEmpty(edtEmail.getText().toString());
+                btnLogin2.setEnabled(isEnabled);
+                if (isEnabled) {
+                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+                } else {
+                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#423F3E")));
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
     }
 
     private void addViews() {
@@ -117,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin2 = (Button) findViewById(R.id.btn_login2);
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         mAuth = FirebaseAuth.getInstance();
+
     }
 
 }

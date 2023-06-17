@@ -76,6 +76,7 @@
       />
  </LinearLayout>
  <EditText
+     android:id="@+id/edt_name"
      android:background="@drawable/custom_edttext"
      app:backgroundTint="@null"
      android:layout_marginTop="10dp"
@@ -157,6 +158,7 @@
 
 
  <EditText
+     android:id="@+id/edt_password2"
      android:layout_marginTop="10dp"
      android:background="@drawable/custom_edttext"
      app:backgroundTint="@null"

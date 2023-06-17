@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.Login;
+package com.truongcongphi.mymusic.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import com.truongcongphi.mymusic.R;
 
 
 public class HomeLoginActivity extends AppCompatActivity {
-    Button btnLoginFB, btnLoginPNumber , btnRegister, btnLoginGoogle, btnLogin1;
+    Button btnLoginFB, btnLoginPhoneNumber , btnRegister, btnLoginGoogle, btnLogin1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,30 +23,29 @@ public class HomeLoginActivity extends AppCompatActivity {
         addViews();
         addEvents();
         addButtonAnimator();
-
-
     }
 
 
 
     private void addViews() {
         btnLoginFB = (Button) findViewById(R.id.btn_loginFacebook);
-        btnLoginPNumber = (Button) findViewById(R.id.btn_login_phonenumber);
+
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnLoginGoogle = (Button) findViewById(R.id.btn_login_accountgoogle);
         btnLogin1 = (Button) findViewById(R.id.btn_login1);
+
     }
 
     //set các hiệu cho button
     public void addButtonAnimator(){
         btnRegister.setOnTouchListener(new ButtonAnimator(btnRegister));
-        btnLoginPNumber.setOnTouchListener(new ButtonAnimator(btnLoginPNumber));
         btnLoginGoogle.setOnTouchListener(new ButtonAnimator(btnLoginGoogle));
         btnLoginFB.setOnTouchListener(new ButtonAnimator(btnLoginFB));
         btnLogin1.setOnTouchListener(new ButtonAnimator(btnLogin1));
     }
 // chuyển trang đăng kí
     public void addEvents() {
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
