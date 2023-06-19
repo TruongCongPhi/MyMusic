@@ -1,30 +1,30 @@
 package com.truongcongphi.mymusic.test;
 
 public class User {
-    private String mEmail;
-    private String mPassword;
+    private String email;
+    private String password;
 
     public User() {
     }
 
-    public User(String mEmail, String mPassword) {
-        this.mEmail = mEmail;
-        this.mPassword = mPassword;
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public String getmEmail() {
-        return mEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getmPassword() {
-        return mPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setmPassword(String mPassword) {
-        this.mPassword = mPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

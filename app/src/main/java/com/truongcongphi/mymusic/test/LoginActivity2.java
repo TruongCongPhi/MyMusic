@@ -24,8 +24,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Activity.MainActivity;
 import com.truongcongphi.mymusic.R;
 
@@ -46,33 +49,49 @@ public class LoginActivity2 extends AppCompatActivity {
     private void addEvents() {
 
         btnLogin2.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String email, pass;
                 email = edtEmail.getText().toString();
                 pass = edtPasword.getText().toString();
-                User user = new User(email,pass);
-                user.setmEmail(email);
-                user.setmPassword(pass);
-                mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                User user = new User(email, pass);
+                user.setEmail(email);
+                user.setPassword(pass);
+                mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             Intent intentHome = new Intent(LoginActivity2.this, MainActivity.class);
                             startActivity(intentHome);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu không chính xác!",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-
-
-
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("users");
-                myRef.push().setValue(user);
+
+
+                // Kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu chưa
+                myRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            // Người dùng chưa tồn tại trong cơ sở dữ liệu, thêm họ vào cơ sở dữ liệu
+                            myRef.push().setValue(user);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+
+
+                });
             }
         });
 
