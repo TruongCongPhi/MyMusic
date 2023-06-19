@@ -38,10 +38,22 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addViews();
         addEvents();
-
     }
 
     private void addEvents() {
+
+
+
+
+
+
+
+
+
+
+
+
+
         btnLogin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +73,15 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
+
+
+
+
+
             }
+
         });
+
 
         // button quay lại
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +172,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin2 = (Button) findViewById(R.id.btn_login2);
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         mAuth = FirebaseAuth.getInstance();
-
     }
 
 }
