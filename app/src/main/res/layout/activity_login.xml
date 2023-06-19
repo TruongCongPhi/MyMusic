@@ -78,18 +78,19 @@
         />
 
     <Button
-        android:layout_marginTop="20dp"
         android:id="@+id/btn_login2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_login_custom_off"
+        android:enabled="false"
         android:text="Đăng nhập"
         android:textColor="@color/black"
         android:textSize="@dimen/button_textsize_20sp"
-        android:layout_gravity="center"
-        android:background="@drawable/button_login_custom_off"
-        app:backgroundTint="@null"
         android:textStyle="bold"
-        android:enabled="false"/>
+        app:backgroundTint="@null" />
+
     <TextView
         android:id="@+id/get_password"
         android:layout_width="wrap_content"
