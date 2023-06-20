@@ -5,70 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity"
-
+    android:background="#ff0"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#000000"
-        android:padding="15dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Have a great day 💙"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            />
+    <TextView
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Music"
-            android:textSize="17dp"
-            android:background="@drawable/button_login_custom_off"
-            app:backgroundTint="@null"
-            />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Podcast &amp; shows"
-                android:layout_marginLeft="10dp"
-                android:textSize="17dp"
-                android:background="@drawable/button_login_custom_off"
-                app:backgroundTint="@null"
-                />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Popular radio"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginTop="30dp"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            />
-    </LinearLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

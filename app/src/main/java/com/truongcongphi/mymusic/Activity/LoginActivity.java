@@ -1,6 +1,7 @@
 package com.truongcongphi.mymusic.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -24,7 +25,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.R;
+import com.truongcongphi.mymusic.test.User;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPasword;
@@ -44,16 +52,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
         btnLogin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,18 +63,34 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                            Intent intentHome = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intentHome = new Intent(LoginActivity.this, AccountActivity.class);
                             startActivity(intentHome);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu không chính xác!",Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String uid = user.getUid();
+                            User user1 = new User();
+                            user1.setEmail(email);
+                            user1.setPassword(pass);
+
+                            // Kiểm tra xem tài khoản đã tồn tại trên cơ sở dữ liệu chưa
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (!dataSnapshot.exists()) {
+                                        // Nếu tài khoản chưa tồn tại trên cơ sở dữ liệu thì lưu email lên cơ sở dữ liệu
+                                        mDatabase.child("users").child(uid).setValue(user1);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
+
                     }
                 });
-
-
-
-
-
 
             }
 

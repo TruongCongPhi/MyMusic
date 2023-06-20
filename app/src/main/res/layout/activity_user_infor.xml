@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Activity.AccountActivity"
+    android:orientation="vertical"
     android:background="@color/black"
-    android:orientation="vertical">
+    >
+
     <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Name"
+        android:textColor="@color/white"></TextView>
+    <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="email"
         android:textSize="30sp"
+        android:text="email"
         android:textColor="@color/white"></TextView>
     <EditText
-        android:id="@+id/edt_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/edt_user_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="nhap ten nguoi dung"
+        android:hint="nhập ten tài khoản"
         android:background="@color/white"
         android:textSize="30sp"></EditText>
-    <TextView
-        android:id="@+id/tv_name"
+
+
+    <Button
+        android:id="@+id/btn_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ten người dùng"
-        android:textSize="30sp"
-        android:textColor="@color/white"></TextView>
+        android:text="đổi tên"></Button>
+    <Button
+        android:id="@+id/btn_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sign out"></Button>
 
+    <EditText
+        android:id="@+id/edt_get_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="url"
+        android:textSize="30sp"></EditText>
 
+    <Button
+        android:id="@+id/btn_get_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="get url"></Button>
 
+    <Button
+        android:id="@+id/btn_push_song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="push song" />
 
 
 </LinearLayout>

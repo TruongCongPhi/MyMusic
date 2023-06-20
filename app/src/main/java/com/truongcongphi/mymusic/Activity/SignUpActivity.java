@@ -1,8 +1,7 @@
 package com.truongcongphi.mymusic.Activity;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -49,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
                 email = edtEmail.getText().toString();
                 pass = edtPasword.getText().toString();
 
+
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(SignUpActivity.this, "Vui lòng nhập email!",Toast.LENGTH_SHORT).show();
                     return;
@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "tạo tài khoản thành công!",Toast.LENGTH_SHORT).show();
-                            Intent intentHome = new Intent(SignUpActivity.this, MainActivity.class);
+                            Intent intentHome = new Intent(SignUpActivity.this, AccountActivity.class);
                             startActivity(intentHome);
                         }else {
                             Toast.makeText(getApplicationContext(), "tạo tài khoản không thành công!",Toast.LENGTH_SHORT).show();
