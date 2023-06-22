@@ -11,14 +11,35 @@
         android:id="@+id/btn_push_song"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="push song" />
+        android:text="update song" />
+    <Button
+        android:id="@+id/btn_update_singer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update ca sĩ" />
 
     <Button
         android:id="@+id/btn_album"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="show album" />
-
+        android:text="update album" />
+    <Button
+        android:id="@+id/btn_update_url_name_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update URL- NAME album" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="check"
+            />
+    </RelativeLayout>
 
 
 </LinearLayout>

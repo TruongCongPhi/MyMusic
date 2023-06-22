@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView artistRecyclerView;
     private ArtistAdapter artistAdapter;
+    private TextView tvShow;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         getAlbumData();
         getArtistData();
+
     }
 
     private void getAlbumData() {
@@ -77,12 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
                 // Cập nhật dữ liệu cho AlbumAdapter
                 albumAdapter.setData(albums);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Xử lý lỗi tại đây
             }
+
         });
     }
 
