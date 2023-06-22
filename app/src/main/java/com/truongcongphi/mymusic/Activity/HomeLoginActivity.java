@@ -30,7 +30,6 @@ public class HomeLoginActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
-    private boolean showOneTapUI = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,82 +39,8 @@ public class HomeLoginActivity extends AppCompatActivity {
         addEvents();
         addButtonAnimator();
         mAuth = FirebaseAuth.getInstance();
-        btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInGoogle();
-            }
-        });
-        createRequest();
-    }
-
-    private void createRequest() {
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-    }
-
-
-    private void signInGoogle() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 1000);
 
     }
-
-//        @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1000) {
-//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//            try {
-//                task.getResult(ApiException.class);
-//                Toast.makeText(this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-//                navigateToSecondActivity();
-//            } catch (ApiException e) {
-//                Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == 1000) {
-        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-        try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            String idToken = account.getIdToken();
-            AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-            mAuth.signInWithCredential(credential)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success
-                                Toast.makeText(HomeLoginActivity.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                                navigateToSecondActivity();
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        } catch (ApiException e) {
-            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-        }
-    }
-}
-
-
-
-
-
-        private void navigateToSecondActivity () {
-            finish();
-            Intent intent = new Intent(HomeLoginActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
 
 
 

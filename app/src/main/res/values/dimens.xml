@@ -7,4 +7,5 @@
     <dimen name="fragment_vertical_margin">16dp</dimen>
     <dimen name="button_textsize_20sp">20sp</dimen>
     <dimen name="tv_email_pass_28sp">28sp</dimen>
+    <dimen name="magrin_left_14dp">14dp</dimen>
 </resources>
