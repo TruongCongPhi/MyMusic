@@ -1,64 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg_color"
+    android:scrollbars="none"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Album nổi bật"
-        android:textSize="24sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/white"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/album_rcv"
+    <LinearLayout
+        android:id="@+id/linerlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nghệ sĩ"
-        android:textSize="24sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/white"
-        />
+        <fragment
+            android:id="@+id/fragment_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.truongcongphi.mymusic.Fragment.AlbumFragment"
+            ></fragment>
+        <fragment
+            android:id="@+id/fragment_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.truongcongphi.mymusic.Fragment.ArtistFragment"
+            ></fragment>
+    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/artist_rcv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-</LinearLayout>
-    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:layout_marginLeft="10dp">-->
-
-    <!--    <FrameLayout-->
-    <!--        android:id="@+id/fragment_container"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_above="@+id/bottom_navigation" />-->
-
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:id="@+id/bottom_navigation"-->
-    <!--        app:menu="@menu/bottom_navigation_menu"-->
-    <!--        android:layout_alignParentBottom="true"></com.google.android.material.bottomnavigation.BottomNavigationView>-->
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:id="@+id/rcv"></androidx.recyclerview.widget.RecyclerView>-->
-
-    <!--</RelativeLayout>-->
+</ScrollView>

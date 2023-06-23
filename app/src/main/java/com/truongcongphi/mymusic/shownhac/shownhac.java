@@ -33,7 +33,6 @@ import java.util.Map;
 public class shownhac extends AppCompatActivity {
     Button btnPushSong,btnUpdateSinger , btnAlbum, btnUpdateUrlNameAlbum,btnCheck;
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

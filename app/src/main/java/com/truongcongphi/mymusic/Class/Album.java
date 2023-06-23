@@ -1,6 +1,8 @@
 package com.truongcongphi.mymusic.Class;
 
-public class Album {
+import java.io.Serializable;
+
+public class Album implements Serializable {
     private String albumName,singerName;
     private String albumURL,albumID;
 
