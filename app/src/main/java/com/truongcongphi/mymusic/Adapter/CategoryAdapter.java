@@ -1,6 +1,5 @@
-package com.truongcongphi.mymusic.demoalbum;
+package com.truongcongphi.mymusic.Adapter;
 
-import android.animation.RectEvaluator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

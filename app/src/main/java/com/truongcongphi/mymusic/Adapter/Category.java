@@ -1,4 +1,6 @@
-package com.truongcongphi.mymusic.demoalbum;
+package com.truongcongphi.mymusic.Adapter;
+
+import com.truongcongphi.mymusic.Class.Album;
 
 import java.util.List;
 

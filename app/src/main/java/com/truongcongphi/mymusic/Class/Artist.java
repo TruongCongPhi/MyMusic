@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.demoalbum;
+package com.truongcongphi.mymusic.Class;
 
 public class Artist {
     private String imgURL,name;

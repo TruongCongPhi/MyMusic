@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.demoalbum;
+package com.truongcongphi.mymusic.Adapter;
 
 
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.R;
 
 import java.util.List;
@@ -33,12 +34,16 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         Artist artist = mArtist.get(position);
-        if(artist == null){
+        if (artist == null) {
             return;
         }
+
+        // Hiển thị ảnh ca sĩ
         Glide.with(holder.itemView.getContext())
                 .load(artist.getImgURL())
                 .into(holder.imgAlbum);
+
+        // Hiển thị tên ca sĩ
         holder.tvSingerName.setText(artist.getName());
     }
 

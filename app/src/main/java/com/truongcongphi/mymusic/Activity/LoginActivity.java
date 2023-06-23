@@ -30,8 +30,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.truongcongphi.mymusic.Fragment.HomeFragment;
 import com.truongcongphi.mymusic.R;
-import com.truongcongphi.mymusic.test.User;
+import com.truongcongphi.mymusic.Class.User;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPasword;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                            Intent intentHome = new Intent(LoginActivity.this, AccountActivity.class);
+                            Intent intentHome = new Intent(LoginActivity.this, HomeFragment.class);
                             startActivity(intentHome);
                             FirebaseUser user = mAuth.getCurrentUser();
                             String uid = user.getUid();

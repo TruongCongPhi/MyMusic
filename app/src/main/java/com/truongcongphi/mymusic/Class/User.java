@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.test;
+package com.truongcongphi.mymusic.Class;
 
 public class User {
     private  String userID;

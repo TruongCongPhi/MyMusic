@@ -12,24 +12,28 @@
         android:theme="@style/Theme.MyMusic"
         tools:targetApi="31">
         <activity
-            android:name=".Fragment.Fragment_Playlist"
-            android:exported="false" />
+            android:name=".Activity.ListAlbumActivity"
+            android:exported="true" />
         <activity
             android:name=".shownhac.shownhac"
             android:exported="true">
+
+
+        </activity>
+        <activity
+            android:name=".Activity.HomeLoginActivity"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Fragment.HomeFragment"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity
-            android:name=".Activity.HomeLoginActivity"
-            android:exported="false" >
-        </activity>
-
-
         <activity
             android:name=".Activity.AccountActivity"
             android:exported="false" />
@@ -44,6 +48,7 @@
             android:exported="true">
 
         </activity>
+
     </application>
 
 </manifest>
