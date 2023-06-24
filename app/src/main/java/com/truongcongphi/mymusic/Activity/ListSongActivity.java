@@ -2,6 +2,7 @@ package com.truongcongphi.mymusic.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,10 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +39,12 @@ public class ListSongActivity extends AppCompatActivity {
     Album album ;
     Artist artist;
     ArrayList<Song> listSong = new ArrayList<>();
+    CoordinatorLayout coordinatorLayout;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    Toolbar toolbar;
+    RecyclerView recyclerViewlistbaihat;
+    FloatingActionButton floatingActionButton;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -52,6 +62,16 @@ public class ListSongActivity extends AppCompatActivity {
         rcvSongs.setAdapter(songAdapter);
         dataIntent();
         getData();
+        anhxa();
+
+    }
+
+    private void anhxa() {
+        coordinatorLayout = findViewById(R.id.coordinatorlayout);
+        collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
+        toolbar = findViewById(R.id.toolbarlist);
+        recyclerViewlistbaihat = findViewById(R.id.rcv_songs);
+        floatingActionButton = findViewById(R.id.floatingactionbutton);
 
     }
 

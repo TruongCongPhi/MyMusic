@@ -6,16 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.truongcongphi.mymusic.Fragment.AccountFragment;
-import com.truongcongphi.mymusic.Fragment.HomeFragment;
-import com.truongcongphi.mymusic.Fragment.SearchFragment;
+import com.truongcongphi.mymusic.shownhac.Fragment.AccountFragment;
+import com.truongcongphi.mymusic.shownhac.Fragment.HomeFragment;
+import com.truongcongphi.mymusic.shownhac.Fragment.SearchFragment;
 import com.truongcongphi.mymusic.R;
 
 

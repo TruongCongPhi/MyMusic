@@ -1,29 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    android:id="@+id/coordinatorlayout"
+    android:background="#000000"
+    >
 
-    <androidx.cardview.widget.CardView
-        android:elevation="10dp"
-        android:layout_marginTop="70dp"
-        android:layout_gravity="center|top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:scaleType="centerCrop"
-            android:id="@+id/img_list"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/mck"
-            ></ImageView>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_songs"
-        android:background="@color/black"
+    <com.google.android.material.appbar.AppBarLayout
+        android:fitsSystemWindows="true"
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="300dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:expandedTitleGravity="center|bottom"
+            app:expandedTitleMarginBottom="33dp"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:background="@drawable/mau_nen_list_nhac"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <androidx.appcompat.widget.Toolbar
+                app:popupTheme="@style/Theme.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                android:id="@+id/toolbarlist"
+                android:elevation="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+                <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/ic_back2"
+                    />
+            </androidx.appcompat.widget.Toolbar>
+            <ImageView
+                android:id="@+id/img_list"
+                android:elevation="6dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/mck"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="150dp"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingactionbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/play"
+        app:fabSize="normal"
+        app:layout_anchor="@id/appbarlayout"
+        app:layout_anchorGravity="bottom|right"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:backgroundTint="#73bbc9"
+        />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_anchor="@id/appbarlayout"
+    app:layout_anchorGravity="bottom|"
+    android:layout_marginLeft="10dp"
+    app:fabSize="normal"
+    android:scaleType="fitXY"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    >
+    <Button
+        android:id="@+id/btn_tym"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textStyle="bold"
+        android:background="@drawable/heart"
+        />
+    <Button
+        android:id="@+id/btn_down"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textStyle="bold"
+        android:background="@drawable/download"
+        android:layout_marginLeft="20dp"
+        />
+    <Button
+        android:id="@+id/btn_more"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textStyle="bold"
+        android:background="@drawable/more"
+        android:layout_marginLeft="20dp"
+        />
 
 </LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/layout_bg"
+        android:layout_marginTop="30dp"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_songs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

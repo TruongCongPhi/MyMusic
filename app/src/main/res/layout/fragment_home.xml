@@ -15,13 +15,13 @@
             android:id="@+id/fragment_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.truongcongphi.mymusic.Fragment.AlbumFragment"
+            android:name="com.truongcongphi.mymusic.shownhac.Fragment.AlbumFragment"
             ></fragment>
         <fragment
             android:id="@+id/fragment_artist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.truongcongphi.mymusic.Fragment.ArtistFragment"
+            android:name="com.truongcongphi.mymusic.shownhac.Fragment.ArtistFragment"
             ></fragment>
     </LinearLayout>
 
