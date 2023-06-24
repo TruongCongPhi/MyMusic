@@ -11,6 +11,15 @@ public class Song implements Serializable {
     private List<String> singerName;
     private String songName;
     private String url;
+    private String songID;
+
+    public String getSongID() {
+        return songID;
+    }
+
+    public void setSongID(String songID) {
+        this.songID = songID;
+    }
 
     public Song() {
     }

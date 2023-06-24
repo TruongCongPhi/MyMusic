@@ -1,9 +1,10 @@
 package com.truongcongphi.mymusic.Adapter;
 
+import static android.webkit.URLUtil.isValidUrl;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,12 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
 import com.truongcongphi.mymusic.Class.Album;
 
 import com.truongcongphi.mymusic.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
@@ -37,7 +40,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_albums,parent,false);
+        View view = inflater.inflate(R.layout.item_home,parent,false);
 
         return new AlbumViewHolder(view);
     }
@@ -48,9 +51,18 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         if(album == null){
             return;
         }
-        Glide.with(holder.itemView.getContext())
-                .load(album.getAlbumURL())
-                .into(holder.imgAlbum);
+
+        boolean isValidUrl = isValidUrl(album.getAlbumURL());
+
+        if (isValidUrl) {
+            // Nếu URL hợp lệ, hiển thị ảnh từ URL bằng Glide
+            Glide.with(holder.itemView.getContext())
+                    .load(album.getAlbumURL())
+                    .into(holder.imgAlbum);
+        } else {
+            // Nếu URL không hợp lệ, hiển thị ảnh từ Drawable
+            holder.imgAlbum.setImageResource(R.drawable.music_note);
+        }
         holder.tvAlbumName.setText(album.getAlbumName());
         holder.tvSingerName.setText(album.getSingerName());
     }
@@ -75,9 +87,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
         public AlbumViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgAlbum = itemView.findViewById(R.id.img_album);
-            tvAlbumName = itemView.findViewById(R.id.tv_album_name);
-            tvSingerName = itemView.findViewById(R.id.tv_singer_name);
+            imgAlbum = itemView.findViewById(R.id.img_item);
+            tvAlbumName = itemView.findViewById(R.id.tv_tilte1);
+            tvSingerName = itemView.findViewById(R.id.tv_tilte2);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

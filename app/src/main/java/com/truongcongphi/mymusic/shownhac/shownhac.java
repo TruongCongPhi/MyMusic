@@ -23,6 +23,8 @@ import com.google.firebase.storage.StorageReference;
 import com.truongcongphi.mymusic.Fragment.HomeFragment;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.Class.Song;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +57,7 @@ public class shownhac extends AppCompatActivity {
         btnUpdateSinger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateSinger();
+                updateArtists();
 
             }
         });
@@ -84,41 +86,47 @@ public class shownhac extends AppCompatActivity {
 
     }
 
-    private void updateSinger() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference songsRef = database.getReference("songs");
-        DatabaseReference artistsRef = database.getReference("artists");
+//    Nếu bạn muốn key của các bài hát trong songs phải là số thứ tự tăng dần, bạn có thể sử dụng một biến đếm để lưu trữ số thứ tự hiện tại và tăng giá trị của nó mỗi khi bạn thêm một bài hát mới vào songs. Ví dụ:
+
+    private void updateArtists() {
+        DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
+        DatabaseReference artistsRef = FirebaseDatabase.getInstance().getReference("artists");
 
         songsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, List<String>> artistSongsMap = new HashMap<>();
+
                 for (DataSnapshot songSnapshot : dataSnapshot.getChildren()) {
                     String songId = songSnapshot.getKey();
-                    String songName = songSnapshot.child("songName").getValue(String.class);
-                    String albumId = songSnapshot.child("albumID").getValue(String.class);
-                    String duration = songSnapshot.child("duration").getValue(String.class);
-                    String url = songSnapshot.child("url").getValue(String.class);
                     List<String> singerNames = songSnapshot.child("singerName").getValue(new GenericTypeIndicator<List<String>>() {});
 
                     for (String singerName : singerNames) {
                         String[] individualSingers = singerName.split(",");
 
                         for (String individualSinger : individualSingers) {
-                            // Tạo nút con cho từng ca sĩ
-                            DatabaseReference artistRef = artistsRef.child(individualSinger.trim());
-
-                            // Lưu thông tin về ca sĩ
-                            artistRef.child("artistName").setValue(individualSinger.trim());
-                            artistRef.child("artistImage").setValue("url_to_artist_image"); // Thay thế bằng URL ảnh ca sĩ thực tế
-
-                            // Tạo nút con cho bài hát của ca sĩ
-                            DatabaseReference songRef = artistRef.child("songs").child(songId);
-                            songRef.child("songName").setValue(songName);
-                            songRef.child("albumID").setValue(albumId);
-                            songRef.child("duration").setValue(duration);
-                            songRef.child("url").setValue(url);
+                            String trimmedSingerName = individualSinger.trim();
+                            if (!artistSongsMap.containsKey(trimmedSingerName)) {
+                                artistSongsMap.put(trimmedSingerName, new ArrayList<>());
+                            }
+                            artistSongsMap.get(trimmedSingerName).add(songId);
                         }
                     }
+                }
+
+                for (Map.Entry<String, List<String>> entry : artistSongsMap.entrySet()) {
+                    String artistName = entry.getKey();
+                    List<String> songs = entry.getValue();
+
+                    // Tạo nút con cho từng ca sĩ
+                    DatabaseReference artistRef = artistsRef.child(artistName);
+
+                    // Lưu thông tin về ca sĩ
+                    artistRef.child("artistName").setValue(artistName);
+                    artistRef.child("artistImage").setValue("url_to_artist_image"); // Thay thế bằng URL ảnh ca sĩ thực tế
+
+                    // Thêm danh sách songID vào mảng songs của ca sĩ
+                    artistRef.child("songs").setValue(songs);
                 }
             }
 
@@ -128,6 +136,10 @@ public class shownhac extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 
 
     private void Check() {
@@ -277,7 +289,9 @@ private void uploadSong() {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference songsRef = database.getReference("songs");
 
+                        String key = String.format(Locale.US, "song%03d", countIDCount[0]);
                         Map<String, Object> newSong = new HashMap<>();
+                        newSong.put(("songID"),key);
                         newSong.put("songName", songName);
                         newSong.put("singerName", Arrays.asList(singers));
                         newSong.put("albumID", album);
@@ -287,7 +301,6 @@ private void uploadSong() {
                         newSong.put("like","lượt thích");
 
                         // Sử dụng định dạng mới cho key
-                        String key = String.format(Locale.US, "song%03d", countIDCount[0]);
                         songsRef.child(key).setValue(newSong);
 
                         countIDCount[0]++;

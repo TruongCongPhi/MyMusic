@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Adapter.SongAdapter;
 import com.truongcongphi.mymusic.Class.Album;
+import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
 
@@ -31,6 +33,7 @@ public class ListSongActivity extends AppCompatActivity {
     private SongAdapter songAdapter;
     ImageView imgList;
     Album album ;
+    Artist artist;
     ArrayList<Song> listSong = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
@@ -53,30 +56,56 @@ public class ListSongActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
-        songsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (album != null) {
+            DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
+            songsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
 
-                    Song song = childSnapshot.getValue(Song.class);
+                        Song song = childSnapshot.getValue(Song.class);
 
-                    if(song.getAlbumID().equals(album.getAlbumID())){
-                        listSong.add(song);
-                        songAdapter.notifyDataSetChanged();
+                        if (song.getAlbumID().equals(album.getAlbumID())) {
+                            listSong.add(song);
+                            songAdapter.notifyDataSetChanged();
+                        }
                     }
+                    songAdapter.setData(listSong);
+
                 }
-                songAdapter.setData(listSong);
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
 
-            }
-        });
+        if (artist != null) {
+            DatabaseReference artistRef = FirebaseDatabase.getInstance().getReference("songs");
+            artistRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        Song song = childSnapshot.getValue(Song.class);
 
+                        if (artist.getListSongArtist().contains(song.getSongID())) {
+                            listSong.add(song);
+                            songAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                    songAdapter.setData(listSong);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
     }
         private void dataIntent() {
             Intent intent = getIntent();
@@ -84,6 +113,10 @@ public class ListSongActivity extends AppCompatActivity {
                 album = (Album) intent.getSerializableExtra("album");
                 Toast.makeText(this,album.getAlbumID(),Toast.LENGTH_SHORT).show();
             }
+            if (intent.hasExtra("artist")){
+                artist = (Artist) intent.getSerializableExtra("artist");
+                String listSongArtistString = TextUtils.join(", ", artist.getListSongArtist());
+                Toast.makeText(this, listSongArtistString, Toast.LENGTH_LONG).show();            }
         }
 
 

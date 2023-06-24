@@ -26,12 +26,14 @@ import java.util.List;
 public class ArtistFragment extends Fragment {
     private RecyclerView artistRecyclerView;
     private ArtistAdapter artistAdapter;
+    ArrayList<Artist> artists;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_artist, container, false);
 
+        artists = new ArrayList<>();
         artistRecyclerView = view.findViewById(R.id.artist_rcv);
         artistAdapter = new ArtistAdapter();
         LinearLayoutManager artistLinearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
@@ -54,6 +56,12 @@ public class ArtistFragment extends Fragment {
                     String artistName = artistSnapshot.child("artistName").getValue(String.class);
 
                     Artist artist = new Artist(artistImage, artistName);
+                    List<String> listSongArtist = new ArrayList<>();
+                    for (DataSnapshot songSnapshot : artistSnapshot.child("songs").getChildren()) {
+                        String songId = songSnapshot.getValue(String.class);
+                        listSongArtist.add(songId);
+                    }
+                    artist.setListSongArtist(listSongArtist); // Lưu danh sách các songID vào đối tượng Artist
                     artists.add(artist);
                 }
 

@@ -1,48 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="150dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
     android:layout_marginEnd="10dp"
-
-
+    android:id="@+id/linear_layout"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/bg_color">
         <ImageView
-            android:id="@+id/img_album"
+            android:id="@+id/img_item"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/mck"></ImageView>
-        <TextView
-            android:id="@+id/tv_album_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/tilte_item"
-            android:text="album name"></TextView>
+            android:src="@drawable/mck" />
 
         <TextView
-            android:id="@+id/tv_singer_name"
+            android:id="@+id/tv_tilte1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textSize="12sp"
-            android:textStyle="bold"
             android:textColor="@color/tilte_item"
-            android:text="MCK" />
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tv_tilte2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/tilte_item" />
 
     </LinearLayout>
-
-
-
-
-
-
-</androidx.cardview.widget.CardView>
