@@ -61,7 +61,9 @@
                 android:layout_marginLeft="10dp"
                 app:layout_anchorGravity="bottom"
                 app:fabSize="normal"
-                app:layout_behavior="@string/bottom_sheet_behavior">
+                app:layout_behavior="@string/bottom_sheet_behavior"
+
+                >
 
                 <Button
                     android:id="@+id/btn_tym"
