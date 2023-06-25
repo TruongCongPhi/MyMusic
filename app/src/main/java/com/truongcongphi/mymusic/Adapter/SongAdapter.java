@@ -1,6 +1,5 @@
 package com.truongcongphi.mymusic.Adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,12 +15,13 @@ import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
-import java.util.List;
+
+import java.util.ArrayList;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
-    private List<Song> mSongs;
-    public void setData(List<Song> list) {
-        this.mSongs = list;
+    private ArrayList<Song> mSongs;
+    public void setData(ArrayList<Song> listArrSong) {
+        this.mSongs = listArrSong;
         notifyDataSetChanged();
     }
 

@@ -137,10 +137,6 @@ public class shownhac extends AppCompatActivity {
     }
 
 
-
-
-
-
     private void Check() {
         startActivity(new Intent(this, HomeFragment.class));
     }

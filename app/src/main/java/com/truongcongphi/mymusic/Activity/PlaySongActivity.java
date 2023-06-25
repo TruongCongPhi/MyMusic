@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.view.View;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.Fragment.FragmentSongBefore;
 import com.truongcongphi.mymusic.Fragment.FragmentSongCurrent;
@@ -54,102 +56,77 @@ public class PlaySongActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_song);
         initView();
         getDataFromIntent();
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
-
-
-//        playSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (mediaPlayer != null) {
-                        mediaPlayer.release();
-                    }
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mediaPlayer.setDataSource(url);
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-//        String url = songArrayList.get(0).getUrl();
-//        Toast.makeText(PlaySongActivity.this, url, Toast.LENGTH_LONG).show();
+        playSong();
+        setData();
 
     }
-//    class PlayMp3 extends AsyncTask<String,Void,String>{
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            return strings[0];
-//        }
+
+    private void kiemtra() {
+        if (mediaPlayer.isPlaying()) {
+            Toast.makeText(PlaySongActivity.this,"đang phát", Toast.LENGTH_SHORT).show();
+        } else {
+            // Bài hát không đang được phát
+            // Thực hiện các thao tác tương ứng
+            Toast.makeText(PlaySongActivity.this,"không phát", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 //
-//        @Override
-//        protected void onPostExecute(String baihat) {
-//            super.onPostExecute(baihat);
-//            try {
-//                mediaPlayer=new MediaPlayer();
-//                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override
-//                    public void onCompletion(MediaPlayer mp) {
-//                        mediaPlayer.stop();
-//                        mediaPlayer.reset();
-//                    }
-//                });
-//                mediaPlayer.setDataSource(baihat);
-//                mediaPlayer.prepare();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            mediaPlayer.start();
-//            TimeSong();
-//
-//
-//        }
-//    }
+
+    class PlayMp3 extends AsyncTask<String,Void,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            return strings[0];
+        }
+
+        @Override
+        protected void onPostExecute(String baihat) {
+            super.onPostExecute(baihat);
+            try {
+                mediaPlayer=new MediaPlayer();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
+                    }
+                });
+                mediaPlayer.setDataSource(baihat);
+                mediaPlayer.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("PlaySongActivity", "Error preparing media player", e);
+            }
+            mediaPlayer.start();
+            TimeSong();
+            kiemtra();
+        }
+    }
+
+    private void setData() {
+        tvSongName.setText(songArrayList.get(0).getSongName());
+    }
 
     private void TimeSong() {
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("mm:ss");
         tvSongEndTime.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
         seekBarTime.setMax(mediaPlayer.getDuration());
+    }
+    private void playSong() {
+        String url = songArrayList.get(0).getUrl();
+        Toast.makeText(PlaySongActivity.this, "URL: " + url, Toast.LENGTH_SHORT).show();
+        new PlayMp3().execute(url);
+            imgPlay.setImageResource(R.drawable.icon_pause);
 
     }
-//    private void playSong() {
-//
-//            new PlayMp3().execute(url);
-//            imgPlay.setImageResource(R.drawable.icon_pause);
-////
-//
-//
-//    }
 
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent.hasExtra("bai_hat")) {
             Song song = intent.getParcelableExtra("bai_hat");
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("songs");
-            databaseReference.child(song.getSongID()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (song != null) {
-                        songArrayList.add(song);
-                        for (Song song : songArrayList) {
-                             url = song.getUrl();
-                            Toast.makeText(PlaySongActivity.this,url,Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Xử lý lỗi tại đây
-                }
-            });
+            songArrayList.add(song);
         }
     }
 
