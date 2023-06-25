@@ -25,6 +25,7 @@ import com.truongcongphi.mymusic.Activity.ListSongActivity;
 import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {

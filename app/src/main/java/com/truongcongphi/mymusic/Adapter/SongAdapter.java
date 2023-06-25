@@ -1,6 +1,7 @@
 package com.truongcongphi.mymusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
     private List<Song> mSongs;
-    Context context;
     public void setData(List<Song> list) {
         this.mSongs = list;
         notifyDataSetChanged();
@@ -59,6 +60,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             imgSong = itemView.findViewById(R.id.img_song);
             tvSongName = itemView.findViewById(R.id.tv_song_name);
             tvSingerName = itemView.findViewById(R.id.tv_singer_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), PlaySongActivity.class);
+                    intent.putExtra("bai_hat",mSongs.get(getAdapterPosition()));
+                    v.getContext().startActivity(intent);
+                }
+            });
 
         }
     }

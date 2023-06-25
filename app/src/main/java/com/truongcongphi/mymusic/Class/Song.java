@@ -1,9 +1,13 @@
 package com.truongcongphi.mymusic.Class;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
+import java.sql.ParameterMetaData;
 import java.util.List;
 
-public class Song implements Serializable {
+public class Song implements Parcelable {
     private String albumID;
     private String duration;
     private String imageSong;
@@ -12,6 +16,46 @@ public class Song implements Serializable {
     private String songName;
     private String url;
     private String songID;
+
+    protected Song(Parcel in) {
+        albumID = in.readString();
+        duration = in.readString();
+        imageSong = in.readString();
+        like = in.readString();
+        singerName = in.createStringArrayList();
+        songName = in.readString();
+        url = in.readString();
+        songID = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(albumID);
+        dest.writeString(duration);
+        dest.writeString(imageSong);
+        dest.writeString(like);
+        dest.writeStringList(singerName);
+        dest.writeString(songName);
+        dest.writeString(url);
+        dest.writeString(songID);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
 
     public String getSongID() {
         return songID;
