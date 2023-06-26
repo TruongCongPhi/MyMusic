@@ -6,146 +6,196 @@
     android:layout_height="match_parent"
     android:background="#9997C1"
     tools:context=".Activity.PlaySongActivity"
-    android:orientation="vertical"
-    android:weightSum="10">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_play_Song"
+    android:orientation="vertical">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="35dp">
 
-    </androidx.appcompat.widget.Toolbar>
+        <ImageView
+            android:id="@+id/img_song_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_back2"></ImageView>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_play_song"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        android:padding="20dp"></androidx.viewpager.widget.ViewPager>
-
-    <LinearLayout
-        android:padding="20dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4">
-        <TextView
-            android:id="@+id/tv_play_song_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tên bài hát"
-            android:textSize="40sp"></TextView>
-        <TextView
-            android:id="@+id/tv_song_singer_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tên ca sĩ"
-            android:textSize="16sp"></TextView>
         <LinearLayout
-            android:weightSum="10"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textSize="16sp"
-                android:id="@+id/tv_song_start_time"
-                android:gravity="center"
-                android:text="00:00"
-                android:layout_weight="0.5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <SeekBar
-                android:id="@+id/seekbar_time_Song"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"></SeekBar>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_song_end_time"
-                android:textSize="16sp"
-                android:text="00:00"
-                android:layout_weight="0.5"
-                android:gravity="center"></TextView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20dp"
-                android:background="@color/colorAccent"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="ĐANG PHÁT TỪ DANH SÁCH PHÁT"></TextView>
+            <TextView
+                android:id="@+id/tv_album_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:text="tên album"></TextView>
+        </LinearLayout>
 
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:weightSum="10">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_play_song"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></androidx.viewpager.widget.ViewPager>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_play_song_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên bài hát"
+                        android:textStyle="bold"
+                        android:textSize="40sp"></TextView>
+                    <TextView
+                        android:id="@+id/tv_song_singer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên ca sĩ"
+                        android:textStyle="bold"
+                        android:textSize="16sp"></TextView>
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/imgbtn_tym"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/icon_favorite"
+                    android:scaleType="fitXY"></ImageButton>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:weightSum="10"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="16sp"
+                    android:id="@+id/tv_song_start_time"
+                    android:gravity="center"
+                    android:text="00:00"
+                    android:layout_weight="0.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <SeekBar
+                    android:id="@+id/seekbar_time_Song"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"></SeekBar>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_song_end_time"
+                    android:textSize="16sp"
+                    android:text="00:00"
+                    android:layout_weight="0.5"
+                    android:gravity="center"></TextView>
 
             </LinearLayout>
         </LinearLayout>
         <RelativeLayout
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            >
 
             <ImageButton
-                android:id="@+id/imgbtn_tym"
+                android:id="@+id/imgbtn_random"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="18dp"
-                android:scaleType="fitXY"
-                android:background="@drawable/icon_favorite"></ImageButton>
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/icon_ramdom_white"
+                android:scaleType="fitXY"></ImageButton>
+
             <ImageButton
                 android:id="@+id/imgbtn_pre_Song"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="80dp"
                 android:scaleType="fitXY"
                 android:background="@null"
-                android:layout_alignParentStart="true"
                 android:layout_width="40dp"
                 android:src="@drawable/icon_previous"
-                android:layout_height="40dp"></ImageButton>
+                android:layout_height="40dp"
+                android:layout_marginLeft="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"></ImageButton>
 
             <ImageButton
                 android:id="@+id/imgbtn_play_Song"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="184dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:background="@null"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_pause"></ImageButton>
+                android:src="@drawable/icon_pause"
+                android:layout_centerInParent="true"></ImageButton>
 
             <ImageButton
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="80dp"
-                android:background="@null"
-                android:src="@drawable/icon_skip_next"
-                android:scaleType="fitXY"
+
                 android:id="@+id/img_next_song"
-                android:layout_alignParentRight="true"
                 android:layout_width="40dp"
-                android:layout_height="40dp"></ImageButton>
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="100dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_skip_next"></ImageButton>
             <ImageButton
                 android:id="@+id/imgbtn_repeat_song"
-                android:layout_marginTop="15dp"
                 android:background="@null"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_repeat"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
                 ></ImageButton>
         </RelativeLayout>
         <RelativeLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            >
             <ImageButton
                 android:scaleType="fitXY"
-
-
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@color/white"
@@ -160,6 +210,7 @@
                 android:layout_alignParentEnd="true">
             </ImageButton>
         </RelativeLayout>
-
     </LinearLayout>
+
+
 </LinearLayout>

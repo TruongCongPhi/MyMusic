@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.truongcongphi.mymusic.Fragment.FragmentSongBefore;
+
 import java.util.ArrayList;
 
 public class ViewPagerPlaylistSong extends FragmentPagerAdapter {
@@ -28,4 +30,6 @@ public class ViewPagerPlaylistSong extends FragmentPagerAdapter {
         fragmentArrayList.add(fragment);
 
     }
+
+
 }
