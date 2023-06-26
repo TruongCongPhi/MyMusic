@@ -76,7 +76,6 @@ public class PlaySongActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
         resetBack();
-
         eventClick();
 
     }
@@ -393,7 +392,8 @@ public class PlaySongActivity extends AppCompatActivity {
         adapterSong.addFragment(fragmentSongCurrent);
         adapterSong.addFragment(fragmentSongLater);
         viewPagerPlaySong.setAdapter(adapterSong);
-        fragmentSongCurrent = (FragmentSongCurrent) adapterSong.getItem(1);
+        viewPagerPlaySong.setCurrentItem(1);
+
         playSong(position);
 
     }

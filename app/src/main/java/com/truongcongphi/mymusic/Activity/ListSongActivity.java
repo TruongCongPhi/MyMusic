@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,16 +53,14 @@ public class ListSongActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_song);
 
         imgList = findViewById(R.id.img_list);
-        // Khởi tạo RecyclerView và Adapter
-
         rcvSongs = findViewById(R.id.rcv_songs);
-
         songAdapter = new SongAdapter();
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         rcvSongs.setLayoutManager(linearLayoutManager);
         rcvSongs.setAdapter(songAdapter);
         dataIntent();
         getData();
+        getHinhAnh();
         AppBarLayout appBarLayout = findViewById(R.id.appbarlayout);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -81,6 +80,13 @@ public class ListSongActivity extends AppCompatActivity {
 //        anhxa();
     }
 
+    private void getHinhAnh() {
+        if(album != null){
+            Glide.with(this).load(album.getAlbumURL())
+                    .into(this.imgList);
+        }
+    }
+
     private void anhxa() {
         coordinatorLayout = findViewById(R.id.coordinatorlayout);
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
@@ -90,6 +96,7 @@ public class ListSongActivity extends AppCompatActivity {
     }
 
     private void getData() {
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
         if (album != null) {
             DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
             songsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -143,6 +150,7 @@ public class ListSongActivity extends AppCompatActivity {
     }
         private void dataIntent() {
             Intent intent = getIntent();
+            listSong.clear();
             if (intent.hasExtra("album")) {
                 album = (Album) intent.getSerializableExtra("album");
                 Toast.makeText(this,album.getAlbumID(),Toast.LENGTH_SHORT).show();

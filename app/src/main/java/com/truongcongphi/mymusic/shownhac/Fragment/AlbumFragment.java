@@ -59,9 +59,10 @@ public class AlbumFragment extends Fragment {
                     String albumID = childSnapshot.getKey();
                     album.setAlbumID(albumID);
                     albums.add(album);
-                }
 
-                albumAdapter.setData(albums);
+                }
+                albumAdapter.setData((ArrayList<Album>) albums);
+
             }
 
             @Override

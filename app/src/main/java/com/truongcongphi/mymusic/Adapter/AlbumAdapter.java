@@ -25,13 +25,14 @@ import com.truongcongphi.mymusic.Class.Album;
 
 import com.truongcongphi.mymusic.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
     Context context;
-    List<Album> listAlbum;
+    ArrayList<Album> listAlbum;
 
-    public AlbumAdapter(Context context, List listAlbum) {
+    public AlbumAdapter(Context context, ArrayList listAlbum) {
         this.context = context;
         this.listAlbum = listAlbum;
     }
@@ -74,7 +75,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         }
         return 0;
     }
-    public void setData(List<Album> albums) {
+    public void setData(ArrayList<Album> albums) {
 
         this.listAlbum = albums;
         notifyDataSetChanged();
@@ -90,15 +91,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             imgAlbum = itemView.findViewById(R.id.img_item);
             tvAlbumName = itemView.findViewById(R.id.tv_tilte1);
             tvSingerName = itemView.findViewById(R.id.tv_tilte2);
-
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ListSongActivity.class);
                         // Gắn dữ liệu album vào Intent
                         intent.putExtra("album", listAlbum.get(getAdapterPosition()));
-
                         v.getContext().startActivity(intent);
                     }
             });

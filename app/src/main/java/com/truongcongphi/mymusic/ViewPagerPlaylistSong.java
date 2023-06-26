@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.truongcongphi.mymusic.Fragment.FragmentSongBefore;
+import com.truongcongphi.mymusic.Fragment.FragmentSongCurrent;
+import com.truongcongphi.mymusic.Fragment.FragmentSongLater;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,17 @@ public class ViewPagerPlaylistSong extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return fragmentArrayList.get(position);
+
+        switch (position){
+            case 0:
+                return new FragmentSongBefore();
+            case 1:
+                return new FragmentSongCurrent();
+            case 2:
+                return new FragmentSongLater();
+            default:
+                return new FragmentSongCurrent();
+        }
     }
 
     @Override
