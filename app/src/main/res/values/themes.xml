@@ -7,6 +7,6 @@
 
     <style name="Theme.MyMusic" parent="Base.Theme.MyMusic" />
     <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
+
     </style>
 </resources>
