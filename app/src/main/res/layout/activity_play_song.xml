@@ -144,7 +144,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
-                android:background="@drawable/icon_ramdom_white"
+                android:background="@drawable/icon_random_off"
                 android:scaleType="fitXY"></ImageButton>
 
             <ImageButton
@@ -182,7 +182,7 @@
                 android:id="@+id/imgbtn_repeat_song"
                 android:background="@null"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_repeat"
+                android:src="@drawable/icon_repeat_off"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
