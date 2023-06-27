@@ -3,6 +3,7 @@ package com.truongcongphi.mymusic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.viewpager.widget.ViewPager;
+
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -25,7 +26,6 @@ import com.truongcongphi.mymusic.Fragment.FragmentSongCurrent;
 import com.truongcongphi.mymusic.Fragment.FragmentSongLater;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.ViewPagerPlaylistSong;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,14 +45,14 @@ public class PlaySongActivity extends AppCompatActivity {
     public static ArrayList<Song> songArrayList = new ArrayList<>();
     Song selectedSong;
     public static ViewPagerPlaylistSong adapterSong;
-    FragmentSongBefore fragmentSongBefore;
-    FragmentSongCurrent fragmentSongCurrent;
-    FragmentSongLater fragmentSongLater;
+
     static MediaPlayer mediaPlayer;
-    static int position = 0;
+    static int position = 0; // biến lưu vị trí bài hát hiện tại
     boolean repeat = false;
     boolean checkRandom = false;
     static boolean next = false;
+
+    boolean isBeforeFragment = true;
 
 
     @Override
@@ -70,7 +70,7 @@ public class PlaySongActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
         eventClick();
-        resetBack();
+        imgBack();
 
 
     }
@@ -82,21 +82,36 @@ public class PlaySongActivity extends AppCompatActivity {
         }
     }
 
-    private void resetBack() {
+    private void imgBack() {
         imgSongBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
-                }
-                songArrayList.clear();
             }
         });
-
     }
 
     private void eventClick() {
+        viewPagerPlaySong.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Song song = songArrayList.get(position);
+                tvSingerName.setText(song.getSongID());
+
+                    playSong(position);
+                    Log.e("PlaySongActivity", String.valueOf(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +186,12 @@ public class PlaySongActivity extends AppCompatActivity {
         imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isBeforeFragment && position == 0) {
+                    position++;
+                    viewPagerPlaySong.setCurrentItem(1);
+                    isBeforeFragment = false;
+                }
+
                 if(songArrayList.size()>0){          //có bài hát đang phát thì dừng
                     if(mediaPlayer.isPlaying() || mediaPlayer != null){
                         mediaPlayer.stop();
@@ -197,6 +218,12 @@ public class PlaySongActivity extends AppCompatActivity {
                         }
                         position = index;
                     }
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewPagerPlaySong.setCurrentItem(position);
+                        }
+                    }, 1000);
                     playSong(position);
                     updateTimeSong();
                 }
@@ -215,8 +242,14 @@ public class PlaySongActivity extends AppCompatActivity {
 
 
         imgPre.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                if (isBeforeFragment && position != 0) {
+                    position--;
+                    viewPagerPlaySong.setCurrentItem(1);
+                    isBeforeFragment = false;
+                }
                 if(songArrayList.size() > 0){
                     if(mediaPlayer.isPlaying() || mediaPlayer != null){
                         mediaPlayer.stop();
@@ -240,6 +273,12 @@ public class PlaySongActivity extends AppCompatActivity {
                         }
                         position = index;
                     }
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewPagerPlaySong.setCurrentItem(position);
+                        }
+                    }, 1000);
                     playSong(position);
                     updateTimeSong();
                 }
@@ -256,6 +295,8 @@ public class PlaySongActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void kiemtra() {
         if (mediaPlayer.isPlaying()) {
@@ -379,11 +420,13 @@ public class PlaySongActivity extends AppCompatActivity {
     public void playSong(int po) {
         if (songArrayList.size() > 0) {
             stopCurrentSong();
-            new PlayMp3().execute(songArrayList.get(position).getUrl());
-            tvSongName.setText(songArrayList.get(position).getSongName());
+            new PlayMp3().execute(songArrayList.get(po).getUrl());
+            tvSongName.setText(songArrayList.get(po).getSongName());
             imgPlay.setImageResource(R.drawable.icon_play);
         }
+
     }
+
 
 
     private void getDataFromIntent() {
@@ -414,20 +457,14 @@ public class PlaySongActivity extends AppCompatActivity {
         imgTym = findViewById(R.id.imgbtn_tym);
         imgRandom = findViewById(R.id.imgbtn_random);
         imgSongBack = findViewById(R.id.img_song_back);
+
         viewPagerPlaySong = findViewById(R.id.viewpager_play_song);
-
-        fragmentSongBefore = new FragmentSongBefore();
-        fragmentSongLater = new FragmentSongLater();
-        fragmentSongCurrent = new FragmentSongCurrent();
-
-        adapterSong = new ViewPagerPlaylistSong(getSupportFragmentManager());
-        adapterSong.addFragment(fragmentSongBefore);
-        adapterSong.addFragment(fragmentSongCurrent);
-        adapterSong.addFragment(fragmentSongLater);
+        adapterSong = new ViewPagerPlaylistSong(this,songArrayList,position);
         viewPagerPlaySong.setAdapter(adapterSong);
-        viewPagerPlaySong.setCurrentItem(1);
-
         playSong(position);
+
+
+
 
     }
 }

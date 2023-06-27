@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.shownhac.Fragment;
+package com.truongcongphi.mymusic.Fragment;
 
 import android.os.Bundle;
 
@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 import com.truongcongphi.mymusic.R;
 
-public class SearchFragment extends Fragment {
+public class AccountFragment extends Fragment {
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 }

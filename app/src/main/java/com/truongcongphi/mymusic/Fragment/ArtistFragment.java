@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.shownhac.Fragment;
+package com.truongcongphi.mymusic.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

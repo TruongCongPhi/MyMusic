@@ -65,8 +65,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                 @Override
                 public void onClick(View v) {
                     int vitri = getAdapterPosition();
+                    Song song = mSongs.get(getAdapterPosition());
                     Intent intent = new Intent(v.getContext(), PlaySongActivity.class);
                     intent.putParcelableArrayListExtra("cacbaihat", mSongs);
+                    intent.putExtra("baihat",song);
                     intent.putExtra("vitribaihat",vitri);
                     v.getContext().startActivity(intent);
                 }
