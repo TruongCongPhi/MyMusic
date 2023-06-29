@@ -246,11 +246,14 @@ public class shownhac extends AppCompatActivity {
 //    });
 //}
 private void uploadSong() {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference songsRef1 = database.getReference("songs");
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     StorageReference songsRef = storageRef.child("songs");
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference songsRef1 = database.getReference("songs");
+
+
 
     songsRef1.removeValue(new DatabaseReference.CompletionListener() {
         @Override

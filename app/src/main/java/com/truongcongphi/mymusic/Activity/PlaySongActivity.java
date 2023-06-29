@@ -21,9 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.truongcongphi.mymusic.Class.Song;
-import com.truongcongphi.mymusic.Fragment.FragmentSongBefore;
-import com.truongcongphi.mymusic.Fragment.FragmentSongCurrent;
-import com.truongcongphi.mymusic.Fragment.FragmentSongLater;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.ViewPagerPlaylistSong;
 import java.io.IOException;
@@ -51,8 +48,9 @@ public class PlaySongActivity extends AppCompatActivity {
     boolean repeat = false;
     boolean checkRandom = false;
     static boolean next = false;
+    int positionBefore = 0;
 
-    boolean isBeforeFragment = true;
+
 
 
     @Override
@@ -65,9 +63,6 @@ public class PlaySongActivity extends AppCompatActivity {
         getDataFromIntent();
         initView();
 
-        int numberOfSongs = songArrayList.size();
-        String message = "Số phần tử trong mảng: " + numberOfSongs;
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
         eventClick();
         imgBack();
@@ -99,11 +94,32 @@ public class PlaySongActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Song song = songArrayList.get(position);
-                tvSingerName.setText(song.getSongID());
+                if (mediaPlayer.isPlaying() || mediaPlayer != null) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
+                if (repeat) {
+                    position = position - 1;
+                }
+                if (checkRandom) {
+                    Random random = new Random();
+                    int randomIndex = random.nextInt(songArrayList.size());
+                    if (randomIndex == position) {
+                        position = randomIndex - 1;
+                    }
+                    position = randomIndex;
+                }
 
-                    playSong(position);
-                    Log.e("PlaySongActivity", String.valueOf(position));
+                if (position < positionBefore) {
+                    // play the previous song
+                    position = position - 1;
+                }
+                if (position > (songArrayList.size() - 1)) {
+                    position = 0;
+                }
+                playSong(position);
+                positionBefore = position;
             }
 
             @Override
@@ -186,11 +202,7 @@ public class PlaySongActivity extends AppCompatActivity {
         imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isBeforeFragment && position == 0) {
-                    position++;
-                    viewPagerPlaySong.setCurrentItem(1);
-                    isBeforeFragment = false;
-                }
+
 
                 if(songArrayList.size()>0){          //có bài hát đang phát thì dừng
                     if(mediaPlayer.isPlaying() || mediaPlayer != null){
@@ -245,11 +257,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (isBeforeFragment && position != 0) {
-                    position--;
-                    viewPagerPlaySong.setCurrentItem(1);
-                    isBeforeFragment = false;
-                }
+
                 if(songArrayList.size() > 0){
                     if(mediaPlayer.isPlaying() || mediaPlayer != null){
                         mediaPlayer.stop();
@@ -462,6 +470,7 @@ public class PlaySongActivity extends AppCompatActivity {
         adapterSong = new ViewPagerPlaylistSong(this,songArrayList,position);
         viewPagerPlaySong.setAdapter(adapterSong);
         playSong(position);
+        viewPagerPlaySong.setCurrentItem(position);
 
 
 

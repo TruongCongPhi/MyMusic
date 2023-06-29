@@ -34,7 +34,7 @@
                 <ImageButton
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:background="@drawable/ic_back_down" />
+                    android:background="@drawable/ic_back" />
 
             </androidx.appcompat.widget.Toolbar>
 

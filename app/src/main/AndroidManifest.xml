@@ -20,7 +20,9 @@
             android:exported="true" />
         <activity
             android:name=".shownhac.shownhac"
-            android:exported="true"></activity>
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".Activity.HomeLoginActivity"
             android:exported="true">
@@ -49,6 +51,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
         </activity>
     </application>
