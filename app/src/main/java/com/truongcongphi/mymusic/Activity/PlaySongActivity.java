@@ -63,10 +63,8 @@ public class PlaySongActivity extends AppCompatActivity {
         getDataFromIntent();
         initView();
 
-
         eventClick();
         imgBack();
-
 
     }
 
