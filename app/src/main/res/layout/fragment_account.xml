@@ -25,7 +25,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-
+                    android:padding="2dp"
+                    android:layout_marginTop="10dp"
                     >
                     <ImageButton
                         android:id="@+id/img_avt"
@@ -47,19 +48,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="90dp"
 
                         >
                         <ImageButton
                             android:id="@+id/ic_search"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
                             android:background="@drawable/ic_search"
                             />
                         <ImageButton
                             android:id="@+id/ic_add"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
                             android:background="@drawable/ic_add"
                             android:layout_marginLeft="20dp"
                             />
@@ -69,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     >
                     <Button
                         android:layout_width="wrap_content"
@@ -90,6 +91,8 @@
                         android:text="Artists"
                         android:textSize="13sp"
                         android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="10dp"
                         ></Button>
 
                 </LinearLayout>
