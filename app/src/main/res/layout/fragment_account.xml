@@ -3,13 +3,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2196F3"
+    android:background="@color/black"
     >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+                    <ImageButton
+                        android:id="@+id/img_avt"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ic_user"
+                        ></ImageButton>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Your Library"
+                        android:textSize="24dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="30dp"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="100dp"
+
+                        >
+                        <ImageButton
+                            android:id="@+id/ic_search"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/ic_search"
+                            />
+                        <ImageButton
+                            android:id="@+id/ic_add"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/ic_add"
+                            android:layout_marginLeft="20dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#191A19"
+                        android:text="Playlists"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:padding="2dp"
+                        ></Button>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#191A19"
+                        android:text="Artists"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        ></Button>
+
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="40dp"
+                        android:gravity="center_horizontal"
+                        android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                        android:textColor="@color/white"
+                        android:textSize="34sp"
+                        android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView><TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"></TextView>
+                </LinearLayout>
+
+
+            </androidx.core.widget.NestedScrollView>
+
+
+        </LinearLayout>
+
+
 
 </FrameLayout>
