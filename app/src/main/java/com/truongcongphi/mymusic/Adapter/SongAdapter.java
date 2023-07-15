@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.Class.Song;
+import com.truongcongphi.mymusic.Fragment.MyBottomSheetDialogFragment;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -52,7 +55,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgSong;
+        private ImageView imgSong, songOptions;
         private TextView tvSongName, tvSingerName;
 
         public SongViewHolder(@NonNull View itemView) {
@@ -60,6 +63,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             imgSong = itemView.findViewById(R.id.img_song);
             tvSongName = itemView.findViewById(R.id.tv_song_name);
             tvSingerName = itemView.findViewById(R.id.tv_singer_name);
+            songOptions = itemView.findViewById(R.id.song_options);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +77,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                     v.getContext().startActivity(intent);
                 }
             });
+            songOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int vitri = getAdapterPosition();
+                    Song song = mSongs.get(getAdapterPosition());
+                    MyBottomSheetDialogFragment bottomSheetDialog = MyBottomSheetDialogFragment.newInstance(song);
+                    bottomSheetDialog.show(((AppCompatActivity) v.getContext()).getSupportFragmentManager(), bottomSheetDialog.getTag());
+                }
+            });
 
         }
     }
+
 }

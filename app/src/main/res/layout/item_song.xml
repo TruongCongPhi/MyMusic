@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="@color/tilte_item"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:background="@drawable/layout_bg"
     >
 
     <ImageView
@@ -13,7 +15,7 @@
         android:layout_height="50dp"
         android:background="@drawable/mck"></ImageView>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="10dp">
@@ -21,17 +23,35 @@
             android:id="@+id/tv_song_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:text="tên bài hát"
+            android:textColor="@color/white"
             />
 
         <TextView
             android:id="@+id/tv_singer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="tên ca sĩ"/>
+            android:textSize="12sp"
+            android:text="tên ca sĩ"
+            android:textColor="@color/white"/>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/song_options"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_more_vert"></ImageView>
+    </RelativeLayout>
+
+
+
 
 </LinearLayout>

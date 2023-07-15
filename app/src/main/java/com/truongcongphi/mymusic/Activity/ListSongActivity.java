@@ -2,8 +2,8 @@ package com.truongcongphi.mymusic.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,10 +14,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.appbar.AppBarLayout;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -36,11 +36,10 @@ import java.util.ArrayList;
 public class ListSongActivity extends AppCompatActivity {
     private RecyclerView rcvSongs;
     private SongAdapter songAdapter;
-    ImageView imgList;
+    ImageView imgList, imgBack;
     Album album ;
     Artist artist;
     ArrayList<Song> listSong = new ArrayList<>();
-    CoordinatorLayout coordinatorLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     FloatingActionButton floatingActionButton;
@@ -51,33 +50,51 @@ public class ListSongActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_song);
+        addViews();
+        dataIntent();
+        getData();
+        getHinhAnh();
+        getTilte();
 
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+    }
+
+    private void addViews() {
         imgList = findViewById(R.id.img_list);
+        imgBack = findViewById(R.id.btn_back);
         rcvSongs = findViewById(R.id.rcv_songs);
         songAdapter = new SongAdapter();
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         rcvSongs.setLayoutManager(linearLayoutManager);
         rcvSongs.setAdapter(songAdapter);
-        dataIntent();
-        getData();
-        getHinhAnh();
-        AppBarLayout appBarLayout = findViewById(R.id.appbarlayout);
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int totalScrollRange = appBarLayout.getTotalScrollRange();
-                float offsetPercentage = (float) Math.abs(verticalOffset) / (float) totalScrollRange;
-
-                // Điều chỉnh tỷ lệ thu phóng của ImageView
-                float scaleFactor = 1.0f - offsetPercentage;
-                imgList.setScaleX(scaleFactor);
-                imgList.setScaleY(scaleFactor);
-            }
-        });
+        collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
+        floatingActionButton = findViewById(R.id.floatingactionbutton);
+        toolbar = findViewById(R.id.toolbarlist);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+    }
 
 
 
-//        anhxa();
+    private void getTilte() {
+        String title = "";
+
+        if (album != null) {
+            title = album.getAlbumName();
+        } else if (artist != null) {
+            title = artist.getName();
+        }
+
+        collapsingToolbarLayout.setTitle(title);
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
+        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
 
     private void getHinhAnh() {
@@ -87,13 +104,7 @@ public class ListSongActivity extends AppCompatActivity {
         }
     }
 
-    private void anhxa() {
-        coordinatorLayout = findViewById(R.id.coordinatorlayout);
-        collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
-        toolbar = findViewById(R.id.toolbarlist);
-        floatingActionButton = findViewById(R.id.floatingactionbutton);
 
-    }
 
     private void getData() {
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
