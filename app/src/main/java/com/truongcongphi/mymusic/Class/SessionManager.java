@@ -63,12 +63,7 @@ public class SessionManager {
     }
 
     public void clearUserCredentials() {
-        editor.remove(KEY_EMAIL)
-                .remove(KEY_PASSWORD)
-                .remove(KEY_IMAGE)
-                .remove(KEY_NAME)
-                .remove(KEY_LOGGED_IN)
-                .commit();
+        editor.clear().commit();
     }
 
     public void logoutUser() {

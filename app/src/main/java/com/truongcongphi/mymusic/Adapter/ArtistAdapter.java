@@ -63,7 +63,6 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
                     .into(holder.imgItem);
         } else {
             // Nếu URL không hợp lệ, hiển thị ảnh từ Drawable
-            holder.imgItem.setImageResource(R.drawable.music_note);
             Glide.with(holder.imgItem)
                     .load(R.drawable.music_note)
                     .apply(new RequestOptions().transform(new CenterCrop())

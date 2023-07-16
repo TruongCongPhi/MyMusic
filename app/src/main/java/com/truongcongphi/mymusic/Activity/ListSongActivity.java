@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Adapter.SongAdapter;
 import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Class.Artist;
+import com.truongcongphi.mymusic.Class.DaiyMix;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
 
@@ -39,6 +41,7 @@ public class ListSongActivity extends AppCompatActivity {
     ImageView imgList, imgBack;
     Album album ;
     Artist artist;
+    DaiyMix daiyMix;
     ArrayList<Song> listSong = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
@@ -107,7 +110,6 @@ public class ListSongActivity extends AppCompatActivity {
 
 
     private void getData() {
-        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
         if (album != null) {
             DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
             songsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -130,6 +132,27 @@ public class ListSongActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+        }
+        if (daiyMix != null) {
+            DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
+            songsRef.orderByChild("mixId").equalTo(daiyMix.getMixId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        Song song = childSnapshot.getValue(Song.class);
+                        Log.d("Song", "dailyMixId: " + song.getMixId());
+                        Log.d("Daily", "dailyMixId: " + daiyMix.getMixId());
+                        listSong.add(song);
+                        songAdapter.notifyDataSetChanged();
+                    }
+                    songAdapter.setData(listSong);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Xử lý khi có lỗi xảy ra
                 }
             });
         }
@@ -170,6 +193,10 @@ public class ListSongActivity extends AppCompatActivity {
                 artist = (Artist) intent.getSerializableExtra("artist");
                 String listSongArtistString = TextUtils.join(", ", artist.getListSongArtist());
                 Toast.makeText(this, listSongArtistString, Toast.LENGTH_LONG).show();            }
+            if (intent.hasExtra("dailymix")) {
+                daiyMix = (DaiyMix) intent.getSerializableExtra("dailymix");
+                Toast.makeText(this,daiyMix.getMixId(),Toast.LENGTH_SHORT).show();
+            }
         }
 
 

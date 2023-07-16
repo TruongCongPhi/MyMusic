@@ -25,7 +25,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (sessionManager.isLoggedIn()) {
-
                     // Người dùng đã đăng nhập, chuyển hướng đến màn hình
                     Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                     startActivity(intent);

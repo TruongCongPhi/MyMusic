@@ -41,6 +41,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         Song song = mSongs.get(position);
         holder.tvSongName.setText(song.getSongName());
         holder.tvSingerName.setText(TextUtils.join(", ", song.getSingerName()));
+
         Glide.with(holder.itemView.getContext())
                 .load(song.getImageSong())
                 .into(holder.imgSong);
