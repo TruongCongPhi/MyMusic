@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.Class.User;
 
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin2;
     private ImageButton btnBack;
     private FirebaseAuth mAuth;
+    private SessionManager sessionManager;
     boolean passwordCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addViews();
         addEvents();
+
     }
 
     private void addEvents() {
