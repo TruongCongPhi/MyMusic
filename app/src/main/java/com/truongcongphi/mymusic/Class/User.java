@@ -6,7 +6,20 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String imageUser;
+
+    public String getImageUser() {
+        return imageUser;
+    }
+
+    public void setImageUser(String imageUser) {
+        this.imageUser = imageUser;
+    }
+
     public User() {
+    }
+
+    public User(String email, String password) {
     }
 
     public String getUserID() {
