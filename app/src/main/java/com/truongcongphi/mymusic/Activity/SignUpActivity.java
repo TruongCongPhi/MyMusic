@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -31,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     ImageButton btnBack;
     private FirebaseAuth mAuth;
     boolean passwordCheck;
+    private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +64,11 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "tạo tài khoản thành công!",Toast.LENGTH_SHORT).show();
+                            sessionManager.saveUserCredentials(email, pass,null,null);
+                            sessionManager.isLoggedIn();
                             Intent intentHome = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intentHome);
+                            finish();
                         }else {
                             Toast.makeText(getApplicationContext(), "tạo tài khoản không thành công!",Toast.LENGTH_SHORT).show();
                         }
@@ -232,5 +237,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         edtPasword2 = (EditText) findViewById(R.id.edt_password2);
         edtName = (EditText) findViewById(R.id.edt_name);
+
+        sessionManager = new SessionManager(this);
     }
 }
