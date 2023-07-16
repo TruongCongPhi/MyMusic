@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "tạo tài khoản thành công!",Toast.LENGTH_SHORT).show();
-                            Intent intentHome = new Intent(SignUpActivity.this, AccountActivity.class);
+                            Intent intentHome = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intentHome);
                         }else {
                             Toast.makeText(getApplicationContext(), "tạo tài khoản không thành công!",Toast.LENGTH_SHORT).show();

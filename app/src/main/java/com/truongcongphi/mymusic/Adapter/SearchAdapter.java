@@ -25,7 +25,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     private static Context context;
     private static ArrayList<Song> listSong;
-    private ArrayList<Song> filteredList;
+    private static ArrayList<Song> filteredList;
 
     public SearchAdapter(ArrayList<Song> listSong) {
         this.listSong = listSong;
@@ -67,13 +67,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Song song=listSong.get(getAdapterPosition());
-                    listSong.add(song);
-                    int vitri=getAdapterPosition();
-                    Intent intent=new Intent(context, PlaySongActivity.class);
-                    intent.putExtra("vitribaihat",vitri);
-                    intent.putExtra("cacbaihat",listSong);
-                    context.startActivity(intent);
+                    Song song = filteredList.get(getAdapterPosition());
+                    ArrayList<Song> singleSongList = new ArrayList<>();
+                    singleSongList.add(song);
+                    Intent intent = new Intent(view.getContext(), PlaySongActivity.class);
+                    intent.putExtra("vitribaihat", 0);
+                    intent.putParcelableArrayListExtra("cacbaihat", singleSongList);
+                    view.getContext().startActivity(intent);
                 }
             });
         }
