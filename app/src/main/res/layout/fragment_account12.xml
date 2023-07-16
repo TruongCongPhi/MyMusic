@@ -99,7 +99,7 @@
                     android:textColor="@color/white"
                     android:textSize="15dp"
                     android:textStyle="bold"
-
+                    app:backgroundTint="@null"
                     ></Button>
                 <ImageButton
                     android:layout_width="25dp"
