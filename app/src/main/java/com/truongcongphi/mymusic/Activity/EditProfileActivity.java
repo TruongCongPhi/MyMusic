@@ -33,6 +33,13 @@ public class EditProfileActivity extends AppCompatActivity {
                 xuLyLayHinh();
             }
         });
+        txt_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xuLyLayHinh();
+            }
+        });
+
     }
 
     private void xuLyLayHinh() {
