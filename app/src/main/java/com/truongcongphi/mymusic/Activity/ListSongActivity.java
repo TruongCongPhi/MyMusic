@@ -31,6 +31,7 @@ import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.Class.DaiyMix;
 import com.truongcongphi.mymusic.Class.Song;
+import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class ListSongActivity extends AppCompatActivity {
     Album album ;
     Artist artist;
     DaiyMix daiyMix;
+    Top top;
     ArrayList<Song> listSong = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
@@ -196,6 +198,10 @@ public class ListSongActivity extends AppCompatActivity {
             if (intent.hasExtra("dailymix")) {
                 daiyMix = (DaiyMix) intent.getSerializableExtra("dailymix");
                 Toast.makeText(this,daiyMix.getMixId(),Toast.LENGTH_SHORT).show();
+            }
+            if (intent.hasExtra("top")) {
+                top = (Top) intent.getSerializableExtra("top");
+                Toast.makeText(this,top.getTopName(),Toast.LENGTH_SHORT).show();
             }
         }
 

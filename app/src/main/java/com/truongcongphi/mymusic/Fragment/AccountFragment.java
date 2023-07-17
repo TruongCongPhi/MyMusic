@@ -1,11 +1,10 @@
 package com.truongcongphi.mymusic.Fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.ImageButton;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.truongcongphi.mymusic.Activity.AccountActivity2;
+import com.truongcongphi.mymusic.Activity.AccountFragment2;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
@@ -51,7 +50,14 @@ public class AccountFragment extends Fragment {
         img_avt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(requireContext(), AccountActivity2.class));
+                AccountFragment2 newFragment = new AccountFragment2();
+
+                // Chuyển đổi sang fragment mới bằng FragmentTransaction
+                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, newFragment); // fragment_container là ID của container chứa fragment
+                fragmentTransaction.addToBackStack(null); // (Tùy chọn) Đưa fragment hiện tại vào stack để quay lại khi nhấn nút Back
+                fragmentTransaction.commit();
+
             }
         });
 

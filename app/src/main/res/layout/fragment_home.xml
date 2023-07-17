@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:name="com.truongcongphi.mymusic.Fragment.DailyMixFragment"
             ></fragment>
+        <fragment
+            android:id="@+id/fragment_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.truongcongphi.mymusic.Fragment.TopFragment"
+            ></fragment>
     </LinearLayout>
 
 </ScrollView>
