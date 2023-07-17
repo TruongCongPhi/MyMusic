@@ -3,6 +3,7 @@ package com.truongcongphi.mymusic.Activity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,12 @@ public class AccountFragment2 extends Fragment {
         Glide.with(this).load(infor.getImageUser()).into(imgUser);
         tvName.setText(infor.getName());
         tvGmail.setText(infor.getEmail());
+        imgUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireContext(), EditProfileActivity.class));
+            }
+        });
     }
 }
 

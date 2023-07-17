@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:elevation="6dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/music_note"
+                android:src="@drawable/mck"
                 />
             <ImageView
                 android:id="@+id/img_add_list_song"
