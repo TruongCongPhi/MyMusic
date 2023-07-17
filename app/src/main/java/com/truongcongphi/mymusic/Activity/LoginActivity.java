@@ -45,8 +45,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         addViews();
         addEvents();
+
+
 
     }
 
@@ -57,46 +60,77 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email, pass;
-                email = edtEmail.getText().toString();
-                pass = edtPasword.getText().toString();
-                mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                String email = edtEmail.getText().toString().trim();
+                String password = edtPasword.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                            Intent intentHome = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intentHome);
+                        if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = user.getUid();
-                            User user1 = new User();
-                            user1.setEmail(email);
-                            user1.setPassword(pass);
+                            if (user != null) {
+                                String uid = user.getUid();
+                                User user1 = new User();
+                                user1.setEmail(email);
+                                user1.setPassword(password);
 
-                            // Kiểm tra xem tài khoản đã tồn tại trên cơ sở dữ liệu chưa
-                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                            mDatabase.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if (!dataSnapshot.exists()) {
-                                        // Nếu tài khoản chưa tồn tại trên cơ sở dữ liệu thì lưu email lên cơ sở dữ liệu
-                                        mDatabase.child("users").child(uid).setValue(user1);
+                                // Kiểm tra xem tài khoản đã tồn tại trên cơ sở dữ liệu chưa
+                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                                mDatabase.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (!dataSnapshot.exists()) {
+                                            // Nếu tài khoản chưa tồn tại trên cơ sở dữ liệu thì lưu lên cơ sở dữ liệu
+                                            mDatabase.child("users").child(uid).setValue(user1);
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
+                                    }
+                                });
+
+                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+                                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            String image = dataSnapshot.child("imageUser").getValue(String.class);
+                                            String name = dataSnapshot.child("name").getValue(String.class);
+
+                                            // Lưu thông tin người dùng vào SessionManager
+                                            sessionManager.saveUserCredentials(email, password, image, name);
+                                            sessionManager.isLoggedIn();
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        // Xử lý khi có lỗi truy cập cơ sở dữ liệu
+                                    }
+                                });
+
+                            }
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thất bại! Vui lòng kiểm tra email và mật khẩu.", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
-
             }
-
         });
+
 
 
         // button quay lại
@@ -188,6 +222,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin2 = (Button) findViewById(R.id.btn_login2);
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         mAuth = FirebaseAuth.getInstance();
+        sessionManager = new SessionManager(this);
     }
 
 }

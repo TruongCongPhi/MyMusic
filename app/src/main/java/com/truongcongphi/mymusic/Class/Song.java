@@ -3,8 +3,6 @@ package com.truongcongphi.mymusic.Class;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.sql.ParameterMetaData;
 import java.util.List;
 
 public class Song implements Parcelable {
@@ -12,16 +10,21 @@ public class Song implements Parcelable {
     private String duration;
     private String imageSong;
     private String like;
+    private String mixId;
     private List<String> singerName;
     private String songName;
     private String url;
     private String songID;
+
+    public Song() {
+    }
 
     protected Song(Parcel in) {
         albumID = in.readString();
         duration = in.readString();
         imageSong = in.readString();
         like = in.readString();
+        mixId = in.readString();
         singerName = in.createStringArrayList();
         songName = in.readString();
         url = in.readString();
@@ -34,6 +37,7 @@ public class Song implements Parcelable {
         dest.writeString(duration);
         dest.writeString(imageSong);
         dest.writeString(like);
+        dest.writeString(mixId);
         dest.writeStringList(singerName);
         dest.writeString(songName);
         dest.writeString(url);
@@ -56,17 +60,6 @@ public class Song implements Parcelable {
             return new Song[size];
         }
     };
-
-    public String getSongID() {
-        return songID;
-    }
-
-    public void setSongID(String songID) {
-        this.songID = songID;
-    }
-
-    public Song() {
-    }
 
     public String getAlbumID() {
         return albumID;
@@ -100,6 +93,14 @@ public class Song implements Parcelable {
         this.like = like;
     }
 
+    public String getMixId() {
+        return mixId;
+    }
+
+    public void setMixId(String mixId) {
+        this.mixId = mixId;
+    }
+
     public List<String> getSingerName() {
         return singerName;
     }
@@ -124,5 +125,11 @@ public class Song implements Parcelable {
         this.url = url;
     }
 
+    public String getSongID() {
+        return songID;
+    }
 
+    public void setSongID(String songID) {
+        this.songID = songID;
+    }
 }

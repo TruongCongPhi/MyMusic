@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchFragment searchFragment;
     private AccountFragment accountFragment;
 
-    int SPLASH_TIME_OUT = 3000; // Thời gian của màn hình chờ 3s
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,15 +33,7 @@ public class MainActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         searchFragment = new SearchFragment();
         accountFragment = new AccountFragment();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(intent);
-//
-//                finish();
-//            }
-//        },SPLASH_TIME_OUT);
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

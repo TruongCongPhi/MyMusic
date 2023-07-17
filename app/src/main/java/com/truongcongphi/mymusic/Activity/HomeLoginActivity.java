@@ -54,7 +54,7 @@ public class HomeLoginActivity extends AppCompatActivity {
 
                 // Định nghĩa các animation cho quá trình chuyển đổi giữa các activity
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
+                finish();
             }
         });
 
@@ -64,6 +64,7 @@ public class HomeLoginActivity extends AppCompatActivity {
                 Intent intentLogin = new Intent(HomeLoginActivity.this, LoginActivity.class);
                 startActivity(intentLogin);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
 
             }
         });
