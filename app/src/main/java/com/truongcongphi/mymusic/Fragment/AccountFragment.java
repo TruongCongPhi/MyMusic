@@ -3,6 +3,7 @@ package com.truongcongphi.mymusic.Fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,7 +16,14 @@ import android.widget.ImageButton;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Activity.AccountFragment2;
+import com.truongcongphi.mymusic.Activity.EditProfileActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
@@ -44,8 +52,23 @@ public class AccountFragment extends Fragment {
         sessionManager = new SessionManager(getActivity());
         infor = sessionManager.getLoggedInUser();
 
-
-        Glide.with(requireContext()).load(infor.getImageUser()).into(img_avt);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String image = dataSnapshot.child("imageUser").getValue(String.class);
+                        Glide.with(getActivity()).load(image).into(img_avt);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Xử lý khi có lỗi truy cập cơ sở dữ liệu
+                }
+            });
+        }
 
         img_avt.setOnClickListener(new View.OnClickListener() {
             @Override
