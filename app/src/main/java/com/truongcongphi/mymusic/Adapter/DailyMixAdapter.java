@@ -1,6 +1,5 @@
 package com.truongcongphi.mymusic.Adapter;
 
-import static android.webkit.URLUtil.isValidUrl;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
-import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Class.DaiyMix;
 import com.truongcongphi.mymusic.R;
 

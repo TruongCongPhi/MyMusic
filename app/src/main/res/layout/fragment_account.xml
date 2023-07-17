@@ -103,82 +103,12 @@
 
                 </LinearLayout>
             </LinearLayout>
-            <androidx.core.widget.NestedScrollView
+            <fragment
+                android:id="@+id/fragment_playlist"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="40dp"
-                        android:gravity="center_horizontal"
-                        android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                        android:textColor="@color/white"
-                        android:textSize="34sp"
-                        android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView><TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center_horizontal"
-                    android:text="Hàng triệu bài hát. Miễn phí trên Music"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"></TextView>
-                </LinearLayout>
-
-
-            </androidx.core.widget.NestedScrollView>
+                android:layout_height="wrap_content"
+                android:name="com.truongcongphi.mymusic.Fragment.PlaylistFragment"
+                ></fragment>
 
 
         </LinearLayout>
