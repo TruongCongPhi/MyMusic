@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.truongcongphi.mymusic.R;
 public class AccountFragment2 extends Fragment {
     ImageView imgUser;
     TextView tvName, tvGmail;
+    ImageButton ic_back;
     private SessionManager sessionManager;
     User infor;
 
@@ -31,6 +33,7 @@ public class AccountFragment2 extends Fragment {
         imgUser = view.findViewById(R.id.img_avt);
         tvName = view.findViewById(R.id.txt_name);
         tvGmail = view.findViewById(R.id.txt_gmail);
+        ic_back = view.findViewById(R.id.ic_back);
 
         sessionManager = new SessionManager(getActivity());
         infor = sessionManager.getLoggedInUser();
@@ -50,6 +53,14 @@ public class AccountFragment2 extends Fragment {
                 startActivity(new Intent(requireContext(), EditProfileActivity.class));
             }
         });
+
+        ic_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
+
     }
 }
 

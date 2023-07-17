@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.truongcongphi.mymusic.R;
 public class EditProfileActivity extends AppCompatActivity {
     ImageView img_avt;
     TextView txt_photo;
+    ImageButton ic_exit;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,13 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 xuLyLayHinh();
+            }
+        });
+
+        ic_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -71,5 +80,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private void addControls() {
         img_avt = (ImageView) findViewById(R.id.img_avt);
         txt_photo = (TextView)  findViewById(R.id.txt_photo);
+        ic_exit = (ImageButton) findViewById(R.id.ic_exit);
     }
 }
