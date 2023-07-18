@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.truongcongphi.mymusic.R;
 
 public class EditProfileActivity extends AppCompatActivity {
+    public static final int CAMERA_ACTION_CODE = 1;
     ImageView img_avt;
     TextView txt_photo;
     ImageButton ic_exit;
@@ -74,6 +76,13 @@ public class EditProfileActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
+                btn_chupanh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        xuLyChupHinh();
+                    }
+                });
             }
         });
 
@@ -87,6 +96,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     }
+
+    private void xuLyChupHinh() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, CAMERA_ACTION_CODE);
+        }else {
+            Toast.makeText(EditProfileActivity.this, "There is no app that suport this action", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 
     private void xuLyLayHinh() {
         Intent intent = new Intent();
@@ -111,6 +131,11 @@ public class EditProfileActivity extends AppCompatActivity {
             {
                 Log.e("Error", ex.toString());
             }
+        }
+        if(requestCode == CAMERA_ACTION_CODE && resultCode == RESULT_OK && data != null) {
+            Bundle bundle = data.getExtras();
+            Bitmap Photo = (Bitmap) bundle.get("data");
+            img_avt.setImageBitmap(Photo);
         }
     }
 
