@@ -1,4 +1,4 @@
-package com.truongcongphi.mymusic.Activity;
+package com.truongcongphi.mymusic.Fragment;
 
 import androidx.fragment.app.Fragment;
 
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.truongcongphi.mymusic.Activity.EditProfileActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
@@ -39,7 +40,7 @@ public class AccountFragment2 extends Fragment {
         btn_edit = view.findViewById(R.id.btn_edit);
 
         sessionManager = new SessionManager(getActivity());
-        infor = sessionManager.getLoggedInUser();
+
 
         addEvents();
         return view;
@@ -47,9 +48,9 @@ public class AccountFragment2 extends Fragment {
 
 
     private void addEvents() {
-        Glide.with(this).load(infor.getImageUser()).into(imgUser);
-        tvName.setText(infor.getName());
-        tvGmail.setText(infor.getEmail());
+        Glide.with(this).load(sessionManager.getImage()).into(imgUser);
+        tvName.setText(sessionManager.getName());
+        tvGmail.setText(sessionManager.getEmail());
         imgUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

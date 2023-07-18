@@ -5,19 +5,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.truongcongphi.mymusic.Adapter.AlbumAdapter;
 import com.truongcongphi.mymusic.Adapter.TopAdapter;
-import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
@@ -45,7 +41,6 @@ public class TopFragment extends Fragment {
         topRecyclerview.setAdapter(topAdapter);
 
         getTopData();
-
         return view;
     }
 

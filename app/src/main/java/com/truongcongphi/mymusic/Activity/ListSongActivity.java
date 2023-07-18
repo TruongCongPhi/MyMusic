@@ -93,9 +93,17 @@ public class ListSongActivity extends AppCompatActivity {
 
         if (album != null) {
             title = album.getAlbumName();
-        } else if (artist != null) {
+        }
+        if (artist != null) {
             title = artist.getName();
         }
+        if(daiyMix !=null){
+            title = daiyMix.getMixName();
+        }
+        if (top!=null){
+            title = top.getTopName();
+        }
+
 
         collapsingToolbarLayout.setTitle(title);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
@@ -107,6 +115,19 @@ public class ListSongActivity extends AppCompatActivity {
             Glide.with(this).load(album.getAlbumURL())
                     .into(this.imgList);
         }
+        if(artist != null){
+            Glide.with(this).load(artist.getImgURL())
+                    .into(this.imgList);
+        }
+        if(daiyMix != null){
+            Glide.with(this).load(daiyMix.getUrl())
+                    .into(this.imgList);
+        }
+        if(top != null){
+            Glide.with(this).load(top.getTopUrl())
+                    .into(this.imgList);
+        }
+
     }
 
 
@@ -146,6 +167,25 @@ public class ListSongActivity extends AppCompatActivity {
                         Song song = childSnapshot.getValue(Song.class);
                         Log.d("Song", "dailyMixId: " + song.getMixId());
                         Log.d("Daily", "dailyMixId: " + daiyMix.getMixId());
+                        listSong.add(song);
+                        songAdapter.notifyDataSetChanged();
+                    }
+                    songAdapter.setData(listSong);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Xử lý khi có lỗi xảy ra
+                }
+            });
+        }
+        if (top != null) {
+            DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
+            songsRef.orderByChild("top").equalTo(top.getTopId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        Song song = childSnapshot.getValue(Song.class);
                         listSong.add(song);
                         songAdapter.notifyDataSetChanged();
                     }

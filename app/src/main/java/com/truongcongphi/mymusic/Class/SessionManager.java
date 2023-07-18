@@ -32,6 +32,10 @@ public class SessionManager {
         editor.putBoolean(KEY_LOGGED_IN, true);
         editor.commit();
     }
+    public void saveUserImage(String imageDownloadUrl) {
+        editor.putString(KEY_IMAGE, imageDownloadUrl);
+        editor.commit();
+    }
 
     public String getEmail() {
         return sharedPreferences.getString(KEY_EMAIL, "");
@@ -49,14 +53,6 @@ public class SessionManager {
         return sharedPreferences.getString(KEY_NAME, "");
     }
 
-    public User getLoggedInUser() {
-        User user = new User();
-        user.setName(getName());
-        user.setEmail(getEmail());
-        user.setPassword(getPassword());
-        user.setImageUser(getImage());
-        return user;
-    }
 
     public boolean isLoggedIn() {
         return sharedPreferences.getBoolean(KEY_LOGGED_IN, false) && !getEmail().isEmpty() && !getPassword().isEmpty();
@@ -75,4 +71,10 @@ public class SessionManager {
         context.startActivity(intent);
     }
 
+
+    public void saveNameImage(String name) {
+        editor.putString(KEY_NAME, name);
+        editor.commit();
+
+    }
 }
