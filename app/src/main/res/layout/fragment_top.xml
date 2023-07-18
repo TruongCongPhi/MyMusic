@@ -9,14 +9,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="danh sách phát"
+        android:text="Đề xuất của Tôi"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginStart="10dp"
         android:textColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlist_rcv"
+        android:id="@+id/top_rcv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

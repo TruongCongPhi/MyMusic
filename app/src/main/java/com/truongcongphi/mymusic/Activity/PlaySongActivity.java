@@ -109,15 +109,10 @@ public class PlaySongActivity extends AppCompatActivity {
                     position = randomIndex;
                 }
 
-                if (position < positionBefore) {
-                    // play the previous song
-                    position = position - 1;
-                }
                 if (position > (songArrayList.size() - 1)) {
                     position = 0;
                 }
                 playSong(position);
-                positionBefore = position;
             }
 
             @Override

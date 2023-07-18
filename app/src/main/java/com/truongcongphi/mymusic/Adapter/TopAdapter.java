@@ -1,6 +1,5 @@
 package com.truongcongphi.mymusic.Adapter;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,46 +7,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
 import com.truongcongphi.mymusic.Class.DaiyMix;
+import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
 
-public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyMixViewHolder> {
+public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
     Context context;
-    ArrayList<DaiyMix> list;
+    ArrayList<Top> list;
 
-    public DailyMixAdapter(Context context, ArrayList<DaiyMix> list) {
+    public TopAdapter(Context context, ArrayList<Top> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public DailyMixViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TopViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_home,parent,false);
 
-        return new DailyMixViewHolder(view);
+        return new TopViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DailyMixViewHolder holder, int position) {
-        DaiyMix daiyMix = list.get(position);
-        if(daiyMix == null){
+    public void onBindViewHolder(@NonNull TopViewHolder holder, int position) {
+        Top top = list.get(position);
+        if(top == null){
             return;
         }
 
 
-            Glide.with(holder.itemView.getContext())
-                    .load(daiyMix.getUrl())
-                    .into(holder.imgDailyMix);
+        Glide.with(holder.itemView.getContext())
+                .load(top.getTopUrl())
+                .into(holder.imgTop);
 
-        holder.tvDailyMix.setText(daiyMix.getMixName());
+        holder.tvTop.setText(top.getTopName());
+
     }
 
     @Override
@@ -57,26 +60,26 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
         }
         return 0;
     }
-    public void setData(ArrayList<DaiyMix> dailyMixs) {
 
-        this.list = dailyMixs;
+    public void setData(ArrayList<Top> tops) {
+        this.list = tops;
         notifyDataSetChanged();
     }
 
-    public class DailyMixViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imgDailyMix;
-        private TextView tvDailyMix;
-        public DailyMixViewHolder(@NonNull View itemView) {
+    public class TopViewHolder extends RecyclerView.ViewHolder{
+        private ImageView imgTop;
+        private TextView tvTop;
+        public TopViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgDailyMix = itemView.findViewById(R.id.img_item);
-            tvDailyMix = itemView.findViewById(R.id.tv_tilte1);
+            imgTop = itemView.findViewById(R.id.img_item);
+            tvTop = itemView.findViewById(R.id.tv_tilte1);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ListSongActivity.class);
                     // Gắn dữ liệu album vào Intent
-                    intent.putExtra("dailymix", list.get(getAdapterPosition()));
+                    intent.putExtra("top", list.get(getAdapterPosition()));
                     v.getContext().startActivity(intent);
                 }
             });

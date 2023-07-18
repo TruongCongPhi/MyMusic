@@ -114,13 +114,11 @@ public class LoginActivity extends AppCompatActivity {
                                             finish();
                                         }
                                     }
-
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                         // Xử lý khi có lỗi truy cập cơ sở dữ liệu
                                     }
                                 });
-
                             }
 
                         } else {
@@ -130,7 +128,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-
 
 
         // button quay lại
