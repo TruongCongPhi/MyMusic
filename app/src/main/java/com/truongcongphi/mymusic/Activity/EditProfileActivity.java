@@ -1,12 +1,18 @@
 package com.truongcongphi.mymusic.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +26,7 @@ public class EditProfileActivity extends AppCompatActivity {
     ImageView img_avt;
     TextView txt_photo;
     ImageButton ic_exit;
+    Button btn_chonanh, btn_chupanh;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +39,44 @@ public class EditProfileActivity extends AppCompatActivity {
         img_avt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                xuLyLayHinh();
+                final Dialog dialog = new Dialog (EditProfileActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.layout_dialog_feeback);
+                dialog.show();
+
+                btn_chonanh = dialog.findViewById(R.id.btn_chonanh);
+                btn_chupanh = dialog.findViewById(R.id.btn_chupanh);
+
+                btn_chonanh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        xuLyLayHinh();
+                        dialog.cancel();
+                    }
+                });
             }
         });
         txt_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                xuLyLayHinh();
+                final Dialog dialog = new Dialog (EditProfileActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.layout_dialog_feeback);
+                dialog.show();
+
+                btn_chonanh = dialog.findViewById(R.id.btn_chonanh);
+                btn_chupanh = dialog.findViewById(R.id.btn_chupanh);
+
+                btn_chonanh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        xuLyLayHinh();
+                        dialog.cancel();
+                    }
+                });
             }
         });
+
 
         ic_exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +84,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
     }
 
@@ -81,5 +118,6 @@ public class EditProfileActivity extends AppCompatActivity {
         img_avt = (ImageView) findViewById(R.id.img_avt);
         txt_photo = (TextView)  findViewById(R.id.txt_photo);
         ic_exit = (ImageButton) findViewById(R.id.ic_exit);
+
     }
 }

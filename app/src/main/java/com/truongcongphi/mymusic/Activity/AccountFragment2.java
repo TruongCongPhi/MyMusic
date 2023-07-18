@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class AccountFragment2 extends Fragment {
     ImageView imgUser;
     TextView tvName, tvGmail;
     ImageButton ic_back;
+    Button btn_edit;
     private SessionManager sessionManager;
     User infor;
 
@@ -34,6 +36,7 @@ public class AccountFragment2 extends Fragment {
         tvName = view.findViewById(R.id.txt_name);
         tvGmail = view.findViewById(R.id.txt_gmail);
         ic_back = view.findViewById(R.id.ic_back);
+        btn_edit = view.findViewById(R.id.btn_edit);
 
         sessionManager = new SessionManager(getActivity());
         infor = sessionManager.getLoggedInUser();
