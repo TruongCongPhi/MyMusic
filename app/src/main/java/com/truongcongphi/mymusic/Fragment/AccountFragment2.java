@@ -25,7 +25,7 @@ public class AccountFragment2 extends Fragment {
     ImageButton ic_back;
     Button btn_edit;
     private SessionManager sessionManager;
-    User infor;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -45,13 +45,38 @@ public class AccountFragment2 extends Fragment {
         addEvents();
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUserData();
+    }
+
+    private void loadUserData() {
+        String imageUrl = sessionManager.getImage();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this).load(imageUrl).into(imgUser);
+        }else imgUser.setImageResource(R.drawable.ic_user);
+        tvName.setText(sessionManager.getName());
+        tvGmail.setText(sessionManager.getEmail());
+    }
+
 
 
     private void addEvents() {
-        Glide.with(this).load(sessionManager.getImage()).into(imgUser);
+        String imageUrl = sessionManager.getImage();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this).load(imageUrl).into(imgUser); // Tải ảnh bằng Glide nếu địa chỉ ảnh khác null
+        }
+
         tvName.setText(sessionManager.getName());
         tvGmail.setText(sessionManager.getEmail());
         imgUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireContext(), EditProfileActivity.class));
+            }
+        });
+        btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(requireContext(), EditProfileActivity.class));

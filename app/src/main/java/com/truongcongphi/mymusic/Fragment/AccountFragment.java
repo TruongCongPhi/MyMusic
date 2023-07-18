@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +28,8 @@ import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
 
 public class AccountFragment extends Fragment {
-    ImageButton img_avt, ic_search, ic_add;
+    ImageButton ic_search, ic_add;
+    ImageView img_avt;
     Button btnSignOut;
     private SessionManager sessionManager;
     private FirebaseAuth mAuth;
@@ -49,8 +51,12 @@ public class AccountFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
 
-        Glide.with(getActivity()).load(sessionManager.getImage()).into(img_avt);
 
+        String imageUrl = sessionManager.getImage(); // Lấy địa chỉ ảnh từ SessionManager
+
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this).load(imageUrl).into(img_avt); // Tải ảnh bằng Glide nếu địa chỉ ảnh khác null
+        }
         img_avt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

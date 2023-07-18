@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +42,8 @@ import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
 public class EditProfileActivity extends AppCompatActivity {
-
+    private boolean checkImage = false;
+    private boolean isImageUpdated = false;
 
     private ImageView imageView;
     private TextView txt_photo, tvSave;
@@ -65,7 +67,6 @@ public class EditProfileActivity extends AppCompatActivity {
         addControls();
         loadUserData();
         addEvents();
-
     }
 
     private void addEvents() {
@@ -146,9 +147,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
         builder.show();
     }
+
     private void deleteImage() {
-        imageView.setImageDrawable(null);
+        imageView.setImageResource(R.drawable.ic_user);
+        selectedImageUri = null;
+        checkImage = true;
     }
+
     private boolean checkCameraPermission() {
         int cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         return cameraPermission == PackageManager.PERMISSION_GRANTED;
@@ -186,7 +191,6 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        selectedImageUri = data.getData();
 
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
@@ -194,16 +198,16 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (extras != null) {
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     imageView.setImageBitmap(imageBitmap);
+                    selectedImageUri = null; // Set selectedImageUri to null if using camera capture
                 }
             } else if (requestCode == REQUEST_IMAGE_PICK) {
                 if (data != null) {
-                    Uri selectedImageUri = data.getData();
+                    selectedImageUri = data.getData();
                     imageView.setImageURI(selectedImageUri);
                 }
             }
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -224,7 +228,6 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void loadUserData() {
-
         if (currentUser != null) {
             userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.getUid());
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -236,7 +239,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         if (image != null) {
                             Glide.with(EditProfileActivity.this).load(image).into(imageView);
                         }
-                        if(name != null){
+                        if (name != null) {
                             edtName.setText(name);
                         }
                     }
@@ -249,9 +252,6 @@ public class EditProfileActivity extends AppCompatActivity {
             });
         }
     }
-
-
-
 
 
     private void uploadImageToFirebase(Uri imageUri) {
@@ -268,18 +268,13 @@ public class EditProfileActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri downloadUri) {
                                 String imageDownloadUrl = downloadUri.toString();
+
                                 sessionManager.saveUserImage(imageDownloadUrl);
-                                userRef.child("imageUser").setValue(imageDownloadUrl)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Glide.with(EditProfileActivity.this).load(imageDownloadUrl).into(imageView);
-                                                } else {
-                                                    Toast.makeText(EditProfileActivity.this, "Cập nhật hình ảnh thất bại", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                Glide.with(EditProfileActivity.this).load(sessionManager.getImage()).into(imageView);
+
+                                userRef.child("imageUser").setValue(imageDownloadUrl);
+                                isImageUpdated = true;
+                                checkAndCloseActivity();
                             }
                         });
                     } else {
@@ -289,20 +284,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-
-    private void saveProfile() {
-        if (selectedImageUri != null) {
-            uploadImageToFirebase(selectedImageUri);
-        }
-        if(edtName.getText() !=null){
-            uploadNameToFirebase();
-        }
-        Toast.makeText(EditProfileActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
-
-
-
     }
 
     private void uploadNameToFirebase() {
@@ -324,6 +305,28 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void saveProfile() {
+        if (selectedImageUri != null) {
+            uploadImageToFirebase(selectedImageUri);
+        }
+        if (edtName.getText() != null) {
+            uploadNameToFirebase();
+        }
+        if(checkImage == true){
+            userRef.child("imageUser").setValue(null);
+            sessionManager.saveUserImage(null);
+            isImageUpdated = true;
+        }
+        checkAndCloseActivity();
+    }
+    private void checkAndCloseActivity() {
+        if (isImageUpdated) {
+            // Hiển thị Toast
+            Toast.makeText(EditProfileActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+
+            finish();
+        }
+    }
 
     private void addControls() {
         imageView = findViewById(R.id.img_avt);
