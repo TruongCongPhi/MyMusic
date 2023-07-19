@@ -101,8 +101,6 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,9 +135,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void showChooseSourceDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Chọn ảnh");
-
-
+        builder.setTitle("Chọn ảnh thay đổi hồ sơ");
         boolean hasImage = (imageView.getDrawable().getConstantState() != getResources().getDrawable(R.drawable.ic_user).getConstantState());
 
         if (hasImage) {
@@ -317,7 +313,7 @@ public class EditProfileActivity extends AppCompatActivity {
         if (selectedImageUri != null) {
             if (currentUser != null) {
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference("avatars");
-                StorageReference imageRef = storageRef.child("avatars" + currentUser.getUid());
+                StorageReference imageRef = storageRef.child(currentUser.getUid());
 
                 UploadTask uploadTask = imageRef.putFile(selectedImageUri);
                 uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {

@@ -6,6 +6,11 @@ import android.content.SharedPreferences;
 
 import com.truongcongphi.mymusic.Activity.HomeLoginActivity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class SessionManager {
     private static final String PREF_NAME = "MyMusicPref";
     private static final String KEY_EMAIL = "email";
@@ -13,6 +18,7 @@ public class SessionManager {
     private static final String KEY_IMAGE = "image";
     private static final String KEY_NAME = "name";
     private static final String KEY_LOGGED_IN = "logged_in";
+    private static final String KEY_LIKED_SONGS = "liked_songs";
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -40,6 +46,17 @@ public class SessionManager {
         editor.putString(KEY_NAME, name);
         editor.commit();
     }
+    public void saveLikedSongs(List<String> likedSongs) {
+        Set<String> songSet = new HashSet<>(likedSongs);
+        editor.putStringSet(KEY_LIKED_SONGS, songSet);
+        editor.commit();
+    }
+
+    public List<String> getLikedSongs() {
+        Set<String> songSet = sharedPreferences.getStringSet(KEY_LIKED_SONGS, new HashSet<>());
+        return new ArrayList<>(songSet);
+    }
+
 
     public String getEmail() {
         return sharedPreferences.getString(KEY_EMAIL, "");

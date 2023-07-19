@@ -18,10 +18,15 @@ import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHoler> {
     Context context;
     ArrayList<PlayList> playLists;
+    public PlaylistAdapter(Context context, ArrayList list) {
+        this.context = context;
+        this.playLists = list;
+    }
 
     public Context getContext() {
         return context;
@@ -30,20 +35,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     public void setContext(Context context) {
         this.context = context;
     }
-
-    public ArrayList<PlayList> getPlayLists() {
-        return playLists;
-    }
-
-    public void setPlayLists(ArrayList<PlayList> playLists) {
-        this.playLists = playLists;
-    }
-
     @NonNull
     @Override
     public PlaylistViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_song,parent);
+        View view = inflater.inflate(R.layout.item_song,parent,false);
         return new PlaylistViewHoler(view);
     }
 
@@ -53,7 +49,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         if(playList == null){
             return;
         }
-
+        Glide.with(context).load(playList.getImg()).into(holder.imgPlaylist);
+        holder.tvPlaylist.setText(playList.getName());
 
     }
 

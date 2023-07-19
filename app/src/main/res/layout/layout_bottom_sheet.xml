@@ -61,6 +61,7 @@
             android:layout_marginRight="10dp">
         </ImageView>
         <TextView
+            android:id="@+id/song_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thích"
@@ -80,6 +81,7 @@
             android:layout_marginRight="10dp">
         </ImageView>
         <TextView
+            android:id="@+id/add_playlist_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thêm vào danh sách phát"

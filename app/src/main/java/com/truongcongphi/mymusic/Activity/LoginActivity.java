@@ -34,6 +34,9 @@ import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.Class.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPasword;
     private Button btnLogin2;
@@ -96,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
-                                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                mDatabase.child("users").child(user.getUid());
+                                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
@@ -119,6 +122,30 @@ public class LoginActivity extends AppCompatActivity {
                                         // Xử lý khi có lỗi truy cập cơ sở dữ liệu
                                     }
                                 });
+
+                                mDatabase.child("users")
+                                        .child(uid)
+                                        .child("playlists")
+                                        .child("songliked")
+                                        .child("songs").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                List<String> likedSongs = new ArrayList<>();
+                                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                    String songId = dataSnapshot.getValue(String.class);
+                                                    likedSongs.add(songId);
+                                                }
+
+                                                // Lưu danh sách các bài hát đã thích vào SessionManager
+                                                sessionManager.saveLikedSongs(likedSongs);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
                             }
 
                         } else {
