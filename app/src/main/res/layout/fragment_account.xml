@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
 
 
 
@@ -28,13 +28,14 @@
                     android:padding="2dp"
                     android:layout_marginTop="10dp"
                     >
-                    <ImageButton
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/img_avt"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/ic_user"
-                        android:scaleType="fitCenter"
-                        ></ImageButton>
+                        android:src="@drawable/ic_user"
+                        android:scaleType="centerCrop"
+                        />
 
                     <TextView
                         android:id="@+id/test"
