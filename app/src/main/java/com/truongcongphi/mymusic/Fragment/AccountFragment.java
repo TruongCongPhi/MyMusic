@@ -53,7 +53,6 @@ public class AccountFragment extends Fragment {
 
 
         String imageUrl = sessionManager.getImage(); // Lấy địa chỉ ảnh từ SessionManager
-
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(this).load(imageUrl).into(img_avt); // Tải ảnh bằng Glide nếu địa chỉ ảnh khác null
         }

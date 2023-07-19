@@ -36,6 +36,10 @@ public class SessionManager {
         editor.putString(KEY_IMAGE, imageDownloadUrl);
         editor.commit();
     }
+    public void saveUserName(String name) {
+        editor.putString(KEY_NAME, name);
+        editor.commit();
+    }
 
     public String getEmail() {
         return sharedPreferences.getString(KEY_EMAIL, "");
@@ -72,9 +76,5 @@ public class SessionManager {
     }
 
 
-    public void saveNameImage(String name) {
-        editor.putString(KEY_NAME, name);
-        editor.commit();
 
-    }
 }
