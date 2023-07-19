@@ -19,6 +19,7 @@ public class SessionManager {
     private static final String KEY_NAME = "name";
     private static final String KEY_LOGGED_IN = "logged_in";
     private static final String KEY_LIKED_SONGS = "liked_songs";
+    private static final String KEY_PLAYLISTS = "playlists";
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -56,6 +57,18 @@ public class SessionManager {
         Set<String> songSet = sharedPreferences.getStringSet(KEY_LIKED_SONGS, new HashSet<>());
         return new ArrayList<>(songSet);
     }
+
+    public void savePlaylist(List<String> playlists) {
+        Set<String> playlistSet = new HashSet<>(playlists);
+        editor.putStringSet(KEY_PLAYLISTS, playlistSet);
+        editor.commit();
+    }
+
+    public List<String> getPlaylist() {
+        Set<String> playlistSet = sharedPreferences.getStringSet(KEY_PLAYLISTS, new HashSet<>());
+        return new ArrayList<>(playlistSet);
+    }
+
 
 
     public String getEmail() {

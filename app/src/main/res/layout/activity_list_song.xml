@@ -31,10 +31,10 @@
                 android:src="@drawable/mck"
                 />
             <ImageView
-                android:id="@+id/img_add_list_song"
+                android:id="@+id/img_add_playlist"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/ic_add"
+                android:src="@drawable/icon_add"
                 android:layout_gravity="end|bottom"
                 android:layout_marginRight="10dp"></ImageView>
 

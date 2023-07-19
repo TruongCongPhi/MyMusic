@@ -21,6 +21,8 @@ import com.bumptech.glide.Glide;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,16 +32,18 @@ import com.truongcongphi.mymusic.Adapter.SongAdapter;
 import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.Class.DaiyMix;
+import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListSongActivity extends AppCompatActivity {
     private RecyclerView rcvSongs;
     private SongAdapter songAdapter;
-    ImageView imgList, imgBack;
+    ImageView imgList, imgBack,imgAddPlayList;
     Album album ;
     Artist artist;
     DaiyMix daiyMix;
@@ -48,6 +52,8 @@ public class ListSongActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     FloatingActionButton floatingActionButton;
+    FirebaseUser currentUser;
+    SessionManager sessionManager;
 
 
     @SuppressLint("MissingInflatedId")
@@ -72,6 +78,7 @@ public class ListSongActivity extends AppCompatActivity {
     }
 
     private void addViews() {
+        imgAddPlayList = findViewById(R.id.img_add_playlist);
         imgList = findViewById(R.id.img_list);
         imgBack = findViewById(R.id.btn_back);
         rcvSongs = findViewById(R.id.rcv_songs);
@@ -84,6 +91,8 @@ public class ListSongActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarlist);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        sessionManager = new SessionManager(this);
     }
 
 
@@ -133,25 +142,82 @@ public class ListSongActivity extends AppCompatActivity {
 
 
     private void getData() {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+
         if (album != null) {
-            DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
-            songsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("songs").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                    List<String> songPlaylist = new ArrayList<>();
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-
                         Song song = childSnapshot.getValue(Song.class);
-
                         if (song.getAlbumID().equals(album.getAlbumID())) {
                             listSong.add(song);
+                            songPlaylist.add(song.getSongID());
                             songAdapter.notifyDataSetChanged();
+
+
+
                         }
                     }
                     songAdapter.setData(listSong);
+                    List<String> playlistId = sessionManager.getPlaylist();
+                    String albumId = album.getAlbumID();
+                    boolean isAlbum = playlistId.contains(albumId);
+                    if(isAlbum){
+                        imgAddPlayList.setImageResource(R.drawable.icon_add_task);
+                    }
+                    imgAddPlayList.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
+                            List<String> playlistId = sessionManager.getPlaylist();
+                            String albumId = album.getAlbumID();
+                            boolean isAlbum = playlistId.contains(albumId);
+
+                            if(isAlbum){
+                                playlistId.remove(albumId);
+                                Toast.makeText(ListSongActivity.this,"Đã xóa khỏi danh sách phát",Toast.LENGTH_SHORT).show();
+                                imgAddPlayList.setImageResource(R.drawable.icon_add);
+                                databaseReference.child("users")
+                                        .child(currentUser.getUid())
+                                        .child("playlists")
+                                        .child(album.getAlbumID())
+                                        .removeValue();
+
+                            }else {
+                                playlistId.add(albumId);
+                                imgAddPlayList.setImageResource(R.drawable.icon_add_task);
+                                Toast.makeText(ListSongActivity.this, "Đã thêm vào danh sách phát",Toast.LENGTH_SHORT).show();
+                                databaseReference.child("users")
+                                        .child(currentUser.getUid())
+                                        .child("playlists")
+                                        .child(album.getAlbumID())
+                                        .child("songs")
+                                        .setValue(songPlaylist);
+                                databaseReference.child("users")
+                                        .child(currentUser.getUid())
+                                        .child("playlists")
+                                        .child(album.getAlbumID())
+                                        .child("img").setValue(album.getAlbumURL());
+                                databaseReference.child("users")
+                                        .child(currentUser.getUid())
+                                        .child("playlists")
+                                        .child(album.getAlbumID())
+                                        .child("name").setValue(album.getAlbumName());
+                            }
+                            sessionManager.savePlaylist(playlistId);
+
+
+
+
+
+
+                        }
+                    });
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 

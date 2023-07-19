@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -51,8 +52,6 @@ public class LoginActivity extends AppCompatActivity {
 
         addViews();
         addEvents();
-
-
 
     }
 
@@ -99,8 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                mDatabase.child("users").child(user.getUid());
-                                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                mDatabase.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
@@ -110,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                                             // Lưu thông tin người dùng vào SessionManager
                                             sessionManager.saveUserCredentials(email, password, image, name);
                                             sessionManager.isLoggedIn();
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!" + name, Toast.LENGTH_SHORT).show();
 
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
@@ -146,6 +144,27 @@ public class LoginActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                mDatabase.child("users")
+                                        .child(uid)
+                                        .child("playlists")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                List<String> playlists = new ArrayList<>();
+                                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                    String playlistId = dataSnapshot.getKey();
+                                                    playlists.add(playlistId);
+                                                    Log.d("PlaylistFragment", "Playlist: " + playlistId);
+                                                }
+                                                // Lưu danh sách các album,artist... vào SessionManager
+                                                sessionManager.savePlaylist(playlists);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                             }
 
                         } else {
