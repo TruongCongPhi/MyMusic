@@ -72,7 +72,7 @@ public class PlaylistFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         for (DataSnapshot playlistSnapshot : dataSnapshot.getChildren()) {
-                            String id = playlistSnapshot.child("id").getValue(String.class);
+                            String id = playlistSnapshot.getKey();
                             String img = playlistSnapshot.child("img").getValue(String.class);
                             String name = playlistSnapshot.child("name").getValue(String.class);
 

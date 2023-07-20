@@ -1,0 +1,16 @@
+package com.truongcongphi.mymusic.Activity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import com.truongcongphi.mymusic.R;
+
+public class MyPlaylistActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_playlist);
+    }
+}

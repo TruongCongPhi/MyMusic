@@ -32,6 +32,7 @@ import com.truongcongphi.mymusic.Adapter.SongAdapter;
 import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.Class.DaiyMix;
+import com.truongcongphi.mymusic.Class.PlayList;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.Class.Top;
@@ -48,6 +49,7 @@ public class ListSongActivity extends AppCompatActivity {
     Artist artist;
     DaiyMix daiyMix;
     Top top;
+    PlayList playList;
     ArrayList<Song> listSong = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
@@ -64,9 +66,9 @@ public class ListSongActivity extends AppCompatActivity {
         addViews();
         dataIntent();
         getData();
-        getHinhAnh();
-        getTilte();
+        getTilteAndImage();
         setupListeners();
+
     }
     private void setupListeners() {
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -93,52 +95,51 @@ public class ListSongActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         sessionManager = new SessionManager(this);
+
+
+
+
+
+
     }
 
-    private void getTilte() {
+    private void getTilteAndImage() {
         String title = "";
 
         if (album != null) {
             title = album.getAlbumName();
+            Glide.with(this).load(album.getAlbumURL())
+                    .into(this.imgList);
         }
         if (artist != null) {
             title = artist.getName();
+            Glide.with(this).load(artist.getImgURL())
+                    .into(this.imgList);
         }
         if(daiyMix !=null){
             title = daiyMix.getMixName();
+            Glide.with(this).load(daiyMix.getUrl())
+                    .into(this.imgList);
         }
         if (top!=null){
             title = top.getTopName();
+            Glide.with(this).load(top.getTopUrl())
+                    .into(this.imgList);
+        }
+        if(playList != null){
+            title = playList.getName();
+            Glide.with(this).load(playList.getImg())
+                    .error(R.drawable.music_note)
+                    .into(this.imgList);
+
         }
         collapsingToolbarLayout.setTitle(title);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
 
-    private void getHinhAnh() {
-        if(album != null){
-            Glide.with(this).load(album.getAlbumURL())
-                    .into(this.imgList);
-        }
-        if(artist != null){
-            Glide.with(this).load(artist.getImgURL())
-                    .into(this.imgList);
-        }
-        if(daiyMix != null){
-            Glide.with(this).load(daiyMix.getUrl())
-                    .into(this.imgList);
-        }
-        if(top != null){
-            Glide.with(this).load(top.getTopUrl())
-                    .into(this.imgList);
-        }
-
-    }
 
     private void getData() {
-
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         if (album != null) {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             databaseReference.child("songs").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -235,6 +236,33 @@ public class ListSongActivity extends AppCompatActivity {
             });
 
         }
+        if(playList !=null){
+            DatabaseReference artistRef = FirebaseDatabase.getInstance().getReference("songs");
+            artistRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<String> songPlaylist = new ArrayList<>();
+
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        Song song = childSnapshot.getValue(Song.class);
+                        if (playList.getListSongPlaylist().contains(song.getSongID())) {
+                            listSong.add(song);
+                            songPlaylist.add(song.getSongID());
+                            songAdapter.notifyDataSetChanged();
+                        }
+                    }
+                    songAdapter.setData(listSong);
+                    checkInPlaylist(songPlaylist, playList.getId(), playList.getName(), playList.getImg());
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
     }
 
     private void checkInPlaylist(List<String> songPlaylist, String id, String name, String img) {
@@ -313,6 +341,14 @@ public class ListSongActivity extends AppCompatActivity {
         if (intent.hasExtra("top")) {
             top = (Top) intent.getSerializableExtra("top");
             Toast.makeText(this,top.getTopName(),Toast.LENGTH_SHORT).show();
+        }
+        if (intent.hasExtra("playlist")) {
+            playList = (PlayList) intent.getSerializableExtra("playlist");
+            Toast.makeText(this,playList.getName(),Toast.LENGTH_SHORT).show();
+        }
+        if (intent.hasExtra("myplaylist")) {
+            String namePlaylist = getIntent().getStringExtra("myplaylist");
+            Toast.makeText(this,namePlaylist,Toast.LENGTH_SHORT).show();
         }
     }
 

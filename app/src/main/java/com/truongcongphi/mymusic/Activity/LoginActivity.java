@@ -172,6 +172,31 @@ public class LoginActivity extends AppCompatActivity {
 
                                             }
                                         });
+
+                                mDatabase.child("users")
+                                        .child(uid)
+                                        .child("myplaylist")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                List<String> playlists = new ArrayList<>();
+                                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                    String playlistId = dataSnapshot.getValue(String.class);
+                                                    Log.d("Playlist", "playlist: " + playlistId);
+                                                    playlists.add(playlistId);
+                                                }
+
+                                                // Lưu danh sách các bài hát đã thích vào SessionManager
+                                                sessionManager.saveMyPlaylist(playlists);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+
                             }
 
                         } else {
