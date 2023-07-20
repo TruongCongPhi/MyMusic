@@ -66,15 +66,15 @@ public class ListSongActivity extends AppCompatActivity {
         getData();
         getHinhAnh();
         getTilte();
-
+        setupListeners();
+    }
+    private void setupListeners() {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
     }
 
     private void addViews() {
@@ -95,8 +95,6 @@ public class ListSongActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
     }
 
-
-
     private void getTilte() {
         String title = "";
 
@@ -112,8 +110,6 @@ public class ListSongActivity extends AppCompatActivity {
         if (top!=null){
             title = top.getTopName();
         }
-
-
         collapsingToolbarLayout.setTitle(title);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
@@ -139,11 +135,9 @@ public class ListSongActivity extends AppCompatActivity {
 
     }
 
-
-
     private void getData() {
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (album != null) {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -157,66 +151,11 @@ public class ListSongActivity extends AppCompatActivity {
                             listSong.add(song);
                             songPlaylist.add(song.getSongID());
                             songAdapter.notifyDataSetChanged();
-
-
-
                         }
                     }
                     songAdapter.setData(listSong);
-                    List<String> playlistId = sessionManager.getPlaylist();
-                    String albumId = album.getAlbumID();
-                    boolean isAlbum = playlistId.contains(albumId);
-                    if(isAlbum){
-                        imgAddPlayList.setImageResource(R.drawable.icon_add_task);
-                    }
-                    imgAddPlayList.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            List<String> playlistId = sessionManager.getPlaylist();
-                            String albumId = album.getAlbumID();
-                            boolean isAlbum = playlistId.contains(albumId);
-
-                            if(isAlbum){
-                                playlistId.remove(albumId);
-                                Toast.makeText(ListSongActivity.this,"Đã xóa khỏi danh sách phát",Toast.LENGTH_SHORT).show();
-                                imgAddPlayList.setImageResource(R.drawable.icon_add);
-                                databaseReference.child("users")
-                                        .child(currentUser.getUid())
-                                        .child("playlists")
-                                        .child(album.getAlbumID())
-                                        .removeValue();
-
-                            }else {
-                                playlistId.add(albumId);
-                                imgAddPlayList.setImageResource(R.drawable.icon_add_task);
-                                Toast.makeText(ListSongActivity.this, "Đã thêm vào danh sách phát",Toast.LENGTH_SHORT).show();
-                                databaseReference.child("users")
-                                        .child(currentUser.getUid())
-                                        .child("playlists")
-                                        .child(album.getAlbumID())
-                                        .child("songs")
-                                        .setValue(songPlaylist);
-                                databaseReference.child("users")
-                                        .child(currentUser.getUid())
-                                        .child("playlists")
-                                        .child(album.getAlbumID())
-                                        .child("img").setValue(album.getAlbumURL());
-                                databaseReference.child("users")
-                                        .child(currentUser.getUid())
-                                        .child("playlists")
-                                        .child(album.getAlbumID())
-                                        .child("name").setValue(album.getAlbumName());
-                            }
-                            sessionManager.savePlaylist(playlistId);
-
-
-
-
-
-
-                        }
-                    });
+                    // kiểm tra album trong playlist
+                    checkInPlaylist(songPlaylist, album.getAlbumID(), album.getAlbumName(), album.getAlbumURL());
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -229,16 +168,18 @@ public class ListSongActivity extends AppCompatActivity {
             songsRef.orderByChild("mixId").equalTo(daiyMix.getMixId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<String> songPlaylist = new ArrayList<>();
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         Song song = childSnapshot.getValue(Song.class);
                         Log.d("Song", "dailyMixId: " + song.getMixId());
                         Log.d("Daily", "dailyMixId: " + daiyMix.getMixId());
                         listSong.add(song);
+                        songPlaylist.add(song.getSongID());
                         songAdapter.notifyDataSetChanged();
                     }
                     songAdapter.setData(listSong);
+                    checkInPlaylist(songPlaylist,daiyMix.getMixId(), daiyMix.getMixName(), daiyMix.getUrl());
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // Xử lý khi có lỗi xảy ra
@@ -250,12 +191,15 @@ public class ListSongActivity extends AppCompatActivity {
             songsRef.orderByChild("top").equalTo(top.getTopId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<String> songPlaylist = new ArrayList<>();
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         Song song = childSnapshot.getValue(Song.class);
                         listSong.add(song);
                         songAdapter.notifyDataSetChanged();
+                        songPlaylist.add(song.getSongID());
                     }
                     songAdapter.setData(listSong);
+                    checkInPlaylist(songPlaylist,top.getTopId(), top.getTopName(), top.getTopUrl());
                 }
 
                 @Override
@@ -270,16 +214,18 @@ public class ListSongActivity extends AppCompatActivity {
             artistRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<String> songPlaylist = new ArrayList<>();
+
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         Song song = childSnapshot.getValue(Song.class);
-
                         if (artist.getListSongArtist().contains(song.getSongID())) {
                             listSong.add(song);
+                            songPlaylist.add(song.getSongID());
                             songAdapter.notifyDataSetChanged();
                         }
-
                     }
                     songAdapter.setData(listSong);
+                    checkInPlaylist(songPlaylist, artist.getName(), artist.getName(), artist.getImgURL());
                 }
 
                 @Override
@@ -290,26 +236,85 @@ public class ListSongActivity extends AppCompatActivity {
 
         }
     }
-        private void dataIntent() {
-            Intent intent = getIntent();
-            listSong.clear();
-            if (intent.hasExtra("album")) {
-                album = (Album) intent.getSerializableExtra("album");
-                Toast.makeText(this,album.getAlbumID(),Toast.LENGTH_SHORT).show();
-            }
-            if (intent.hasExtra("artist")){
-                artist = (Artist) intent.getSerializableExtra("artist");
-                String listSongArtistString = TextUtils.join(", ", artist.getListSongArtist());
-                Toast.makeText(this, listSongArtistString, Toast.LENGTH_LONG).show();            }
-            if (intent.hasExtra("dailymix")) {
-                daiyMix = (DaiyMix) intent.getSerializableExtra("dailymix");
-                Toast.makeText(this,daiyMix.getMixId(),Toast.LENGTH_SHORT).show();
-            }
-            if (intent.hasExtra("top")) {
-                top = (Top) intent.getSerializableExtra("top");
-                Toast.makeText(this,top.getTopName(),Toast.LENGTH_SHORT).show();
-            }
+
+    private void checkInPlaylist(List<String> songPlaylist, String id, String name, String img) {
+        List<String> playlistId = sessionManager.getPlaylist();
+
+        boolean checkId = playlistId.contains(id);
+
+
+        if (checkId) {
+            imgAddPlayList.setImageResource(R.drawable.icon_add_task);
+        } else {
+            imgAddPlayList.setImageResource(R.drawable.icon_add);
         }
+        imgAddPlayList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handlePlaylistClick(songPlaylist,id,name,img);
+            }
+        });
+    }
+    private void handlePlaylistClick(List<String> songPlaylist,String id, String name, String img) {
+        List<String> playlistId = sessionManager.getPlaylist();
+        boolean checkId = playlistId.contains(id);
+
+        if (checkId ) {
+            playlistId.remove(id);
+            Toast.makeText(ListSongActivity.this, "Đã xóa khỏi danh sách phát", Toast.LENGTH_SHORT).show();
+            imgAddPlayList.setImageResource(R.drawable.icon_add);
+            removeFromUserPlaylist(id);
+        } else {
+            playlistId.add(id);
+            imgAddPlayList.setImageResource(R.drawable.icon_add_task);
+            Toast.makeText(ListSongActivity.this, "Đã thêm vào danh sách phát", Toast.LENGTH_SHORT).show();
+            addToUserPlaylist(songPlaylist, id, name, img);
+        }
+        sessionManager.savePlaylist(playlistId);
+    }
+
+    private void addToUserPlaylist(List<String> songPlaylist, String id, String name, String img) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
+                .child(currentUser.getUid())
+                .child("playlists")
+                .child(id);
+
+        // Lưu thông tin chung cho playlist
+        databaseReference.child("name").setValue(name);
+        databaseReference.child("img").setValue(img);
+
+        // Lưu danh sách bài hát của nghệ sĩ
+        databaseReference.child("songs").setValue(songPlaylist);
+    }
+
+    private void removeFromUserPlaylist(String playlistId) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
+                .child(currentUser.getUid())
+                .child("playlists")
+                .child(playlistId);
+        databaseReference.removeValue();
+    }
+
+    private void dataIntent() {
+        Intent intent = getIntent();
+        listSong.clear();
+        if (intent.hasExtra("album")) {
+            album = (Album) intent.getSerializableExtra("album");
+            Toast.makeText(this,album.getAlbumID(),Toast.LENGTH_SHORT).show();
+        }
+        if (intent.hasExtra("artist")){
+            artist = (Artist) intent.getSerializableExtra("artist");
+            String listSongArtistString = TextUtils.join(", ", artist.getListSongArtist());
+            Toast.makeText(this, listSongArtistString, Toast.LENGTH_LONG).show();            }
+        if (intent.hasExtra("dailymix")) {
+            daiyMix = (DaiyMix) intent.getSerializableExtra("dailymix");
+            Toast.makeText(this,daiyMix.getMixId(),Toast.LENGTH_SHORT).show();
+        }
+        if (intent.hasExtra("top")) {
+            top = (Top) intent.getSerializableExtra("top");
+            Toast.makeText(this,top.getTopName(),Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 }

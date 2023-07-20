@@ -1,11 +1,14 @@
 package com.truongcongphi.mymusic.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -23,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,20 +44,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText edtEmail, edtPasword;
+    private EditText edtEmail, edtPassword;
     private Button btnLogin2;
     private ImageButton btnBack;
     private FirebaseAuth mAuth;
     private SessionManager sessionManager;
-    boolean passwordCheck;
+    private boolean passwordVisible = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         addViews();
         addEvents();
-
     }
 
     private void addEvents() {
@@ -63,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = edtEmail.getText().toString().trim();
-                String password = edtPasword.getText().toString().trim();
+                String password = edtPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
@@ -77,9 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
                                 String uid = user.getUid();
-                                User user1 = new User();
-                                user1.setEmail(email);
-                                user1.setPassword(password);
 
                                 // Kiểm tra xem tài khoản đã tồn tại trên cơ sở dữ liệu chưa
                                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -88,7 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if (!dataSnapshot.exists()) {
                                             // Nếu tài khoản chưa tồn tại trên cơ sở dữ liệu thì lưu lên cơ sở dữ liệu
-                                            mDatabase.child("users").child(uid).setValue(user1);
+                                            mDatabase.child("users").child(uid).child("email").setValue(email);
+                                            mDatabase.child("users").child(uid).child("password").setValue(password);
                                         }
                                     }
 
@@ -185,83 +186,60 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-
-        // ẩn-hiện password
-        edtPasword.setOnTouchListener(new View.OnTouchListener() {
+//         Show/Hide Password
+        edtPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int right = 2;
-                if(event.getAction()==MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= edtPasword.getRight() - edtPasword.getCompoundDrawables()[right].getBounds().width()) {
-                        int selection = edtPasword.getSelectionEnd();
-                        if (passwordCheck) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                                edtPasword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_not_show_password, 0);
-                            }
-                            edtPasword.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
-                            passwordCheck = false;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= edtPassword.getRight() - edtPassword.getCompoundDrawables()[right].getBounds().width()) {
+                        passwordVisible = !passwordVisible;
+
+                        // Đổi hình ảnh của Drawable phía cuối
+                        if (passwordVisible) {
+                            edtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_show_password, 0);
                         } else {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                                edtPasword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_show_password, 0);
-                            }
-                            edtPasword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                            passwordCheck = true;
+                            edtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_not_show_password, 0);
                         }
-                        edtPasword.setSelection(selection);
+
+                        edtPassword.setTransformationMethod(passwordVisible ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
+                        edtPassword.setSelection(edtPassword.getText().length());
                         return true;
                     }
                 }
                 return false;
             }
         });
+//
+//        // Enable/Disable Login Button based on input
+        edtEmail.addTextChangedListener(textWatcher);
+        edtPassword.addTextChangedListener(textWatcher);
 
-        // bắt buộc nhap đủ email-pass mới hiển thị button
-        edtEmail.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                boolean isEnabled = !TextUtils.isEmpty(s.toString()) && !TextUtils.isEmpty(edtPasword.getText().toString());
-                btnLogin2.setEnabled(isEnabled);
-                if (isEnabled) {
-                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
-                } else {
-                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#423F3E")));
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        edtPasword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                boolean isEnabled =!TextUtils.isEmpty(s.toString()) && !TextUtils.isEmpty(edtEmail.getText().toString());
-                btnLogin2.setEnabled(isEnabled);
-                if (isEnabled) {
-                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
-                } else {
-                    btnLogin2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#423F3E")));
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
 
 
     }
+    private boolean isInputValid(String email, String password) {
+        return !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password);
+    }
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            boolean isEnabled = isInputValid(edtEmail.getText().toString(), edtPassword.getText().toString());
+            btnLogin2.setEnabled(isEnabled);
+            btnLogin2.setBackgroundTintList(ColorStateList.valueOf(isEnabled ? Color.parseColor("#ffffff") : Color.parseColor("#423F3E")));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
 
     private void addViews() {
         edtEmail = (EditText) findViewById(R.id.edt_email);
-        edtPasword = (EditText) findViewById(R.id.edt_password);
+        edtPassword = (EditText) findViewById(R.id.edt_password);
         btnLogin2 = (Button) findViewById(R.id.btn_login2);
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         mAuth = FirebaseAuth.getInstance();

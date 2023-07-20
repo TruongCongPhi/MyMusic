@@ -78,8 +78,7 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
                             .child("users")
                             .child(userId)
                             .child("playlists")
-                            .child("songliked")
-                            .child("songs");
+                            .child("songliked");
 
                     List<String> likedSongs = sessionManager.getLikedSongs();
                     String songId = song.getSongID();
@@ -105,7 +104,9 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
                     // Lưu danh sách bài hát đã thay đổi vào SessionManager
                     sessionManager.saveLikedSongs(likedSongs);
                     // Lưu danh sách bài hát đã thay đổi lên Firebase
-                    userRef.setValue(likedSongs);
+                    userRef.child("img").setValue("https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/liked_songs.png?alt=media&token=6ac491d3-f73b-4be7-a664-af282e49c0a5");
+                    userRef.child("name").setValue("Bài hát ưa thích");
+                    userRef.child("songs").setValue(likedSongs);
                     dismiss();
 
                 }
