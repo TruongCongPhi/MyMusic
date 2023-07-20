@@ -90,6 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                                             // Nếu tài khoản chưa tồn tại trên cơ sở dữ liệu thì lưu lên cơ sở dữ liệu
                                             mDatabase.child("users").child(uid).child("email").setValue(email);
                                             mDatabase.child("users").child(uid).child("password").setValue(password);
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                            sessionManager.saveUserCredentials(email, password, null, null);
+
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     }
 

@@ -20,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
+import com.truongcongphi.mymusic.Activity.MainActivity;
+import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.Fragment.HomeFragment;
 import com.truongcongphi.mymusic.R;
 
@@ -32,7 +34,7 @@ import java.util.Map;
 
 
 public class shownhac extends AppCompatActivity {
-    Button btnPushSong,btnUpdateSinger , btnAlbum, btnUpdateUrlNameAlbum,btnCheck;
+    Button btnPushSong,btnUpdateSinger ,btnTop, btnDailyMix, btnUpdateUrlNameAlbum,btnCheck;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,7 +42,8 @@ public class shownhac extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shownhac);
         btnPushSong = (Button) findViewById(R.id.btn_push_song);
-        btnAlbum = (Button) findViewById(R.id.btn_album);
+        btnTop = findViewById(R.id.btn_top);
+        btnDailyMix = (Button) findViewById(R.id.btn_dailymix);
         btnUpdateSinger = (Button) findViewById(R.id.btn_update_singer);
         btnUpdateUrlNameAlbum = (Button) findViewById(R.id.btn_update_url_name_album);
         btnCheck= (Button) findViewById(R.id.btn_check);
@@ -62,10 +65,10 @@ public class shownhac extends AppCompatActivity {
         });
 
 
-        btnAlbum.setOnClickListener(new View.OnClickListener() {
+        btnDailyMix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                updateSingerNameInAlbums();
+                updateDailyMixs();
 
             }
         });
@@ -82,6 +85,95 @@ public class shownhac extends AppCompatActivity {
                 Check();
             }
         });
+        btnTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference albumsRef = database.getReference("tops");
+
+                // Giả sử bạn đã có thông tin về URL và tên của các album
+                Map<String, String> albumURLs = new HashMap<>();
+                albumURLs.put("top001", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20%C4%91%E1%BB%81%20xu%E1%BA%A5t%20nh%E1%BA%A1c4%2Ftop1.jpg?alt=media&token=bee6e102-0cc8-472c-9177-1513b8a23f09");
+                albumURLs.put("top002", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20%C4%91%E1%BB%81%20xu%E1%BA%A5t%20nh%E1%BA%A1c4%2Ftop2.jpg?alt=media&token=ca2c4de2-14f8-44b3-8ab7-9acb2370cacf");
+                albumURLs.put("top003", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20%C4%91%E1%BB%81%20xu%E1%BA%A5t%20nh%E1%BA%A1c4%2Ftop3.jpg?alt=media&token=313bd4c7-a897-43d2-bd77-03ecb3f0ccb8");
+                albumURLs.put("top004", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20%C4%91%E1%BB%81%20xu%E1%BA%A5t%20nh%E1%BA%A1c4%2Ftop4.jpg?alt=media&token=308bf193-d0ce-4cc8-84ed-66cb3bcf141f");
+                // ...
+
+                Map<String, String> albumNames = new HashMap<>();
+                albumNames.put("top001", "đề xuất 1");
+                albumNames.put("top002", "đề xuất 2");
+                albumNames.put("top003", "đề xuất 3");
+                albumNames.put("top004", "đề xuất 4");
+
+                Map<String, String> id = new HashMap<>();
+                id.put("top001", "top001");
+                id.put("top002", "top002");
+                id.put("top003", "top003");
+                id.put("top004", "top004");
+
+
+                // ...
+
+                // Duyệt qua các entry của albumURLs và albumNames để cập nhật thông tin cho node albums
+                for (Map.Entry<String, String> entry : albumURLs.entrySet()) {
+                    String albumID = entry.getKey();
+                    String albumURL = entry.getValue();
+                    String albumName = albumNames.get(albumID);
+                    String mixId = id.get(albumID);
+
+                    DatabaseReference albumRef = albumsRef.child(albumID);
+                    albumRef.child("topUrl").setValue(albumURL);
+                    albumRef.child("topName").setValue(albumName);
+                    albumRef.child("topId").setValue(mixId);
+
+                }
+
+            }
+        });
+
+    }
+
+    private void updateDailyMixs() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference albumsRef = database.getReference("dailymixs");
+
+        // Giả sử bạn đã có thông tin về URL và tên của các album
+        Map<String, String> albumURLs = new HashMap<>();
+        albumURLs.put("dailymix001", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20dailymix%2Fdailymix1.jpg?alt=media&token=0a049c14-b745-4134-8ecc-8481aefa2f19");
+        albumURLs.put("dailymix002", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20dailymix%2Fdailymix2.jpg?alt=media&token=3f90b9a8-1bd9-4a6c-9c49-040c0001b50b");
+        albumURLs.put("dailymix003", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20dailymix%2Fdailymix3.jpg?alt=media&token=e61c2cd1-7cd0-4fce-bb86-28cf61e3f0d9");
+        albumURLs.put("dailymix004", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20dailymix%2Fdailymix4.jpg?alt=media&token=d8d3572c-aa9e-4acc-a93e-0b460746e499");
+        // ...
+
+        Map<String, String> albumNames = new HashMap<>();
+        albumNames.put("dailymix001", "DailyMix 1");
+        albumNames.put("dailymix002", "DailyMix 2");
+        albumNames.put("dailymix003", "DailyMix 3");
+        albumNames.put("dailymix004", "DailyMix 4");
+
+        Map<String, String> id = new HashMap<>();
+        id.put("dailymix001", "dailymix001");
+        id.put("dailymix002", "dailymix002");
+        id.put("dailymix003", "dailymix003");
+        id.put("dailymix004", "dailymix004");
+
+
+        // ...
+
+        // Duyệt qua các entry của albumURLs và albumNames để cập nhật thông tin cho node albums
+        for (Map.Entry<String, String> entry : albumURLs.entrySet()) {
+            String albumID = entry.getKey();
+            String albumURL = entry.getValue();
+            String albumName = albumNames.get(albumID);
+            String mixId = id.get(albumID);
+
+            DatabaseReference albumRef = albumsRef.child(albumID);
+            albumRef.child("url").setValue(albumURL);
+            albumRef.child("mixName").setValue(albumName);
+            albumRef.child("mixId").setValue(mixId);
+
+        }
+
 
     }
 
@@ -138,7 +230,7 @@ public class shownhac extends AppCompatActivity {
 
 
     private void Check() {
-        startActivity(new Intent(this, HomeFragment.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     private void updateAlbumInfoInAlbums() {
@@ -147,11 +239,11 @@ public class shownhac extends AppCompatActivity {
 
         // Giả sử bạn đã có thông tin về URL và tên của các album
         Map<String, String> albumURLs = new HashMap<>();
-        albumURLs.put("album001", "URL của album 1");
-        albumURLs.put("album002", "https://firebasestorage.googleapis.com/v0/b/loginmusic-1f591.appspot.com/o/%E1%BA%A3nh%20album%2Fmck.jpg?alt=media&token=8325d713-1920-46a8-b281-a84909e2c16c");
-        albumURLs.put("album003", "https://firebasestorage.googleapis.com/v0/b/loginmusic-1f591.appspot.com/o/%E1%BA%A3nh%20album%2Flisa.jpg?alt=media&token=ab4f8242-8b08-498b-91b3-b2b743233f39");
-        albumURLs.put("album004", "URL của album 2");
-        albumURLs.put("album005", "https://firebasestorage.googleapis.com/v0/b/loginmusic-1f591.appspot.com/o/%E1%BA%A3nh%20album%2F22.jpg?alt=media&token=544787ea-65d8-47b7-9bea-bef4b1d16a72");
+        albumURLs.put("album001", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20album%2Fsontungmtp.jpg?alt=media&token=09935324-a622-46a0-84c3-2d193c21f071");
+        albumURLs.put("album002", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20album%2F%E1%BA%A3nhMCK.jpg?alt=media&token=d02fd725-97de-4cca-bf56-744bb3aafe03");
+        albumURLs.put("album003", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20album%2Flisa.jpg?alt=media&token=10d88c52-b490-47b8-b40f-1368bb5c2b9f");
+        albumURLs.put("album004", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20album%2Fbts.jpg?alt=media&token=94141214-47dc-4ef0-a525-58803a4b9e60");
+        albumURLs.put("album005", "https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/%E1%BA%A3nh%20album%2F22.jpg?alt=media&token=73900380-53b7-413b-b11c-e32ed255f900");
         // ...
 
         Map<String, String> albumNames = new HashMap<>();
@@ -202,49 +294,7 @@ public class shownhac extends AppCompatActivity {
 //        }
 //    });
 //}
-//private void uploadSong() {
-//    FirebaseStorage storage = FirebaseStorage.getInstance();
-//    StorageReference storageRef = storage.getReference();
-//    StorageReference songsRef = storageRef.child("songs");
-//
-//    songsRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-//        @Override
-//        public void onSuccess(ListResult listResult) {
-//            final int[] countIDCount = {1};
-//
-//            for (StorageReference item : listResult.getItems()) {
-//                String[] parts = item.getName().split(" - ");
-//                String songName = parts[0];
-//                String singerName = parts[1];
-//                String duration = parts[2];
-//                String album = parts[3].replace(".mp3", "");
-//                item.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        String audioUrl = uri.toString();
-//
-//                        // Lưu trữ thông tin về bài hát trong cơ sở dữ liệu
-//                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                        DatabaseReference songsRef = database.getReference("songs");
-//
-//                        Map<String, Object> newSong = new HashMap<>();
-//                        newSong.put("songName", songName);
-//                        newSong.put("singerName", singerName);
-//                        newSong.put("albumID", album);
-//                        newSong.put("duration", duration);
-//                        newSong.put("url", audioUrl);
-//
-//                        // Sử dụng định dạng mới cho key
-//                        String key = String.format(Locale.US, "song%03d", countIDCount[0]);
-//                        songsRef.child(key).setValue(newSong);
-//
-//                        countIDCount[0]++;
-//                    }
-//                });
-//            }
-//        }
-//    });
-//}
+
 private void uploadSong() {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference songsRef1 = database.getReference("songs");
@@ -297,6 +347,8 @@ private void uploadSong() {
                         newSong.put("url", audioUrl);
                         newSong.put("imageSong","url hình bài hát");
                         newSong.put("like","lượt thích");
+                        newSong.put("mixId","");
+                        newSong.put("topId","");
 
                         // Sử dụng định dạng mới cho key
                         songsRef.child(key).setValue(newSong);

@@ -188,7 +188,7 @@ public class ListSongActivity extends AppCompatActivity {
         }
         if (top != null) {
             DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference("songs");
-            songsRef.orderByChild("top").equalTo(top.getTopId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            songsRef.orderByChild("topId").equalTo(top.getTopId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     List<String> songPlaylist = new ArrayList<>();
