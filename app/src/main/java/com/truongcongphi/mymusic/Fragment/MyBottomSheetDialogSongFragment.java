@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,19 +15,15 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
     FirebaseUser currentUser;
     TextView tvSongName,tvSingerName,tvSongLike, tvAddPlaylistSong;
     ImageView imgSong, iconLike;
@@ -37,7 +32,8 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
     @Override
     public void setupDialog(@NonNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
-        View contentView = View.inflate(getContext(), R.layout.layout_bottom_sheet, null);
+        View contentView = View.inflate(getContext(), R.layout.layout_bottom_sheet_song, null);
+
         imgSong = contentView.findViewById(R.id.img_song);
         tvSongName = contentView.findViewById(R.id.tv_song_name);
         tvSingerName = contentView.findViewById(R.id.tv_singer_name);
@@ -78,8 +74,7 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
                             .child("users")
                             .child(userId)
                             .child("playlists")
-                            .child("songliked")
-                            .child("songs");
+                            .child("songliked");
 
                     List<String> likedSongs = sessionManager.getLikedSongs();
                     String songId = song.getSongID();
@@ -105,7 +100,9 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
                     // Lưu danh sách bài hát đã thay đổi vào SessionManager
                     sessionManager.saveLikedSongs(likedSongs);
                     // Lưu danh sách bài hát đã thay đổi lên Firebase
-                    userRef.setValue(likedSongs);
+                    userRef.child("img").setValue("https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/liked_songs.png?alt=media&token=6ac491d3-f73b-4be7-a664-af282e49c0a5");
+                    userRef.child("name").setValue("Bài hát ưa thích");
+                    userRef.child("songs").setValue(likedSongs);
                     dismiss();
 
                 }
@@ -124,8 +121,8 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
     }
 
 
-    public static MyBottomSheetDialogFragment newInstance(Song song) {
-        MyBottomSheetDialogFragment fragment = new MyBottomSheetDialogFragment();
+    public static MyBottomSheetDialogSongFragment newInstance(Song song) {
+        MyBottomSheetDialogSongFragment fragment = new MyBottomSheetDialogSongFragment();
         Bundle args = new Bundle();
         args.putParcelable("song", song);
         fragment.setArguments(args);

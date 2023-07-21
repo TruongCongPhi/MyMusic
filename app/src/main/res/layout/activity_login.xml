@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:inputType="textPassword"
-        android:drawableRight="@drawable/ic_not_show_password"
+        android:drawableEnd="@drawable/ic_not_show_password"
 
 
         />

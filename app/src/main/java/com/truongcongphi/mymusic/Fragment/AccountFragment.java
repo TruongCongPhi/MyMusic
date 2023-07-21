@@ -3,7 +3,6 @@ package com.truongcongphi.mymusic.Fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,18 +16,11 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Class.SessionManager;
-import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
 
 public class AccountFragment extends Fragment {
-    ImageButton ic_search, ic_add;
+    ImageButton ic_search, imgAdd;
     ImageView img_avt;
     Button btnSignOut;
     private SessionManager sessionManager;
@@ -44,14 +36,17 @@ public class AccountFragment extends Fragment {
 
         img_avt = view.findViewById(R.id.img_avt);
         ic_search = view.findViewById(R.id.ic_search);
-        ic_add = view.findViewById(R.id.ic_add);
+        imgAdd = view.findViewById(R.id.img_add_playlist);
         btnSignOut = view.findViewById(R.id.btn_sign_out);
 
         mAuth = FirebaseAuth.getInstance();
-
         sessionManager = new SessionManager(getActivity());
+        addEvents();
 
+        return view;
+    }
 
+    private void addEvents() {
         String imageUrl = sessionManager.getImage(); // Lấy địa chỉ ảnh từ SessionManager
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(this).load(imageUrl).into(img_avt); // Tải ảnh bằng Glide nếu địa chỉ ảnh khác null
@@ -81,6 +76,13 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        return view;
+        imgAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBottomSheetDialogPlaylistFragment myBottomSheetDialogPlaylistFragment = new MyBottomSheetDialogPlaylistFragment();
+                myBottomSheetDialogPlaylistFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetDialogPlaylistFragment.getTag());
+            }
+        });
+
     }
 }

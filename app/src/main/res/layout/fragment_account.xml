@@ -61,7 +61,7 @@
                             android:background="@drawable/ic_search"
                             />
                         <ImageButton
-                            android:id="@+id/ic_add"
+                            android:id="@+id/img_add_playlist"
                             android:layout_width="23dp"
                             android:layout_height="23dp"
                             android:background="@drawable/ic_add"

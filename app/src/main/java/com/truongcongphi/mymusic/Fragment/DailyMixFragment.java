@@ -49,7 +49,7 @@ public class DailyMixFragment extends Fragment {
     }
 
     private void getDailyMixData() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("dailymix");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("dailymixs");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -45,7 +45,7 @@ public class TopFragment extends Fragment {
     }
 
     private void getTopData() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("topmusic");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("tops");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

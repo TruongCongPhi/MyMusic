@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.Class.Song;
-import com.truongcongphi.mymusic.Fragment.MyBottomSheetDialogFragment;
+import com.truongcongphi.mymusic.Fragment.MyBottomSheetDialogSongFragment;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -83,7 +82,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                 public void onClick(View v) {
                     int vitri = getAdapterPosition();
                     Song song = mSongs.get(getAdapterPosition());
-                    MyBottomSheetDialogFragment bottomSheetDialog = MyBottomSheetDialogFragment.newInstance(song);
+                    MyBottomSheetDialogSongFragment bottomSheetDialog = MyBottomSheetDialogSongFragment.newInstance(song);
                     bottomSheetDialog.show(((AppCompatActivity) v.getContext()).getSupportFragmentManager(), bottomSheetDialog.getTag());
                 }
             });

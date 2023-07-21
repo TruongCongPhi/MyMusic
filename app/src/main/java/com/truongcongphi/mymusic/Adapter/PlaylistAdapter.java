@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
+import com.truongcongphi.mymusic.Activity.MyPlaylistActivity;
 import com.truongcongphi.mymusic.Class.PlayList;
+import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
@@ -50,7 +53,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
             return;
         }
         Glide.with(context).load(playList.getImg()).into(holder.imgPlaylist);
-        holder.tvPlaylist.setText(playList.getName());
+        holder.tvPlaylist1.setText(playList.getName());
+
+        holder.songOption.setVisibility(View.GONE);
 
     }
 
@@ -67,18 +72,43 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     }
 
     public class PlaylistViewHoler extends RecyclerView.ViewHolder{
-        private ImageView imgPlaylist;
-        private TextView tvPlaylist;
+        private ImageView imgPlaylist,songOption;
+        private TextView tvPlaylist1,tvPlaylist2;
+        SessionManager sessionManager;
 
         public PlaylistViewHoler(@NonNull View itemView) {
             super(itemView);
             imgPlaylist = itemView.findViewById(R.id.img_song);
-            tvPlaylist = itemView.findViewById(R.id.tv_song_name);
+            tvPlaylist1 = itemView.findViewById(R.id.tv_song_name);
+            tvPlaylist2 = itemView.findViewById(R.id.tv_singer_name);
+            songOption = itemView.findViewById(R.id.song_options);
+            sessionManager = new SessionManager(getContext());
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    String playlistId = playLists.get(getAdapterPosition()).getId();
+                    List<String> myPlaylistId = sessionManager.getmyPlaylist();
+
+                    boolean isPlaylistIdFound = false;
+
+                    for (String myId : myPlaylistId) {
+                        if (myId.equals(playlistId)) {
+                            isPlaylistIdFound = true;
+                            break;
+                        }
+                    }
+                    if(isPlaylistIdFound == true){
+                        Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
+                        intent.putExtra("playlist", playLists.get(getAdapterPosition()));
+                        v.getContext().startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(v.getContext(), ListSongActivity.class);
+                        intent.putExtra("playlist", playLists.get(getAdapterPosition()));
+                        v.getContext().startActivity(intent);
+                    }
                 }
             });
         }
