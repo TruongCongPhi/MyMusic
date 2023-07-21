@@ -95,7 +95,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
                     boolean isPlaylistIdFound = false;
 
                     for (String myId : myPlaylistId) {
-                        if (myId.equals(playlistId)) {
+                        if (myId.equals(playlistId) && myId.equals("songliked")) {
                             isPlaylistIdFound = true;
                             break;
                         }

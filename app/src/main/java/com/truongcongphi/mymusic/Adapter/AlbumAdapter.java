@@ -99,6 +99,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
                         intent.putExtra("album", listAlbum.get(getAdapterPosition()));
                         v.getContext().startActivity(intent);
                     }
+
+                    // click vào thì hiển thị trình phát nhạc
+
+
+
             });
 
 //             hiệu ứng item

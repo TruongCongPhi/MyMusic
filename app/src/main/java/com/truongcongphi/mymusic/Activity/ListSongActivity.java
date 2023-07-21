@@ -344,7 +344,7 @@ public class ListSongActivity extends AppCompatActivity {
         }
         if (intent.hasExtra("playlist")) {
             playList = (PlayList) intent.getSerializableExtra("playlist");
-            Toast.makeText(this,playList.getName(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,playList.getId(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("myplaylist")) {
             String namePlaylist = getIntent().getStringExtra("myplaylist");

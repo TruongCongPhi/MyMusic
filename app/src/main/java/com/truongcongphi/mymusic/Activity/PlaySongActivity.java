@@ -298,7 +298,6 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
 
-
     private void kiemtra() {
         if (mediaPlayer.isPlaying()) {
             Toast.makeText(PlaySongActivity.this, "Đang phát", Toast.LENGTH_SHORT).show();
@@ -426,6 +425,7 @@ public class PlaySongActivity extends AppCompatActivity {
             imgPlay.setImageResource(R.drawable.icon_play);
         }
 
+        ///
     }
 
 
@@ -464,8 +464,6 @@ public class PlaySongActivity extends AppCompatActivity {
         viewPagerPlaySong.setAdapter(adapterSong);
         playSong(position);
         viewPagerPlaySong.setCurrentItem(position);
-
-
 
 
     }

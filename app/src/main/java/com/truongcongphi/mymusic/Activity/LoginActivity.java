@@ -1,14 +1,13 @@
 package com.truongcongphi.mymusic.Activity;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
+
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -26,8 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
-import com.truongcongphi.mymusic.Class.User;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,7 +194,6 @@ public class LoginActivity extends AppCompatActivity {
                                             }
                                         });
 
-
                             }
 
                         } else {
@@ -242,12 +239,10 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
-//
+
 //        // Enable/Disable Login Button based on input
         edtEmail.addTextChangedListener(textWatcher);
         edtPassword.addTextChangedListener(textWatcher);
-
-
 
     }
     private boolean isInputValid(String email, String password) {

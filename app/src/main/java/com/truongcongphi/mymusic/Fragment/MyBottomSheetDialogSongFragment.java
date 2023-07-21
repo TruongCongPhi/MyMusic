@@ -73,7 +73,7 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
                     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()
                             .child("users")
                             .child(userId)
-                            .child("playlists")
+                            .child("myplaylist")
                             .child("songliked");
 
                     List<String> likedSongs = sessionManager.getLikedSongs();
