@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,10 +43,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
     private RecyclerView rcvSongs;
     private SongAdapter songAdapter;
     ImageView imgList, imgBack,imgAddPlayList;
-    Album album ;
-    Artist artist;
-    DaiyMix daiyMix;
-    Top top;
+
     PlayList playList;
     ArrayList<Song> listSong = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -53,6 +51,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     FirebaseUser currentUser;
     SessionManager sessionManager;
+    String namePlaylist;
 
 
     @SuppressLint("MissingInflatedId")
@@ -91,28 +90,19 @@ public class MyPlaylistActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         sessionManager = new SessionManager(this);
-
     }
 
     private void getTilteAndImage() {
-        String title = "";
         if(playList != null){
-            title = playList.getName();
-            Glide.with(this).load(playList.getImg())
-                    .error(R.drawable.music_note)
-                    .into(this.imgList);
-
-        }
-        collapsingToolbarLayout.setTitle(title);
+            collapsingToolbarLayout.setTitle(playList.getId());
+        }else collapsingToolbarLayout.setTitle(namePlaylist);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
-
-
     private void getData() {
-        if(playList !=null){
-            DatabaseReference artistRef = FirebaseDatabase.getInstance().getReference("songs");
-            artistRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        if(namePlaylist !=null && !namePlaylist.isEmpty()){
+            DatabaseReference playlistRef = FirebaseDatabase.getInstance().getReference("songs");
+            playlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     List<String> songPlaylist = new ArrayList<>();
@@ -127,25 +117,42 @@ public class MyPlaylistActivity extends AppCompatActivity {
                     }
                     songAdapter.setData(listSong);
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
+        }
+        if(playList != null){
+            DatabaseReference playlistRef = FirebaseDatabase.getInstance().getReference("songs");
+            playlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<String> songPlaylist = new ArrayList<>();
 
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        Song song = childSnapshot.getValue(Song.class);
+                        if (playList.getListSongPlaylist().contains(song.getSongID())) {
+                            listSong.add(song);
+                            songPlaylist.add(song.getSongID());
+                            songAdapter.notifyDataSetChanged();
+                        }
+                    }
+                    songAdapter.setData(listSong);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
         }
     }
-
     private void dataIntent() {
         Intent intent = getIntent();
         listSong.clear();
         if (intent.hasExtra("playlist")) {
             playList = (PlayList) intent.getSerializableExtra("playlist");
-            Toast.makeText(this,playList.getName(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,playList.getId(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("myplaylist")) {
-            String namePlaylist = getIntent().getStringExtra("myplaylist");
+            namePlaylist = getIntent().getStringExtra("myplaylist");
             Toast.makeText(this,namePlaylist,Toast.LENGTH_SHORT).show();
         }
     }

@@ -79,7 +79,7 @@ public class AccountFragment extends Fragment {
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyBottomSheetDialogPlaylistFragment myBottomSheetDialogPlaylistFragment = new MyBottomSheetDialogPlaylistFragment();
+                MyBottomSheetDialogAddPlaylistFragment myBottomSheetDialogPlaylistFragment = new MyBottomSheetDialogAddPlaylistFragment();
                 myBottomSheetDialogPlaylistFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetDialogPlaylistFragment.getTag());
             }
         });

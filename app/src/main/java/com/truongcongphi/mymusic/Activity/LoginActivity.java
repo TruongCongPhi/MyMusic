@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 mDatabase.child("users")
                                         .child(uid)
-                                        .child("myplaylist")
+                                        .child("playlist_my")
                                         .addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -183,7 +183,8 @@ public class LoginActivity extends AppCompatActivity {
                                                     Log.d("Playlist", "playlist: " + playlistId);
                                                     playlists.add(playlistId);
                                                 }
-
+                                                String songliked = "songliked";
+                                                playlists.add(songliked);
                                                 // Lưu danh sách các bài hát đã thích vào SessionManager
                                                 sessionManager.saveMyPlaylist(playlists);
                                             }

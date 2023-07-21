@@ -1,0 +1,33 @@
+<!-- item_list_layout.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="#222222">
+
+
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="item"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"/>
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        />
+
+</RelativeLayout>

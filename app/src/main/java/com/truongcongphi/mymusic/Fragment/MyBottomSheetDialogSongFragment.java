@@ -73,7 +73,7 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
                     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()
                             .child("users")
                             .child(userId)
-                            .child("myplaylist")
+                            .child("playlists")
                             .child("songliked");
 
                     List<String> likedSongs = sessionManager.getLikedSongs();
@@ -100,6 +100,8 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
                     // Lưu danh sách bài hát đã thay đổi vào SessionManager
                     sessionManager.saveLikedSongs(likedSongs);
                     // Lưu danh sách bài hát đã thay đổi lên Firebase
+
+
                     userRef.child("img").setValue("https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/liked_songs.png?alt=media&token=6ac491d3-f73b-4be7-a664-af282e49c0a5");
                     userRef.child("name").setValue("Bài hát ưa thích");
                     userRef.child("songs").setValue(likedSongs);
@@ -116,8 +118,11 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
             }
         });
     }
-
     private void setDataPlaylistSong() {
+        MyBottomSheetDialogAddSongPlaylistFragment dialog = new MyBottomSheetDialogAddSongPlaylistFragment();
+        dialog.show(getActivity().getSupportFragmentManager(),dialog.getTag());
+        dismiss();
+
     }
 
 

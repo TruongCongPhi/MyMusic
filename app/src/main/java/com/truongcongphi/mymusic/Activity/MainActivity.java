@@ -17,9 +17,6 @@ import com.truongcongphi.mymusic.Fragment.HomeFragment;
 import com.truongcongphi.mymusic.Fragment.SearchFragment;
 import com.truongcongphi.mymusic.R;
 
-
-
-
 public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
