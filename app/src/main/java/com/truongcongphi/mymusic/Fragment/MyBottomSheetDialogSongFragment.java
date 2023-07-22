@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -119,8 +120,12 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
         });
     }
     private void setDataPlaylistSong() {
-        MyBottomSheetDialogAddSongPlaylistFragment dialog = new MyBottomSheetDialogAddSongPlaylistFragment();
-        dialog.show(getActivity().getSupportFragmentManager(),dialog.getTag());
+
+//        MyBottomSheetDialogAddSongPlaylistFragment dialog = new MyBottomSheetDialogAddSongPlaylistFragment();
+        Bundle args = getArguments();
+        Song song = args.getParcelable("song");
+        MyBottomSheetDialogAddSongPlaylistFragment bottomSheetDialog = MyBottomSheetDialogAddSongPlaylistFragment.newInstance(song);
+        bottomSheetDialog.show(getActivity().getSupportFragmentManager(), bottomSheetDialog.getTag());
         dismiss();
 
     }

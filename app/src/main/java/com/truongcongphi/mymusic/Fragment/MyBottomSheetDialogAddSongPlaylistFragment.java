@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.truongcongphi.mymusic.Activity.MyPlaylistActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
+import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -123,6 +124,26 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
             }
         });
 
+        btnAddPlaylistNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = getArguments();
+                Song song = args.getParcelable("song");
+
+                MyBottomSheetDialogAddPlaylistFragment bottomSheetDialog = MyBottomSheetDialogAddPlaylistFragment.newInstance(song);
+                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), bottomSheetDialog.getTag());
+                dismiss();
+
+            }
+        });
+
+    }
+    public static MyBottomSheetDialogAddSongPlaylistFragment newInstance(Song song) {
+        MyBottomSheetDialogAddSongPlaylistFragment fragment = new MyBottomSheetDialogAddSongPlaylistFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("song", song);
+        fragment.setArguments(args);
+        return fragment;
     }
 
 

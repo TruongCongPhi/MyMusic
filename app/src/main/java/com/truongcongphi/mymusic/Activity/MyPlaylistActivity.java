@@ -51,6 +51,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     FirebaseUser currentUser;
     SessionManager sessionManager;
+    Song song;
     String namePlaylist;
 
 
@@ -100,7 +101,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
     private void getData() {
-        if(namePlaylist !=null && !namePlaylist.isEmpty()){
+        if(song !=null ){
             DatabaseReference playlistRef = FirebaseDatabase.getInstance().getReference("songs");
             playlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -108,8 +109,8 @@ public class MyPlaylistActivity extends AppCompatActivity {
                     List<String> songPlaylist = new ArrayList<>();
 
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-                        Song song = childSnapshot.getValue(Song.class);
-                        if (playList.getListSongPlaylist().contains(song.getSongID())) {
+                        Song songg = childSnapshot.getValue(Song.class);
+                        if (song.getSongID().contains(songg.getSongID())) {
                             listSong.add(song);
                             songPlaylist.add(song.getSongID());
                             songAdapter.notifyDataSetChanged();
@@ -151,9 +152,15 @@ public class MyPlaylistActivity extends AppCompatActivity {
             playList = (PlayList) intent.getSerializableExtra("playlist");
             Toast.makeText(this,playList.getId(),Toast.LENGTH_SHORT).show();
         }
+        if (intent.hasExtra("nameplaylist")) {
+             namePlaylist = intent.getStringExtra("namplaylist");
+
+        }
         if (intent.hasExtra("myplaylist")) {
-            namePlaylist = getIntent().getStringExtra("myplaylist");
-            Toast.makeText(this,namePlaylist,Toast.LENGTH_SHORT).show();
+            song =  getIntent().getParcelableExtra("myplaylist");
+            if(song!=null){
+                Toast.makeText(this,song.getSongID(),Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
