@@ -101,7 +101,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
     private void getData() {
-        if(song !=null ){
+        if(song != null ){
             DatabaseReference playlistRef = FirebaseDatabase.getInstance().getReference("songs");
             playlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

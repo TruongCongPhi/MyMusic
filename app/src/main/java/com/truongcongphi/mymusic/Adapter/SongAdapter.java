@@ -5,9 +5,10 @@ import static com.truongcongphi.mymusic.Activity.MyNotification.CHANNEL_ID;
 import android.Manifest;
 import android.app.Notification;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import android.support.v4.media.session.MediaSessionCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;

@@ -37,6 +37,7 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
     DatabaseReference databaseReference;
 
 
+
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
@@ -56,6 +57,7 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                 String namePlaylist = String.valueOf(edtPlaylistName.getText());
                 List<String> playlistId = sessionManager.getPlaylist();
                 playlistId.add(namePlaylist);
+                sessionManager.savePlaylist(playlistId);
 
                 List<String> myPlaylistId = sessionManager.getmyPlaylist();
 
@@ -67,44 +69,51 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                     databaseReference.child("playlists").child(namePlaylist).child("name").setValue(namePlaylist);
 
                     Bundle args = getArguments();
+                    if (args != null) {
+                        Song song = args.getParcelable("song");
+                        databaseReference.child("playlists").child(namePlaylist).child("songs").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                List<String> songIds = new ArrayList<>();
 
-                    Song song = args.getParcelable("song");
-                    databaseReference.child("playlists").child(namePlaylist).child("songs").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            List<String> songIds = new ArrayList<>();
-
-                            if (dataSnapshot.exists()) {
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    String songId = snapshot.getValue(String.class);
-                                    songIds.add(songId);
+                                if (dataSnapshot.exists()) {
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        String songId = snapshot.getValue(String.class);
+                                        songIds.add(songId);
+                                    }
                                 }
+                                // Thêm songId mới vào danh sách songIds
+                                songIds.add(song.getSongID());
+
+                                // Lưu danh sách songIds đã cập nhật lên Firebase
+                                databaseReference.child("playlists").child(namePlaylist).child("songs").setValue(songIds);
+
+                                // Tiếp tục xử lý dữ liệu của bạn nếu cần
+                                // ...
+
+                                // Đóng BottomSheetDialog và chuyển tới MyPlaylistActivity
+                                Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
+                                if (song != null) {
+                                    intent.putExtra("myplaylist", song);
+                                }
+                                intent.putExtra("nameplaylist", namePlaylist);
+                                v.getContext().startActivity(intent);
+
+                                dismiss();
                             }
 
-                            // Thêm songId mới vào danh sách songIds
-                            songIds.add(song.getSongID());
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Xử lý nếu có lỗi khi đọc dữ liệu từ Firebase
+                                Toast.makeText(getContext(), "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                            // Lưu danh sách songIds đã cập nhật lên Firebase
-                            databaseReference.child(namePlaylist).child("songs").setValue(songIds);
-
-                            // Tiếp tục xử lý dữ liệu của bạn nếu cần
-                            // ...
-
-                            // Đóng BottomSheetDialog và chuyển tới MyPlaylistActivity
-                            Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
-                            intent.putExtra("myplaylist", song);
-                            intent.putExtra("nameplaylist", namePlaylist);
-                            v.getContext().startActivity(intent);
-
-                            dismiss();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            // Xử lý nếu có lỗi khi đọc dữ liệu từ Firebase
-                            Toast.makeText(getContext(), "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    }else {
+                        Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
+                        intent.putExtra("nameplaylist", namePlaylist);
+                        v.getContext().startActivity(intent);
+                    }
                 }else Toast.makeText(getContext(),"Tên play list đã tồn tại",Toast.LENGTH_SHORT).show();
             }
         });
