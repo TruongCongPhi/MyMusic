@@ -16,11 +16,12 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.truongcongphi.mymusic.Activity.MyNotification;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
 public class AccountFragment extends Fragment {
-    ImageButton ic_search, imgAdd;
+    ImageButton ic_search, imgAdd, btnTest;
     ImageView img_avt;
     Button btnSignOut;
     private SessionManager sessionManager;
@@ -38,6 +39,7 @@ public class AccountFragment extends Fragment {
         ic_search = view.findViewById(R.id.ic_search);
         imgAdd = view.findViewById(R.id.img_add_playlist);
         btnSignOut = view.findViewById(R.id.btn_sign_out);
+        btnTest = view.findViewById(R.id.ic_search);
 
         mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(getActivity());
@@ -81,6 +83,13 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 MyBottomSheetDialogAddPlaylistFragment myBottomSheetDialogPlaylistFragment = new MyBottomSheetDialogAddPlaylistFragment();
                 myBottomSheetDialogPlaylistFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetDialogPlaylistFragment.getTag());
+            }
+        });
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyNotification myNotification = new MyNotification(getContext());
+                myNotification.showNotification();
             }
         });
 

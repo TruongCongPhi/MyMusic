@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ import com.truongcongphi.mymusic.Activity.ListSongActivity;
 import com.truongcongphi.mymusic.Activity.MyPlaylistActivity;
 import com.truongcongphi.mymusic.Class.PlayList;
 import com.truongcongphi.mymusic.Class.SessionManager;
-import com.truongcongphi.mymusic.Class.Top;
+import com.truongcongphi.mymusic.Fragment.MyBottomSheetDialogSongFragment;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         this.context = context;
         this.playLists = list;
     }
-
     public Context getContext() {
         return context;
     }
@@ -45,7 +43,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         View view = inflater.inflate(R.layout.item_song,parent,false);
         return new PlaylistViewHoler(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull PlaylistViewHoler holder, int position) {
         PlayList playList = playLists.get(position);
@@ -54,11 +51,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         }
         Glide.with(context).load(playList.getImg()).into(holder.imgPlaylist);
         holder.tvPlaylist1.setText(playList.getName());
-
         holder.songOption.setVisibility(View.GONE);
-
     }
-
     @Override
     public int getItemCount() {
         if(playLists != null){
@@ -104,10 +98,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
                         Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                         intent.putExtra("playlist", playLists.get(getAdapterPosition()));
                         v.getContext().startActivity(intent);
+
                     }else {
                         Intent intent = new Intent(v.getContext(), ListSongActivity.class);
                         intent.putExtra("playlist", playLists.get(getAdapterPosition()));
                         v.getContext().startActivity(intent);
+
                     }
                 }
             });

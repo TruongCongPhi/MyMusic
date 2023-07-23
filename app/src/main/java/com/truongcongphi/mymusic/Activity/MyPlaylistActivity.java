@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,8 +13,6 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-import com.bumptech.glide.Glide;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,13 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.truongcongphi.mymusic.Adapter.SongAdapter;
-import com.truongcongphi.mymusic.Class.Album;
-import com.truongcongphi.mymusic.Class.Artist;
-import com.truongcongphi.mymusic.Class.DaiyMix;
 import com.truongcongphi.mymusic.Class.PlayList;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
-import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -53,7 +46,6 @@ public class MyPlaylistActivity extends AppCompatActivity {
     SessionManager sessionManager;
     Song song;
     String namePlaylist;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -80,6 +72,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
         imgList = findViewById(R.id.img_list);
         imgBack = findViewById(R.id.btn_back);
         rcvSongs = findViewById(R.id.rcv_songs);
+
         songAdapter = new SongAdapter();
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         rcvSongs.setLayoutManager(linearLayoutManager);
@@ -91,12 +84,16 @@ public class MyPlaylistActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         sessionManager = new SessionManager(this);
-    }
 
+
+    }
     private void getTilteAndImage() {
         if(playList != null){
             collapsingToolbarLayout.setTitle(playList.getId());
-        }else collapsingToolbarLayout.setTitle(namePlaylist);
+        }else if (song!=null){
+            collapsingToolbarLayout.setTitle(namePlaylist);
+        }
+        else collapsingToolbarLayout.setTitle(namePlaylist);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
@@ -150,19 +147,14 @@ public class MyPlaylistActivity extends AppCompatActivity {
         listSong.clear();
         if (intent.hasExtra("playlist")) {
             playList = (PlayList) intent.getSerializableExtra("playlist");
-            Toast.makeText(this,playList.getId(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("nameplaylist")) {
-             namePlaylist = intent.getStringExtra("namplaylist");
-
+             namePlaylist = intent.getStringExtra("nameplaylist");
         }
         if (intent.hasExtra("myplaylist")) {
             song =  getIntent().getParcelableExtra("myplaylist");
             if(song!=null){
-                Toast.makeText(this,song.getSongID(),Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-
 }

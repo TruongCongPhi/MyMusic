@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     Log.d("Playlist", "playlist: " + playlistId);
                                                     playlists.add(playlistId);
                                                 }
-                                                String songliked = "songliked";
+                                                String songliked = "Bài hát ưa thích";
                                                 playlists.add(songliked);
                                                 // Lưu danh sách các bài hát đã thích vào SessionManager
                                                 sessionManager.saveMyPlaylist(playlists);

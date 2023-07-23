@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -29,6 +28,7 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
     TextView tvSongName,tvSingerName,tvSongLike, tvAddPlaylistSong;
     ImageView imgSong, iconLike;
     SessionManager sessionManager;
+
     @SuppressLint("RestrictedApi")
     @Override
     public void setupDialog(@NonNull Dialog dialog, int style) {
@@ -45,7 +45,6 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         dialog.setContentView(contentView);
 
-
         // Truy cập dữ liệu bài hát từ getArguments()
         Bundle args = getArguments();
         if (args != null) {
@@ -60,7 +59,6 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
                 tvSongLike.setText("Đã thích");
                 iconLike.setImageResource(R.drawable.icon_favorite_liked);
             }
-
             if (song != null) {
                 // Hiển thị dữ liệu bài hát trong layout của BottomSheetDialog
                 tvSongName.setText(song.getSongName());
@@ -75,7 +73,7 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
                             .child("users")
                             .child(userId)
                             .child("playlists")
-                            .child("songliked");
+                            .child("Bài hát ưa thích");
 
                     List<String> likedSongs = sessionManager.getLikedSongs();
                     String songId = song.getSongID();
@@ -88,20 +86,16 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
                         tvSongLike.setText("Thích");
                         iconLike.setImageResource(R.drawable.icon_favorite);
                         Toast.makeText(getContext(),"Đã xóa khỏi trang Bài hát ưa thích",Toast.LENGTH_SHORT).show();
-
                     } else {
                         // Thêm bài hát vào danh sách trong SessionManager
                         likedSongs.add(song.getSongID());
                         tvSongLike.setText("Đã thích");
                         iconLike.setImageResource(R.drawable.icon_favorite_liked);
                         Toast.makeText(getContext(),"Đã thêm vào trang Bài hát ưa thích",Toast.LENGTH_SHORT).show();
-
                     }
-
                     // Lưu danh sách bài hát đã thay đổi vào SessionManager
                     sessionManager.saveLikedSongs(likedSongs);
                     // Lưu danh sách bài hát đã thay đổi lên Firebase
-
 
                     userRef.child("img").setValue("https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/liked_songs.png?alt=media&token=6ac491d3-f73b-4be7-a664-af282e49c0a5");
                     userRef.child("name").setValue("Bài hát ưa thích");
@@ -120,8 +114,6 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
         });
     }
     private void setDataPlaylistSong() {
-
-//        MyBottomSheetDialogAddSongPlaylistFragment dialog = new MyBottomSheetDialogAddSongPlaylistFragment();
         Bundle args = getArguments();
         Song song = args.getParcelable("song");
         MyBottomSheetDialogAddSongPlaylistFragment bottomSheetDialog = MyBottomSheetDialogAddSongPlaylistFragment.newInstance(song);

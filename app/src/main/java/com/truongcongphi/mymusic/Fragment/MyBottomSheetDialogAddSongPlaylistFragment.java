@@ -68,10 +68,6 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
         for (String s : sessionManager.getmyPlaylist()) {
             playlist.add(s);
         }
-        int songLikedIndex = playlist.indexOf("songliked");
-        if (songLikedIndex != -1) {
-            playlist.set(songLikedIndex, "Bài hát ưa thích");
-        }
 
         adapter = new ArrayAdapter<>(getActivity(), R.layout.item_checkbox_playlist, R.id.itemName, playlist);
         listView.setAdapter(adapter);
@@ -129,12 +125,7 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
                         }
                     }
                 }
-
-                if (selectedItems.isEmpty()) {
-                    dismiss();
-                } else {
-                    updatePlaylists(selectedItems);
-                }
+                updatePlaylists(selectedItems);
             }
         });
     }
@@ -151,12 +142,14 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
                 if (songIdsInPlaylist == null) {
                     songIdsInPlaylist = new ArrayList<>();
                 }
-                songIdsInPlaylist.add(currentSongId);
-                databaseReference.child("playlists").child(item).child("songs").setValue(songIdsInPlaylist);
-                Toast.makeText(getContext(), "Đã thêm vào danh sách phát " + item, Toast.LENGTH_SHORT).show();
-            } else if (!isPlaylistSelected && isSongInPlaylist) {
+                if (!songIdsInPlaylist.contains(currentSongId)) {
+                    songIdsInPlaylist.add(currentSongId);
+                    databaseReference.child("playlists").child(item).child("songs").setValue(songIdsInPlaylist);
+                    Toast.makeText(getContext(), "Đã thêm vào danh sách phát " + item, Toast.LENGTH_SHORT).show();
+                }
+            } else {
                 // Remove the song from the playlist
-                if (songIdsInPlaylist != null) {
+                if (songIdsInPlaylist != null && songIdsInPlaylist.contains(currentSongId)) {
                     songIdsInPlaylist.remove(currentSongId);
                     databaseReference.child("playlists").child(item).child("songs").setValue(songIdsInPlaylist);
                     Toast.makeText(getContext(), "Đã xóa khỏi danh sách phát " + item, Toast.LENGTH_SHORT).show();
