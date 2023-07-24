@@ -114,6 +114,7 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                         Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                         intent.putExtra("nameplaylist", namePlaylist);
                         v.getContext().startActivity(intent);
+                        dismiss();
                     }
                 }else Toast.makeText(getContext(),"Tên play list đã tồn tại",Toast.LENGTH_SHORT).show();
             }
