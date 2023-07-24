@@ -54,18 +54,19 @@
                         android:layout_marginLeft="90dp"
 
                         >
-                        <ImageButton
-                            android:id="@+id/ic_search"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            android:background="@drawable/ic_search"
-                            />
+
                         <ImageButton
                             android:id="@+id/img_add_playlist"
                             android:layout_width="23dp"
                             android:layout_height="23dp"
                             android:background="@drawable/ic_add"
-                            android:layout_marginLeft="20dp"
+                            />
+                        <ImageButton
+                            android:id="@+id/img_setting"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginLeft="18dp"
+                            android:background="@drawable/icon_setting"
                             />
                     </LinearLayout>
                 </LinearLayout>

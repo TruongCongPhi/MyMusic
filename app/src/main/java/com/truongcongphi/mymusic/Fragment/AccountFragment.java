@@ -21,7 +21,7 @@ import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
 public class AccountFragment extends Fragment {
-    ImageButton ic_search, imgAdd, btnTest;
+    ImageButton ic_search, imgAdd, imgSetting;
     ImageView img_avt;
     Button btnSignOut;
     private SessionManager sessionManager;
@@ -36,10 +36,9 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         img_avt = view.findViewById(R.id.img_avt);
-        ic_search = view.findViewById(R.id.ic_search);
         imgAdd = view.findViewById(R.id.img_add_playlist);
         btnSignOut = view.findViewById(R.id.btn_sign_out);
-        btnTest = view.findViewById(R.id.ic_search);
+        imgSetting = view.findViewById(R.id.img_setting);
 
         mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(getActivity());
@@ -77,21 +76,20 @@ public class AccountFragment extends Fragment {
                 getActivity().finish(); // Đóng Fragment hiện tại
             }
         });
+        imgSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingFragment newFragment = new SettingFragment();
 
-        imgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyBottomSheetDialogAddPlaylistFragment myBottomSheetDialogPlaylistFragment = new MyBottomSheetDialogAddPlaylistFragment();
-                myBottomSheetDialogPlaylistFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetDialogPlaylistFragment.getTag());
+                // Chuyển đổi sang fragment mới bằng FragmentTransaction
+                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, newFragment); // fragment_container là ID của container chứa fragment
+                fragmentTransaction.addToBackStack(null); // (Tùy chọn) Đưa fragment hiện tại vào stack để quay lại khi nhấn nút Back
+                fragmentTransaction.commit();
             }
         });
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyNotification myNotification = new MyNotification(getContext());
-                myNotification.showNotification();
-            }
-        });
+
+
 
     }
 }

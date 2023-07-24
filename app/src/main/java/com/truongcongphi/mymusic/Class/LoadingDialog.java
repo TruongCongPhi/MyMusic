@@ -18,7 +18,6 @@ public class LoadingDialog {
     }
     public void showDialog(){
 
-
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.layout_loading);
         dialog.setCancelable(true);
