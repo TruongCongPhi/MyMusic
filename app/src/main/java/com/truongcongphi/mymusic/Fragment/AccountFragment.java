@@ -1,10 +1,7 @@
 package com.truongcongphi.mymusic.Fragment;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,9 +15,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.truongcongphi.mymusic.Activity.HomeLoginActivity;
-import com.truongcongphi.mymusic.Activity.MainActivity;
-import com.truongcongphi.mymusic.Activity.MyNotification;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
@@ -73,11 +67,9 @@ public class AccountFragment extends Fragment {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Đăng xuất khỏi Firebase
                 mAuth.signOut();
-                // Xóa thông tin người dùng khỏi SessionManager
                 sessionManager.logoutUser();
-                getActivity().finish(); // Đóng Fragment hiện tại
+                getActivity().finish();
             }
         });
         imgSetting.setOnClickListener(new View.OnClickListener() {

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +31,6 @@ import com.truongcongphi.mymusic.R;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
-    RelativeLayout relativeLayout;
 
     private RecyclerView recyclerView;
     private SearchAdapter adapter;
@@ -38,6 +38,7 @@ public class SearchFragment extends Fragment {
     private SearchView editTextSearch;
 
     private DatabaseReference databaseRef;
+    private TextView textView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,8 +47,7 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
         editTextSearch = view.findViewById(R.id.search_box);
-        relativeLayout = view.findViewById(R.id.rll_tv);
-
+        textView = view.findViewById(R.id.text_no_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         listSongView = new ArrayList<>();
@@ -75,7 +75,6 @@ public class SearchFragment extends Fragment {
     }
 
     private void getData() {
-        // Khởi tạo DatabaseReference cho Firebase Realtime Database
         databaseRef = FirebaseDatabase.getInstance().getReference("songs");
         Query query = databaseRef;
         query.addChildEventListener(new ChildEventListener() {
@@ -118,12 +117,10 @@ public class SearchFragment extends Fragment {
         }
 
         adapter.setFilteredList(filteredList);
-    }
-    private void openMusicPlayer(Song song) {
-        Intent intent = new Intent(getActivity(), PlaySongActivity.class);
-        intent.putExtra("baihat", song);
-        intent.putParcelableArrayListExtra("cacbaihat", listSongView);
-        intent.putExtra("vitribaihat", listSongView.indexOf(song));
-        startActivity(intent);
+        if (filteredList.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
     }
 }

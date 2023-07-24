@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
+
 import com.truongcongphi.mymusic.Class.Album;
 
 import com.truongcongphi.mymusic.R;
@@ -100,11 +101,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
                         intent.putExtra("album", listAlbum.get(getAdapterPosition()));
                         v.getContext().startActivity(intent);
                     }
-
-                    // click vào thì hiển thị trình phát nhạc
-
-
-
             });
 
 //             hiệu ứng item

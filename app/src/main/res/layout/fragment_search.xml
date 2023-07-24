@@ -26,26 +26,21 @@
             app:iconifiedByDefault="false" />
 
     </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/rll_tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Không tìm thấy kết quả"
-            android:textSize="30sp"
-            android:textColor="@color/colorAccentPressed"
-            android:textAlignment="center"
-            android:layout_centerInParent="true"
-            >
-        </TextView>
-    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/text_no_results"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:text="Không tìm thấy kết quả"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:visibility="gone" />
 
 
 </LinearLayout>
