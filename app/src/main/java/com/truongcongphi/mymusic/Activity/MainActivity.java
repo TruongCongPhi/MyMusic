@@ -1,11 +1,13 @@
 package com.truongcongphi.mymusic.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private AccountFragment accountFragment;
+    private Fragment currentFragment;
 
 
     @Override
@@ -52,10 +55,29 @@ public class MainActivity extends AppCompatActivity {
         });
         setFragment(homeFragment);
     }
-    private void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+
+        if (fragment instanceof HomeFragment) {
+            if (!((HomeFragment) fragment).onBackPressed()) {
+                // Nếu Fragment không xử lý sự kiện "back", gọi lại phương thức của Activity
+                super.onBackPressed();
+            }
+        }
+        if (fragment instanceof AccountFragment) {
+            setFragment(homeFragment);
+        }
+        if (fragment instanceof SearchFragment) {
+            setFragment(homeFragment);
+        }
+    }
+
+
 }

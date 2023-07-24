@@ -24,6 +24,9 @@
         android:theme="@style/Theme.MyMusic"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.GetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.SendEmailActivity"
             android:exported="false" />
         <activity

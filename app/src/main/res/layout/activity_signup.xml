@@ -9,37 +9,49 @@
 
     >
 
- <LinearLayout
+ <RelativeLayout
      android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:orientation="horizontal">
+     android:layout_height="wrap_content">
 
   <ImageButton
       android:id="@+id/btn_back"
       android:layout_width="35dp"
       android:layout_height="35dp"
       android:background="@drawable/ic_back" />
+
   <TextView
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
       android:text="Tạo tài khoản"
       android:textColor="@color/white"
-      android:textStyle="bold"
-      android:textSize="@dimen/_16sp"
-      android:textAlignment="center"
-      android:layout_gravity="center"
-      ></TextView>
- </LinearLayout>
+      android:textSize="@dimen/button_textsize_20sp"
 
- <TextView
-     android:layout_marginTop="18dp"
+      android:textStyle="bold"></TextView>
+ </RelativeLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal">
+  <TextView
+      android:layout_marginTop="18dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Nhập email?"
+      android:textSize="20dp"
+      android:textStyle="bold"
+      android:textColor="@color/white"
+      />
+  <TextView
+     android:layout_marginLeft="10dp"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:text="Nhập địa chỉ email?"
-     android:textSize="20dp"
-     android:textStyle="bold|italic"
-     android:textColor="@color/white"
+     android:text="*"
+     android:textColor="#FF0000"
      />
+
+ </LinearLayout>
+
  <EditText
      android:layout_marginTop="10dp"
      android:background="@drawable/custom_edttext"
@@ -57,16 +69,15 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:orientation="horizontal">
+
   <TextView
-      android:layout_marginTop="10dp"
-      android:id="@+id/txt_tendn"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
       android:text="Tên người dùng"
-      android:textSize="20dp"
-      android:textStyle="bold|italic"
       android:textColor="@color/white"
-      />
+      android:textSize="20dp"
+      android:textStyle="bold" />
   <TextView
       android:layout_marginLeft="10dp"
       android:layout_width="wrap_content"
@@ -100,7 +111,7 @@
       android:layout_height="wrap_content"
       android:text="Mật khẩu"
       android:textSize="20dp"
-      android:textStyle="bold|italic"
+      android:textStyle="bold"
       android:textColor="@color/white"
       />
   <TextView
@@ -112,13 +123,6 @@
       />
  </LinearLayout>
 
- <TextView
-     android:id="@+id/txt_canhbao"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:text="Mật khẩu bao gồm kí tự đặc biệt, chữ cái in hoa và số..."
-     android:textColor="#FF0000"
-     />
 
  <EditText
      android:layout_marginTop="10dp"
@@ -144,7 +148,7 @@
       android:layout_height="wrap_content"
       android:text="Nhập lại mật khẩu"
       android:textSize="20dp"
-      android:textStyle="bold|italic"
+      android:textStyle="bold"
       android:textColor="@color/white"
       />
   <TextView

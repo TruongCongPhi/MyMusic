@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
+    private TextView getPassword;
     private Button btnLogin2;
     private ImageButton btnBack;
     private FirebaseAuth mAuth;
@@ -240,10 +242,21 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        getPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,GetPasswordActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+            }
+        });
 
 //        // Enable/Disable Login Button based on input
         edtEmail.addTextChangedListener(textWatcher);
         edtPassword.addTextChangedListener(textWatcher);
+
 
     }
     private boolean isInputValid(String email, String password) {
@@ -259,12 +272,12 @@ public class LoginActivity extends AppCompatActivity {
             btnLogin2.setEnabled(isEnabled);
             btnLogin2.setBackgroundTintList(ColorStateList.valueOf(isEnabled ? Color.parseColor("#ffffff") : Color.parseColor("#423F3E")));
         }
-
         @Override
         public void afterTextChanged(Editable s) {}
     };
 
     private void addViews() {
+        getPassword = findViewById(R.id.get_password);
         edtEmail = (EditText) findViewById(R.id.edt_email);
         edtPassword = (EditText) findViewById(R.id.edt_password);
         btnLogin2 = (Button) findViewById(R.id.btn_login2);
