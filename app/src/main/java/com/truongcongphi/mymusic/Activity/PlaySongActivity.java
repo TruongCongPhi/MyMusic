@@ -374,7 +374,7 @@ public class PlaySongActivity extends AppCompatActivity {
         tvSongEndTime.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
         seekBarTime.setMax(mediaPlayer.getDuration());
     }
-
+//hu
     public void updateTimeSong(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
