@@ -1,8 +1,10 @@
 package com.truongcongphi.mymusic.Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,8 +40,6 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
     FirebaseUser user;
     DatabaseReference databaseReference;
 
-
-
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
@@ -45,11 +47,12 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
         View view = inflater.inflate(R.layout.layout_bottom_sheet_playlist, container, false);
 
         edtPlaylistName = view.findViewById(R.id.edt_playlist_name);
-        Button btnSave = view.findViewById(R.id.btnSave);
+        Button btnSave = view.findViewById(R.id.btn_save);
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
 
         sessionManager = new SessionManager(getActivity());
+
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +125,6 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
 
         return view;
     }
-
     public static MyBottomSheetDialogAddPlaylistFragment newInstance(Song song) {
         MyBottomSheetDialogAddPlaylistFragment fragment = new MyBottomSheetDialogAddPlaylistFragment();
         Bundle args = new Bundle();
@@ -130,6 +132,4 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
         fragment.setArguments(args);
         return fragment;
     }
-
-
 }

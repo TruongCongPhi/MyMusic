@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
         editTextSearch = view.findViewById(R.id.search_box);
-        textView = view.findViewById(R.id.text_no_results);
+        textView = view.findViewById(R.id.tv_not);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         listSongView = new ArrayList<>();
@@ -62,13 +62,19 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 filterSongs(newText);
+                if (TextUtils.isEmpty(newText)) {
+                    textView.setVisibility(View.GONE);
+                } else {
+                    boolean hasSearchResults = adapter.getItemCount() > 0;
+                    textView.setVisibility(hasSearchResults ? View.GONE : View.VISIBLE);
+                }
                 return true;
             }
         });
+
 
 
         return view;
@@ -117,10 +123,5 @@ public class SearchFragment extends Fragment {
         }
 
         adapter.setFilteredList(filteredList);
-        if (filteredList.isEmpty()) {
-            textView.setVisibility(View.VISIBLE);
-        } else {
-            textView.setVisibility(View.GONE);
-        }
     }
 }

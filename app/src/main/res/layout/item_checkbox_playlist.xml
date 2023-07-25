@@ -5,9 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="#222222">
-
-
+    android:background="#454545">
 
     <TextView
         android:id="@+id/itemName"

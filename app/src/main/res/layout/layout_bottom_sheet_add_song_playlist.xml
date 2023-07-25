@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#222222">
+    android:background="#454545">
     <RelativeLayout
+        android:id="@+id/rll_1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@drawable/customdialog"
         >
 
         <TextView
@@ -33,22 +32,22 @@
 
     </RelativeLayout>
     <Button
-        android:layout_marginTop="20dp"
         android:id="@+id/btn_add_playlist_new"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Danh sách phát mới"
         android:textColor="@color/black"
         android:layout_gravity="center"
-        android:backgroundTint="@color/white"></Button>
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/rll_1"
+        android:layout_centerInParent="true"></Button>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <ListView
             android:id="@+id/listview_playlist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btn_add_playlist_new">
         </ListView>
         <Button
             android:id="@+id/btn_add_playlist"
@@ -62,7 +61,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             ></Button>
-    </RelativeLayout>
+    
 
-
-</LinearLayout>
+</RelativeLayout>

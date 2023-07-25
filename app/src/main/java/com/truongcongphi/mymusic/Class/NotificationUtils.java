@@ -1,24 +1,15 @@
-package com.truongcongphi.mymusic.Activity;
+package com.truongcongphi.mymusic.Class;
 
-import static com.truongcongphi.mymusic.Activity.PlaySongActivity.songArrayList;
-
-import android.Manifest;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
-
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
-import com.truongcongphi.mymusic.Class.NotificationActionReceiver;
-import com.truongcongphi.mymusic.Class.Song;
+import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.R;
 
 public class NotificationUtils extends Application {

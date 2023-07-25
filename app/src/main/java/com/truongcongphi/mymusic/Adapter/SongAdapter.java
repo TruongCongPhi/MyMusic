@@ -1,13 +1,6 @@
 package com.truongcongphi.mymusic.Adapter;
 
-import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.truongcongphi.mymusic.Activity.NotificationUtils;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.Fragment.MyBottomSheetDialogSongFragment;

@@ -328,27 +328,21 @@ public class ListSongActivity extends AppCompatActivity {
         listSong.clear();
         if (intent.hasExtra("album")) {
             album = (Album) intent.getSerializableExtra("album");
-            Toast.makeText(this,album.getAlbumID(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("artist")){
             artist = (Artist) intent.getSerializableExtra("artist");
-            String listSongArtistString = TextUtils.join(", ", artist.getListSongArtist());
-            Toast.makeText(this, listSongArtistString, Toast.LENGTH_LONG).show();            }
+        }
         if (intent.hasExtra("dailymix")) {
             daiyMix = (DaiyMix) intent.getSerializableExtra("dailymix");
-            Toast.makeText(this,daiyMix.getMixId(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("top")) {
             top = (Top) intent.getSerializableExtra("top");
-            Toast.makeText(this,top.getTopName(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("playlist")) {
             playList = (PlayList) intent.getSerializableExtra("playlist");
-            Toast.makeText(this,playList.getId(),Toast.LENGTH_SHORT).show();
         }
         if (intent.hasExtra("myplaylist")) {
             String namePlaylist = getIntent().getStringExtra("myplaylist");
-            Toast.makeText(this,namePlaylist,Toast.LENGTH_SHORT).show();
         }
     }
 
