@@ -50,6 +50,8 @@ public class PlaySongActivity extends AppCompatActivity {
     boolean repeat = false;
     boolean checkRandom = false;
     static boolean next = false;
+    private boolean checkClick = false;
+
 
     private static PlaySongActivity instance;
 
@@ -74,9 +76,13 @@ public class PlaySongActivity extends AppCompatActivity {
 
 
     private void stopCurrentSong() {
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
             mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 
@@ -90,40 +96,46 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void eventClick() {
-//        viewPagerPlaySong.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                if (mediaPlayer.isPlaying() || mediaPlayer != null) {
-//                    mediaPlayer.stop();
-//                    mediaPlayer.release();
-//                    mediaPlayer = null;
-//                }
-//                if (repeat) {
-//                    position = position - 1;
-//                }
-//                if (checkRandom) {
-//                    Random random = new Random();
-//                    int randomIndex = random.nextInt(songArrayList.size());
-//                    if (randomIndex == position) {
-//                        position = randomIndex - 1;
-//                    }
-//                    position = randomIndex;
-//                }
-//
-//                if (position > (songArrayList.size() - 1)) {
-//                    position = 0;
-//                }
-//                playSong(position);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//            }
-//        });
+        viewPagerPlaySong.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (mediaPlayer != null && (mediaPlayer.isPlaying() || mediaPlayer != null)){
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
+                if (mediaPlayer == null || !mediaPlayer.isPlaying()) {
+                    if (repeat) {
+                        position = position - 1;
+                    }
+                    if (checkRandom) {
+                        Random random = new Random();
+                        int randomIndex = random.nextInt(songArrayList.size());
+                        if (randomIndex == position) {
+                            position = randomIndex - 1;
+                        }
+                        position = randomIndex;
+                    }
+
+                    if (position > (songArrayList.size() - 1)) {
+                        position = 0;
+                    }
+                    if (!checkClick) {
+                        playSong(position);
+                        updateTimeSong();
+                    }
+                    checkClick = false;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
 
 
         imgPlay.setOnClickListener(new View.OnClickListener() {
@@ -187,10 +199,10 @@ public class PlaySongActivity extends AppCompatActivity {
 
     public void previousSong() {
         if(songArrayList.size() > 0){
-            if(mediaPlayer.isPlaying() || mediaPlayer != null){
+            if (mediaPlayer.isPlaying() || mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                mediaPlayer=null;
+                mediaPlayer = null;
             }
         }
         if(position < songArrayList.size()){
@@ -209,12 +221,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 }
                 position = index;
             }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    viewPagerPlaySong.setCurrentItem(position);
-                }
-            }, 1000);
+            checkClick = true;
+            viewPagerPlaySong.setCurrentItem(position);
+
             playSong(position);
             updateTimeSong();
         }
@@ -231,11 +240,12 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     public void nextSong() {
+
         if(songArrayList.size()>0){          //có bài hát đang phát thì dừng
-            if(mediaPlayer.isPlaying() || mediaPlayer != null){
+            if (mediaPlayer.isPlaying() || mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                mediaPlayer=null;
+                mediaPlayer = null;
             }
         }
         if(position < (songArrayList.size())){
@@ -257,12 +267,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 }
                 position = index;
             }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    viewPagerPlaySong.setCurrentItem(position);
-                }
-            }, 1000);
+            checkClick = true;
+            viewPagerPlaySong.setCurrentItem(position);
+
             playSong(position);
             updateTimeSong();
         }
@@ -442,14 +449,16 @@ public class PlaySongActivity extends AppCompatActivity {
 
     public void playSong(int po) {
         if (songArrayList.size() > 0) {
-            stopCurrentSong();
-            new PlayMp3().execute(songArrayList.get(po).getUrl());
-            tvSongName.setText(songArrayList.get(po).getSongName());
-            tvSingerName.setText(TextUtils.join(", ", songArrayList.get(po).getSingerName()));
-            imgPlay.setImageResource(R.drawable.icon_play);
+            // Thêm điều kiện này để chỉ phát bài hát mới khi mediaPlayer đang không phát bài hát nào
+            if (mediaPlayer == null || !mediaPlayer.isPlaying()) {
+                stopCurrentSong();
+                new PlayMp3().execute(songArrayList.get(po).getUrl());
+                tvSongName.setText(songArrayList.get(po).getSongName());
+                tvSingerName.setText(TextUtils.join(", ", songArrayList.get(po).getSingerName()));
+                imgPlay.setImageResource(R.drawable.icon_play);
+            }
+            NotificationUtils.createNotification(this, songArrayList.get(po));
         }
-        NotificationUtils.createNotification(this, songArrayList.get(po));
-
         ///
     }
 
