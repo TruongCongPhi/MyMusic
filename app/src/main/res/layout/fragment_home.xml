@@ -10,6 +10,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have a great day !!"
+            android:textSize="20dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/white"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="130dp"
+            >
+            <ImageButton
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/notification"
+
+                />
+            <ImageButton
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/setting"
+                android:layout_marginLeft="15dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
         <fragment
             android:id="@+id/fragment_album"
