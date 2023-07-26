@@ -51,6 +51,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         }
         Glide.with(context).load(playList.getImg()).into(holder.imgPlaylist);
         holder.tvPlaylist1.setText(playList.getName());
+        List<String> list = holder.sessionManager.getmyPlaylist();
+        if(list.contains(playList.getName())){
+            holder.tvPlaylist2.setText("Danh sách phát * "+holder.sessionManager.getName());
+        }else holder.tvPlaylist2.setVisibility(View.GONE);
         holder.songOption.setVisibility(View.GONE);
     }
     @Override

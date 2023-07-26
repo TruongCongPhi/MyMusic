@@ -273,8 +273,6 @@ public class ListSongActivity extends AppCompatActivity {
         List<String> playlistId = sessionManager.getPlaylist();
 
         boolean checkId = playlistId.contains(id);
-
-
         if (checkId) {
             imgAddPlayList.setImageResource(R.drawable.icon_add_task);
         } else {
@@ -304,13 +302,11 @@ public class ListSongActivity extends AppCompatActivity {
         }
         sessionManager.savePlaylist(playlistId);
     }
-
     private void addToUserPlaylist(List<String> songPlaylist, String id, String name, String img) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
                 .child(currentUser.getUid())
                 .child("playlists")
                 .child(id);
-
         // Lưu thông tin chung cho playlist
         databaseReference.child("name").setValue(name);
         databaseReference.child("img").setValue(img);
@@ -318,7 +314,6 @@ public class ListSongActivity extends AppCompatActivity {
         // Lưu danh sách bài hát của nghệ sĩ
         databaseReference.child("songs").setValue(songPlaylist);
     }
-
     private void removeFromUserPlaylist(String playlistId) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
                 .child(currentUser.getUid())

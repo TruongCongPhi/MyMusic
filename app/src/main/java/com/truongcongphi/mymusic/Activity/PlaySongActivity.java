@@ -48,7 +48,7 @@ public class PlaySongActivity extends AppCompatActivity {
     public static ViewPagerPlaylistSong adapterSong;
 
     static MediaPlayer mediaPlayer;
-    static int position = 0; // biến lưu vị trí bài hát hiện tại
+    static int position = 0;
     boolean repeat = false;
     boolean checkRandom = false;
     static boolean next = false;
