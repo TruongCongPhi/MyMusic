@@ -2,6 +2,7 @@ package com.truongcongphi.mymusic.Fragment;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -50,6 +51,8 @@ public class AccountFragment2 extends Fragment {
         addEvents();
         return view;
     }
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -85,6 +88,9 @@ public class AccountFragment2 extends Fragment {
             }
         });
 
+
     }
+
+
 }
 

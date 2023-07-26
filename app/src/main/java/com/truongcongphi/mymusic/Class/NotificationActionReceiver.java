@@ -3,9 +3,7 @@ package com.truongcongphi.mymusic.Class;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
-import com.truongcongphi.mymusic.Activity.NotificationUtils;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 
 public class NotificationActionReceiver extends BroadcastReceiver {

@@ -2,6 +2,7 @@ package com.truongcongphi.mymusic.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.truongcongphi.mymusic.Activity.AddSongToPlaylist;
+import com.truongcongphi.mymusic.Activity.CreatePlaylistActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
@@ -109,18 +112,18 @@ public class MyBottomSheetDialogSongFragment extends BottomSheetDialogFragment {
         tvAddPlaylistSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setDataPlaylistSong();
+                Bundle args = getArguments();
+                Song song = args.getParcelable("song");
+
+                Intent intent = new Intent(v.getContext(), AddSongToPlaylist.class);
+                // Gắn dữ liệu album vào Intent
+                intent.putExtra("songplaylist", song);
+                v.getContext().startActivity(intent);
+                dismiss();
             }
         });
     }
-    private void setDataPlaylistSong() {
-        Bundle args = getArguments();
-        Song song = args.getParcelable("song");
-        MyBottomSheetDialogAddSongPlaylistFragment bottomSheetDialog = MyBottomSheetDialogAddSongPlaylistFragment.newInstance(song);
-        bottomSheetDialog.show(getActivity().getSupportFragmentManager(), bottomSheetDialog.getTag());
-        dismiss();
 
-    }
 
 
     public static MyBottomSheetDialogSongFragment newInstance(Song song) {
