@@ -15,8 +15,10 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.truongcongphi.mymusic.Fragment.AccountFragment;
+import com.truongcongphi.mymusic.Fragment.AccountFragment2;
 import com.truongcongphi.mymusic.Fragment.HomeFragment;
 import com.truongcongphi.mymusic.Fragment.SearchFragment;
+import com.truongcongphi.mymusic.Fragment.SettingFragment;
 import com.truongcongphi.mymusic.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-
+        if (fragment instanceof AccountFragment2) {
+            // Quay lại AccountFragment nếu đang ở AccountFragment2
+            setFragment(accountFragment);
+        }
         if (fragment instanceof HomeFragment) {
             if (!((HomeFragment) fragment).onBackPressed()) {
                 // Nếu Fragment không xử lý sự kiện "back", gọi lại phương thức của Activity
@@ -76,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         }
         if (fragment instanceof SearchFragment) {
             setFragment(homeFragment);
+        }
+        if (fragment instanceof SettingFragment) {
+            AccountFragment accountFragment2= new AccountFragment();
+            setFragment(accountFragment2);
         }
     }
 

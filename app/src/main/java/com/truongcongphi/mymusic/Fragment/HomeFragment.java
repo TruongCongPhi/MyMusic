@@ -42,8 +42,6 @@ public class HomeFragment extends Fragment {
         });
         builder.show();
 
-        // Trả về true để thể hiện rằng Fragment đã xử lý sự kiện "back" này.
-        // Nếu không, sự kiện "back" sẽ được chuyển tiếp lên Activity.
         return true;
     }
 }

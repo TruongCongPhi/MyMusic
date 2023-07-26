@@ -1,6 +1,7 @@
 package com.truongcongphi.mymusic.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.truongcongphi.mymusic.Activity.CreatePlaylistActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
@@ -87,9 +89,7 @@ public class AccountFragment extends Fragment {
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyBottomSheetDialogAddPlaylistFragment myBottomSheetDialogPlaylistFragment = new MyBottomSheetDialogAddPlaylistFragment();
-                myBottomSheetDialogPlaylistFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetDialogPlaylistFragment.getTag());
-
+                startActivity(new Intent(getContext(), CreatePlaylistActivity.class));
             }
         });
     }

@@ -1,22 +1,19 @@
-package com.truongcongphi.mymusic.Fragment;
+package com.truongcongphi.mymusic.Activity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,9 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialogFragment {
-
-    private TextView tvExit;
+public class AddSongToPlaylist extends AppCompatActivity {
+    private ImageView imgExit;
     private Button btnAddToPlaylists,btnAddPlaylistNew;
     private ListView listView;
     private ArrayList<String> playlist;
@@ -44,32 +40,40 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
     private SessionManager sessionManager;
     private FirebaseUser user;
     private DatabaseReference databaseReference;
-
-    @SuppressLint("MissingInflatedId")
-    @Nullable
+    Song song;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bottom_sheet_add_song_playlist, container, false);
-        Bundle args = getArguments();
-        Song song = args.getParcelable("song");
-        currentSongId = song.getSongID();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_to_playlist);
+        getSong();
+        addViews();
+    }
 
-        tvExit = view.findViewById(R.id.tv_exit);
-        btnAddToPlaylists = view.findViewById(R.id.btn_add_playlist);
-        btnAddPlaylistNew = view.findViewById(R.id.btn_add_playlist_new);
-        listView = view.findViewById(R.id.listview_playlist);
+    private void getSong() {
+        song = getIntent().getParcelableExtra("songplaylist");
+        if (song != null) {
+            currentSongId = song.getSongID();
+        }
+    }
+
+    private void addViews() {
+
+        imgExit =findViewById(R.id.img_exit);
+        btnAddToPlaylists = findViewById(R.id.btn_add_playlist);
+        btnAddPlaylistNew = findViewById(R.id.btn_add_playlist_new);
+        listView = findViewById(R.id.listview_playlist);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
 
-        sessionManager = new SessionManager(getActivity());
+        sessionManager = new SessionManager(this);
 
         playlist = new ArrayList<>();
         for (String s : sessionManager.getmyPlaylist()) {
             playlist.add(s);
         }
 
-        adapter = new ArrayAdapter<>(getActivity(), R.layout.item_checkbox_playlist, R.id.itemName, playlist);
+        adapter = new ArrayAdapter<>(this, R.layout.item_checkbox_playlist, R.id.itemName, playlist);
         listView.setAdapter(adapter);
         databaseReference.child("playlists").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -79,32 +83,30 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddSongToPlaylist.this, "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
             }
         });
 
         addEvents();
-        return view;
     }
 
     private void addEvents() {
         btnAddPlaylistNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle args = getArguments();
-                Song song = args.getParcelable("song");
-
-                MyBottomSheetDialogAddPlaylistFragment bottomSheetDialog = MyBottomSheetDialogAddPlaylistFragment.newInstance(song);
-                bottomSheetDialog.show(getActivity().getSupportFragmentManager(), bottomSheetDialog.getTag());
-                dismiss();
+                Intent intent = new Intent(v.getContext(), CreatePlaylistActivity.class);
+                // Gắn dữ liệu album vào Intent
+                intent.putExtra("songplaylist", song);
+                v.getContext().startActivity(intent);
+                finish();
 
             }
         });
 
-        tvExit.setOnClickListener(new View.OnClickListener() {
+        imgExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                finish();
             }
         });
 
@@ -135,7 +137,6 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
             boolean isPlaylistSelected = selectedItems.contains(item);
 
             List<String> songIdsInPlaylist = playlistSongIdsMap.get(item);
-            boolean isSongInPlaylist = songIdsInPlaylist != null && songIdsInPlaylist.contains(currentSongId);
 
             if (isPlaylistSelected) {
                 // Add the song to the playlist
@@ -145,20 +146,19 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
                 if (!songIdsInPlaylist.contains(currentSongId)) {
                     songIdsInPlaylist.add(currentSongId);
                     databaseReference.child("playlists").child(item).child("songs").setValue(songIdsInPlaylist);
-                    Toast.makeText(getContext(), "Đã thêm vào danh sách phát " + item, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Đã thêm vào danh sách phát " + item, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 // Remove the song from the playlist
                 if (songIdsInPlaylist != null && songIdsInPlaylist.contains(currentSongId)) {
                     songIdsInPlaylist.remove(currentSongId);
                     databaseReference.child("playlists").child(item).child("songs").setValue(songIdsInPlaylist);
-                    Toast.makeText(getContext(), "Đã xóa khỏi danh sách phát " + item, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Đã xóa khỏi danh sách phát " + item, Toast.LENGTH_SHORT).show();
                 }
             }
         }
-        dismiss();
+        finish();
     }
-
     private void getAllSongIdsInPlaylists() {
         databaseReference.child("playlists").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -178,14 +178,12 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
                     updateCheckBoxStateForPlaylist(playlistName, songIds.contains(currentSongId));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddSongToPlaylist.this, "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
     private void updateCheckBoxStateForPlaylist(String playlistName, boolean isChecked) {
         int itemCount = listView.getCount();
         for (int i = 0; i < itemCount; i++) {
@@ -200,13 +198,5 @@ public class MyBottomSheetDialogAddSongPlaylistFragment extends BottomSheetDialo
                 }
             }
         }
-    }
-
-    public static MyBottomSheetDialogAddSongPlaylistFragment newInstance(Song song) {
-        MyBottomSheetDialogAddSongPlaylistFragment fragment = new MyBottomSheetDialogAddSongPlaylistFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("song", song);
-        fragment.setArguments(args);
-        return fragment;
     }
 }

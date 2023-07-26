@@ -47,66 +47,7 @@ public class SendEmailActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                try {
-//                    final String fromEmail = "tcp02012003@gmail.com"; // Thay thế bằng địa chỉ email của bạn
-//                    final String password = "hqgzicjtjvlkcjxs"; // Thay thế bằng mật khẩu email của bạn
-//                    final String toEmail = "congphi02012003@gmail.com"; // Thay thế bằng địa chỉ email của người nhận
-//                    final String subject = edtTieuDe.getText().toString();
-//                    final String body = edtNoiDung.getText().toString();
-//                    String host ="smtp.gmail.com";
-//
-//                    // Cấu hình các thuộc tính SMTP
-//                    Properties props = System.getProperties();
-//                    props.put("mail.smtp.host", host); // Thay thế bằng địa chỉ máy chủ SMTP, ví dụ: smtp.gmail.com
-//                    props.put("mail.smtp.port", "465"); // Thay thế bằng cổng SMTP, ví dụ: 587
-//                    props.put("mail.smtp.auth", "true");
-//                    props.put("mail.smtp.starttls.enable", "true");
-//
-//                    // Tạo phiên làm việc với xác thực
-//                    Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-//                        protected PasswordAuthentication getPasswordAuthentication() {
-//                            return new PasswordAuthentication(fromEmail, password);
-//                        }
-//                    });
-//
-//                    // Tạo thông điệp email
-//                    MimeMessage message = new MimeMessage(session);
-//                    message.setFrom(new InternetAddress(fromEmail));
-//                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-//                    message.setSubject(subject);
-//                    message.setText(body);
-//
-//                    // Gửi email
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                Transport.send(message);
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        // Email gửi thành công
-//                                        // Bạn có thể hiển thị Toast hoặc xử lý thành công tùy ý
-//                                        Toast.makeText(SendEmailActivity.this,"Đã gửi thành công",Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                            } catch (final MessagingException e) {
-//                                e.printStackTrace();
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        // Xử lý lỗi ở đây (ví dụ: hiển thị thông báo lỗi)
-//                                        Toast.makeText(SendEmailActivity.this,"Không thể gửi",Toast.LENGTH_SHORT).show();
-//
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    }).start();
-//
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
+
                 loadingDialog.showDialog();
                 try {
                     String SenderEmail = "tcp02012003@gmail.com";

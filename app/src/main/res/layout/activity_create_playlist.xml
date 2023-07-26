@@ -1,4 +1,3 @@
-<!-- bottom_sheet_dialog_layout.xml -->
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +5,8 @@
     android:padding="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#454545">
+    android:background="@drawable/bg_playlist"
+    android:gravity="center">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,6 @@
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:gravity="center"
         android:textSize="20sp"></TextView>
     <EditText
         android:textColorHint="@color/white"
@@ -29,18 +28,36 @@
         android:textAlignment="center"
         android:inputType="text"
         android:maxLines="1" />
-    <Button
-        android:layout_marginTop="30dp"
-        android:id="@+id/btn_save"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tạo"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:layout_gravity="center"
-        android:background="@drawable/button_login_custom_on"
-        app:backgroundTint="@null"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_edit"
+            app:backgroundTint="@null"
 
-        ></Button>
+            ></Button>
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tạo"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_login_custom_on"
+            app:backgroundTint="@null"
+            android:layout_marginLeft="30dp"
+
+            ></Button>
+    </LinearLayout>
 
 </LinearLayout>

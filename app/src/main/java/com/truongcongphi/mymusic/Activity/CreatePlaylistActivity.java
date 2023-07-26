@@ -1,22 +1,15 @@
-package com.truongcongphi.mymusic.Fragment;
+package com.truongcongphi.mymusic.Activity;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,35 +17,33 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.truongcongphi.mymusic.Activity.MyPlaylistActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
+
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFragment {
-
-
+public class CreatePlaylistActivity extends AppCompatActivity {
     private EditText edtPlaylistName;
+    Button btnSave,btnExit;
     SessionManager sessionManager;
     FirebaseUser user;
     DatabaseReference databaseReference;
-
-    @SuppressLint("MissingInflatedId")
-    @Nullable
+    Song song;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bottom_sheet_playlist, container, false);
-
-        edtPlaylistName = view.findViewById(R.id.edt_playlist_name);
-        Button btnSave = view.findViewById(R.id.btn_save);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_playlist);
+        edtPlaylistName = findViewById(R.id.edt_playlist_name);
+         btnSave = findViewById(R.id.btn_save);
+         btnExit = findViewById(R.id.btn_exit);
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+        sessionManager = new SessionManager(this);
 
-        sessionManager = new SessionManager(getActivity());
-
+        song = getIntent().getParcelableExtra("songplaylist");
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +62,7 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                     databaseReference.child("playlist_my").setValue(myPlaylistId);
                     databaseReference.child("playlists").child(namePlaylist).child("name").setValue(namePlaylist);
 
-                    Bundle args = getArguments();
-                    if (args != null) {
-                        Song song = args.getParcelable("song");
+                    if (song != null) {
                         databaseReference.child("playlists").child(namePlaylist).child("songs").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,9 +80,6 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                                 // Lưu danh sách songIds đã cập nhật lên Firebase
                                 databaseReference.child("playlists").child(namePlaylist).child("songs").setValue(songIds);
 
-                                // Tiếp tục xử lý dữ liệu của bạn nếu cần
-                                // ...
-
                                 // Đóng BottomSheetDialog và chuyển tới MyPlaylistActivity
                                 Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                                 if (song != null) {
@@ -103,13 +89,13 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                                 intent.putExtra("nameplaylist", namePlaylist);
                                 v.getContext().startActivity(intent);
 
-                                dismiss();
+                                finish();
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 // Xử lý nếu có lỗi khi đọc dữ liệu từ Firebase
-                                Toast.makeText(getContext(), "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreatePlaylistActivity.this, "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -117,19 +103,18 @@ public class MyBottomSheetDialogAddPlaylistFragment extends BottomSheetDialogFra
                         Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                         intent.putExtra("nameplaylist", namePlaylist);
                         v.getContext().startActivity(intent);
-                        dismiss();
+                        finish();
                     }
-                }else Toast.makeText(getContext(),"Tên play list đã tồn tại",Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(CreatePlaylistActivity.this,"Tên play list đã tồn tại",Toast.LENGTH_SHORT).show();
             }
         });
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
-        return view;
-    }
-    public static MyBottomSheetDialogAddPlaylistFragment newInstance(Song song) {
-        MyBottomSheetDialogAddPlaylistFragment fragment = new MyBottomSheetDialogAddPlaylistFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("song", song);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 }
