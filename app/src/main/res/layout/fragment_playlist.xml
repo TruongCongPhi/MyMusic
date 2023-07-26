@@ -9,11 +9,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="danh sách phát"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:text="Danh sách tổng hợp"
+        android:textSize="20sp"
         android:layout_marginStart="10dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/tilte_item"
+        android:textStyle="bold"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlist_rcv"

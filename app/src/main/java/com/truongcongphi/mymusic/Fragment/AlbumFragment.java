@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.Class.Album;
 import com.truongcongphi.mymusic.Adapter.AlbumAdapter;
@@ -33,6 +35,7 @@ public class AlbumFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album, container, false);
+
 
         albums = new ArrayList<>();
         albumRecyclerView = view.findViewById(R.id.album_rcv);

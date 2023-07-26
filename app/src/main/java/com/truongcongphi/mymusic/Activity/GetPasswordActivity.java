@@ -2,6 +2,7 @@ package com.truongcongphi.mymusic.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -32,6 +33,8 @@ public class GetPasswordActivity extends AppCompatActivity {
         btnGetPassword =findViewById(R.id.btn_get_pass);
         btnBack = findViewById(R.id.btn_back);
         mAuth= FirebaseAuth.getInstance();
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(GetPasswordActivity.this, R.color.bg_color));
 
         btnGetPassword.setOnClickListener(new View.OnClickListener() {
             @Override

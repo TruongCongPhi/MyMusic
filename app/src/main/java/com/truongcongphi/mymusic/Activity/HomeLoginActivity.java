@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 
 import com.truongcongphi.mymusic.ButtonAnimator.ButtonAnimator;
@@ -23,6 +24,7 @@ public class HomeLoginActivity extends AppCompatActivity {
         addViews();
         addEvents();
         addButtonAnimator();
+        getWindow().setStatusBarColor(ContextCompat.getColor(HomeLoginActivity.this, R.color.mau_nen_play_nhac));
     }
 
 

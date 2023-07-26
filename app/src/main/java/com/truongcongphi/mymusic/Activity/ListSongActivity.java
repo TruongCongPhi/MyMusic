@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +69,9 @@ public class ListSongActivity extends AppCompatActivity {
         getData();
         getTilteAndImage();
         setupListeners();
+        getWindow().setStatusBarColor(ContextCompat.getColor(ListSongActivity.this, R.color.mau_nen_play_nhac));
+
+
 
     }
     private void setupListeners() {

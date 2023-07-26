@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/mau_nen_list_nhac"
     tools:context=".Activity.PlaySongActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="35dp">
+        >
 
         <ImageView
             android:id="@+id/img_song_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_back"></ImageView>

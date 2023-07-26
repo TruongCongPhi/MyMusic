@@ -36,9 +36,11 @@
         android:layout_gravity="center"
         android:text="Không tìm thấy kết quả"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textAlignment="center"
-        android:visibility="gone" />
+        android:visibility="gone"
+
+        />
 
 
 </LinearLayout>

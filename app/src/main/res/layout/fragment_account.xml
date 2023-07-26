@@ -41,8 +41,8 @@
                         android:id="@+id/test"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Your Library"
-                        android:textSize="24dp"
+                        android:text="Thư viện của bạn"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:layout_marginLeft="30dp"
@@ -98,11 +98,7 @@
                         android:textColor="@color/white"
                         android:layout_marginLeft="10dp"
                         ></Button>
-                    <Button
-                        android:id="@+id/btn_sign_out"
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:text="sign_out"></Button>
+
 
                 </LinearLayout>
             </LinearLayout>

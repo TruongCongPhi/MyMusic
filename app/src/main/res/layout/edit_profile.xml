@@ -26,11 +26,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit profile"
+                android:text="Chỉnh sửa hồ sơ"
                 android:textColor="@color/white"
-                android:textSize="23dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:layout_marginLeft="95dp"
+                android:layout_marginLeft="70dp"
                 />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="75dp"
-                android:text="Save"
+                android:text="Lưu"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="25dp"
-                android:text="Change photo"
+                android:text="Thay đổi ảnh"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -91,19 +91,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:hint="Your Name"
+                android:hint="Nhập tên của bạn"
                 android:textColor="@color/white"
                 android:textSize="35dp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:textSize="12dp"
                 android:gravity="center"
-                android:text="This could be your first name or a nickname.
-                It's how you'll appear on Music"
+                android:text="Đó có thể là tên hoặc là biệt danh của bạn.
+                Đây là cách bạn sẽ xuất hiện trên Music"
                 />
         </LinearLayout>
 

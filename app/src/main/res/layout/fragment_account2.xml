@@ -44,13 +44,7 @@
                             android:layout_height="35dp"
                             android:background="@drawable/ic_back" />
 
-                        <TextView
-                            android:id="@+id/txt_name1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Name Account"
-                            android:textColor="@color/white"
-                            android:textSize="23dp" />
+
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
 
@@ -65,13 +59,18 @@
                     android:scaleType="centerCrop"
                     />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+
+                    >
                 <TextView
                     android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="100dp"
                     android:text="Name Cccount"
                     android:textColor="@color/white"
                     android:textSize="25dp"
@@ -81,37 +80,29 @@
                     android:id="@+id/txt_gmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="140dp"
                     android:text="ten gmail"
-                    android:textColor="@color/white"
+                    android:textColor="@color/tilte_item"
                     android:textSize="17dp"
                     android:textStyle="italic"
 
                     />
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/btn_edit"
-                    android:layout_width="75dp"
+                    android:layout_width="100dp"
                     android:layout_height="38dp"
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/button_edit"
-                    android:text="Edit"
+                    android:text="Chỉnh sửa"
                     android:textColor="@color/white"
-                    android:textSize="15dp"
+                    android:textSize="10dp"
                     android:textStyle="bold"
                     app:backgroundTint="@null"
                     ></Button>
-                <ImageButton
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/more3"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginLeft="100dp"
-                    ></ImageButton>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

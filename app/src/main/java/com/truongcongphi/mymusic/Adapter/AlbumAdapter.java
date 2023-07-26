@@ -2,6 +2,7 @@ package com.truongcongphi.mymusic.Adapter;
 
 import static android.webkit.URLUtil.isValidUrl;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,8 +25,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
 
+import com.truongcongphi.mymusic.Activity.PlaySongActivity;
 import com.truongcongphi.mymusic.Class.Album;
 
+import com.truongcongphi.mymusic.Fragment.AlbumFragment;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
@@ -37,13 +41,19 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public AlbumAdapter(Context context, ArrayList listAlbum) {
         this.context = context;
         this.listAlbum = listAlbum;
+
     }
+
+
+
 
     @NonNull
     @Override
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_home,parent,false);
+
+
 
         return new AlbumViewHolder(view);
     }

@@ -2,6 +2,7 @@ package com.truongcongphi.mymusic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -53,6 +54,8 @@ public class PlaySongActivity extends AppCompatActivity {
     private boolean checkClick = false;
 
 
+
+
     private static PlaySongActivity instance;
 
     @Override
@@ -60,6 +63,7 @@ public class PlaySongActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         instance=this;
         setContentView(R.layout.activity_play_song);
+        getWindow().setStatusBarColor(ContextCompat.getColor(PlaySongActivity.this, R.color.mau_nen_play_nhac));
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

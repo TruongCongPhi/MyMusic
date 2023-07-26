@@ -5,7 +5,7 @@
     android:id="@+id/lnl_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/mau_nen_list_nhac"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/_32dp"
@@ -17,7 +17,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:background="@drawable/ic_launcher_foreground"></ImageView>
+        android:background="@drawable/music"></ImageView>
 
     <TextView
         android:layout_width="match_parent"
@@ -71,11 +71,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/button_dang_nhap"
         android:text="Đăng nhập"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"
-        android:textColor="@color/white"></Button>
+        android:textColor="@color/black"
+        app:backgroundTint="@null"
+        ></Button>
 
 
 </LinearLayout>

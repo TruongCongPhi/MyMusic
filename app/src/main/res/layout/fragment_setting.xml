@@ -3,15 +3,224 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SettingFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.SettingFragment"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarlist"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="6dp"
+        app:layout_collapseMode="pin"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="@color/colorBottomNavBar"
+        >
 
-    <TextView
-        android:id="@+id/tv_send_email"
-        android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/ic_back"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cài đặt"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ln_taikhoan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Góp ý, phản hồi"
-        android:textSize="28sp"
-        ></TextView>
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+
+        >
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_user"
+            ></ImageButton>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ten account"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xem hồ sơ"
+                android:textColor="@color/tilte_item"
+                android:textSize="15dp"
+                />
+
+
+        </LinearLayout>
+        <ImageButton
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/next"
+            android:layout_gravity="center"
+            android:layout_marginLeft="170dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giới thiệu"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phiên bản"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0.0.00.1"
+            android:textSize="15dp"
+            android:textColor="@color/tilte_item"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phần mềm của bên thứ ba"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Những phần mềm tuyệt vời đã giúp đỡ chùng tôi"
+            android:textSize="15dp"
+            android:textColor="@color/tilte_item"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Điều khoản và điều kiện"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tất cả những gì bạn cần biết"
+            android:textSize="15dp"
+            android:textColor="@color/tilte_item"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chính sách và quyền riêng tư"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quan trọng đối với cả bạn và chùng tôi"
+            android:textSize="15dp"
+            android:textColor="@color/tilte_item"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hỗ trợ"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hãy tìm kiếm trợ giúp từ chúng tôi và cộng đồng"
+            android:textSize="15dp"
+            android:textColor="@color/tilte_item"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Khác"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+           android:layout_marginTop="15dp"
+            />
+        <LinearLayout
+            android:id="@+id/ln_dangxuat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng xuất"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bạn sẽ đăng nhập với tài khoản khác"
+            android:textSize="15dp"
+            android:textColor="@color/tilte_item"
+            android:layout_marginTop="5dp"
+            />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
