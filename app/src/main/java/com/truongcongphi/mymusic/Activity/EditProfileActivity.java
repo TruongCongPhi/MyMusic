@@ -71,9 +71,6 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile);
 
-        getWindow().setStatusBarColor(ContextCompat.getColor(EditProfileActivity.this, R.color.bg_color));
-
-
         loadingDialog = new LoadingDialog(this);
         addControls();
         loadUserData();
