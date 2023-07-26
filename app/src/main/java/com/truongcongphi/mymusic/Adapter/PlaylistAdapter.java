@@ -82,7 +82,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
             songOption = itemView.findViewById(R.id.song_options);
             sessionManager = new SessionManager(getContext());
 
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -102,12 +101,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
                         Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                         intent.putExtra("playlist", playLists.get(getAdapterPosition()));
                         v.getContext().startActivity(intent);
-
                     }else {
                         Intent intent = new Intent(v.getContext(), ListSongActivity.class);
                         intent.putExtra("playlist", playLists.get(getAdapterPosition()));
                         v.getContext().startActivity(intent);
-
                     }
                 }
             });

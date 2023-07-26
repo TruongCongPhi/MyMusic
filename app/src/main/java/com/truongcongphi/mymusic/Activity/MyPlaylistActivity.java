@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,6 +91,10 @@ public class MyPlaylistActivity extends AppCompatActivity {
     private void getTilteAndImage() {
         if(playList != null){
             collapsingToolbarLayout.setTitle(playList.getId());
+            Glide.with(this)
+                    .load(playList.getImg())
+                    .error(R.drawable.music_note)
+                    .into(imgList);
         }else if (song!=null){
             collapsingToolbarLayout.setTitle(namePlaylist);
         }

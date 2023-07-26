@@ -156,12 +156,10 @@ public class PlaySongActivity extends AppCompatActivity {
                 toggleRepeat();
             }
         });
-// phát ngẫu nhiên
         imgRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleRandom();
-
             }
         });
 
@@ -190,13 +188,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 nextSong();
             }
         });
-
-
         imgPre.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 previousSong();
             }
         });
@@ -243,9 +237,7 @@ public class PlaySongActivity extends AppCompatActivity {
             }
         }, 3000);
     }
-
     public void nextSong() {
-
         if(songArrayList.size()>0){          //có bài hát đang phát thì dừng
             if (mediaPlayer.isPlaying() || mediaPlayer != null) {
                 mediaPlayer.stop();
@@ -274,7 +266,6 @@ public class PlaySongActivity extends AppCompatActivity {
             }
             checkClick = true;
             viewPagerPlaySong.setCurrentItem(position);
-
             playSong(position);
             updateTimeSong();
         }
@@ -289,7 +280,6 @@ public class PlaySongActivity extends AppCompatActivity {
             }
         }, 3000);
     }
-
     private void toggleRandom() {
         if (checkRandom == false) {
             if (repeat == true) {
@@ -368,7 +358,6 @@ public class PlaySongActivity extends AppCompatActivity {
             }
             mediaPlayer.start();
             TimeSong();
-            kiemtra();
             updateTimeSong();
         }
     }
@@ -379,7 +368,6 @@ public class PlaySongActivity extends AppCompatActivity {
         tvSongEndTime.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
         seekBarTime.setMax(mediaPlayer.getDuration());
     }
-//hu
     public void updateTimeSong(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

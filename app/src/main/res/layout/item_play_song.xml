@@ -6,10 +6,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_song_play2"></ImageView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_tieude"></TextView>
+        android:id="@+id/img_song_play2"
+        android:src="@drawable/music_note"></ImageView>
 
 </LinearLayout>
