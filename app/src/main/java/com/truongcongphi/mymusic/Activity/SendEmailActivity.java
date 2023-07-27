@@ -1,12 +1,14 @@
 package com.truongcongphi.mymusic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.truongcongphi.mymusic.Class.LoadingDialog;
@@ -32,6 +34,8 @@ public class SendEmailActivity extends AppCompatActivity {
     Button btnSend;
     SessionManager sessionManager;
     LoadingDialog loadingDialog;
+    ImageButton btn_back;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -39,11 +43,23 @@ public class SendEmailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email);
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(SendEmailActivity.this, R.color.bg_color));
+
         sessionManager = new SessionManager(this);
         edtNoiDung= findViewById(R.id.edt_noidung);
         edtTieuDe =findViewById(R.id.edt_tieude);
         btnSend = findViewById(R.id.btn_send);
+        btn_back = findViewById(R.id.btn_back);
         loadingDialog = new LoadingDialog(this);
+
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

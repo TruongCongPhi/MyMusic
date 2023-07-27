@@ -92,6 +92,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                startActivity(new Intent(requireContext(), SendEmailActivity.class));
             }
         });
 

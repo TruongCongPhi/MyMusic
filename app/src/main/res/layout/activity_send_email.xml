@@ -5,38 +5,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SendEmailActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/bg_color">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarlist"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="6dp"
+        app:layout_collapseMode="pin"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="@color/colorBottomNavBar"
+        >
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/ic_back"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gửi mail"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_gravity="center"
+        >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:textSize="18sp"
-        android:text="Tiêu đề">
+        android:text="Tiêu đề"
+        android:textColor="@color/colorGrayLight"
+        >
     </TextView>
     <EditText
         android:id="@+id/edt_tieude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"></EditText>
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        ></EditText>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:textSize="18sp"
-        android:text="Nội dung">
+        android:text="Nội dung"
+        android:textColor="@color/colorGrayLight"
+        >
     </TextView>
     <EditText
         android:id="@+id/edt_noidung"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:textSize="18sp"></EditText>
+        android:textSize="18sp"
+        android:textColor="@color/white"
+
+        ></EditText>
 
     <Button
         android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gửi"
-        android:layout_gravity="center"></Button>
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_button_send"
+        app:backgroundTint="@null"
+        ></Button>
+    </LinearLayout>
 
 
 </LinearLayout>
