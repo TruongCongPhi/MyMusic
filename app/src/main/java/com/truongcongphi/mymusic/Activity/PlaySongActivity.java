@@ -22,13 +22,20 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.truongcongphi.mymusic.Class.NotificationUtils;
+import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.Song;
 import com.truongcongphi.mymusic.R;
 import com.truongcongphi.mymusic.ViewPagerPlaylistSong;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PlaySongActivity extends AppCompatActivity {
@@ -53,6 +60,7 @@ public class PlaySongActivity extends AppCompatActivity {
     boolean checkRandom = false;
     static boolean next = false;
     private boolean checkClick = false;
+    SessionManager sessionManager;
 
 
 
@@ -70,7 +78,6 @@ public class PlaySongActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         getDataFromIntent();
         initView();
-
         eventClick();
         imgBack();
 
@@ -194,6 +201,55 @@ public class PlaySongActivity extends AppCompatActivity {
                 previousSong();
             }
         });
+
+        imgTym.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeSong();
+            }
+        });
+    }
+
+    private void likeSong() {
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = currentUser.getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(userId)
+                .child("playlists")
+                .child("Bài hát ưa thích");
+
+        List<String> likedSongs = sessionManager.getLikedSongs();
+        String songId = songArrayList.get(position).getSongID();
+        boolean isLiked = likedSongs.contains(songId);
+
+        // Kiểm tra nếu bài hát đã có trong SessionManager
+        if (isLiked) {
+            // Xoá bài hát khỏi danh sách trong SessionManager
+            likedSongs.remove(songArrayList.get(position).getSongID());
+            imgTym.setImageResource(R.drawable.icon_favorite);
+        } else {
+            // Thêm bài hát vào danh sách trong SessionManager
+            likedSongs.add(songArrayList.get(position).getSongID());
+            imgTym.setImageResource(R.drawable.icon_favorite_liked);
+        }
+        // Lưu danh sách bài hát đã thay đổi vào SessionManager
+        sessionManager.saveLikedSongs(likedSongs);
+        // Lưu danh sách bài hát đã thay đổi lên Firebase
+
+        userRef.child("img").setValue("https://firebasestorage.googleapis.com/v0/b/music-2cd36.appspot.com/o/liked_songs.png?alt=media&token=6ac491d3-f73b-4be7-a664-af282e49c0a5");
+        userRef.child("name").setValue("Bài hát ưa thích");
+        userRef.child("songs").setValue(likedSongs);
+    }
+    private void checkLikeSong(){
+        List<String> likedSongs = sessionManager.getLikedSongs();
+        String songId = songArrayList.get(position).getSongID();
+        boolean isLiked = likedSongs.contains(songId);
+
+        if (isLiked) {
+            imgTym.setImageResource(R.drawable.icon_favorite_liked);
+        }else imgTym.setImageResource(R.drawable.icon_favorite);
     }
 
     public void previousSong() {
@@ -323,13 +379,6 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
 
-    private void kiemtra() {
-        if (mediaPlayer.isPlaying()) {
-            Toast.makeText(PlaySongActivity.this, "Đang phát", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(PlaySongActivity.this, "Không phát", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     class PlayMp3 extends AsyncTask<String, Void, String> {
         @Override
@@ -441,6 +490,7 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     public void playSong(int po) {
+//        checkLikeSong();
         if (songArrayList.size() > 0) {
             // Thêm điều kiện này để chỉ phát bài hát mới khi mediaPlayer đang không phát bài hát nào
             if (mediaPlayer == null || mediaPlayer.isPlaying() || !mediaPlayer.isPlaying()) {
@@ -452,7 +502,6 @@ public class PlaySongActivity extends AppCompatActivity {
             }
             NotificationUtils.createNotification(this, songArrayList.get(po));
         }
-        ///
     }
 
 
@@ -491,6 +540,7 @@ public class PlaySongActivity extends AppCompatActivity {
         viewPagerPlaySong.setAdapter(adapterSong);
         playSong(position);
         viewPagerPlaySong.setCurrentItem(position);
+        sessionManager = new SessionManager(this);
 
 
     }

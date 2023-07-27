@@ -8,16 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-
         <ImageView
             android:id="@+id/img_exit"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_back"
-            ></ImageView>
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_back"></ImageView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +34,8 @@
         android:layout_centerInParent="true"
         android:backgroundTint="@color/white"
         android:text="Danh sách phát mới"
-        android:textColor="@color/black"></Button>
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"></Button>
 
     <ListView
         android:layout_marginTop="10dp"
