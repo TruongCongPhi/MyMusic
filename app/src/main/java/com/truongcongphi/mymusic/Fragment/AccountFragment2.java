@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.EditProfileActivity;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
+import com.truongcongphi.mymusic.ButtonAnimator.ButtonAnimator;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
@@ -42,10 +43,9 @@ public class AccountFragment2 extends Fragment {
         ic_back = view.findViewById(R.id.ic_back);
         btn_edit = view.findViewById(R.id.btn_edit);
         sessionManager = new SessionManager(getActivity());
-
-
         requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(requireContext(), R.color.mau_nen_play_nhac));
-
+        ButtonAnimator buttonAnimator = new ButtonAnimator();
+        btn_edit.setOnTouchListener(buttonAnimator);
 
 
         addEvents();

@@ -141,14 +141,13 @@ public class PlaySongActivity extends AppCompatActivity {
                         updateTimeSong();
                     }
                     checkClick = false;
+
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
-
 
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,6 +232,7 @@ public class PlaySongActivity extends AppCompatActivity {
             // Thêm bài hát vào danh sách trong SessionManager
             likedSongs.add(songArrayList.get(position).getSongID());
             imgTym.setImageResource(R.drawable.icon_favorite_liked);
+            imgTym.setVisibility(View.GONE);
         }
         // Lưu danh sách bài hát đã thay đổi vào SessionManager
         sessionManager.saveLikedSongs(likedSongs);

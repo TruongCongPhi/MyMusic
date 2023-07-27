@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
+import com.truongcongphi.mymusic.ButtonAnimator.ButtonAnimator;
 import com.truongcongphi.mymusic.Class.DaiyMix;
 import com.truongcongphi.mymusic.Class.Top;
 import com.truongcongphi.mymusic.R;
@@ -73,7 +74,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
             super(itemView);
             imgTop = itemView.findViewById(R.id.img_item);
             tvTop = itemView.findViewById(R.id.tv_tilte1);
-
+            ButtonAnimator buttonAnimator = new ButtonAnimator();
+            itemView.setOnTouchListener(buttonAnimator);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

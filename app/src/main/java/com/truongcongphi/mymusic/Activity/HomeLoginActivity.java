@@ -30,6 +30,7 @@ public class HomeLoginActivity extends AppCompatActivity {
 
 
     private void addViews() {
+
         btnLoginFB = (Button) findViewById(R.id.btn_loginFacebook);
 
         btnRegister = (Button) findViewById(R.id.btn_register);
@@ -39,11 +40,12 @@ public class HomeLoginActivity extends AppCompatActivity {
     }
 
     //set các hiệu cho button
-    public void addButtonAnimator(){
-        btnRegister.setOnTouchListener(new ButtonAnimator(btnRegister));
-        btnLoginGoogle.setOnTouchListener(new ButtonAnimator(btnLoginGoogle));
-        btnLoginFB.setOnTouchListener(new ButtonAnimator(btnLoginFB));
-        btnLogin1.setOnTouchListener(new ButtonAnimator(btnLogin1));
+    private void addButtonAnimator() {
+        ButtonAnimator buttonAnimator = new ButtonAnimator(); // Tỷ lệ thu nhỏ 90% khi nhấn nút
+        btnRegister.setOnTouchListener(buttonAnimator);
+        btnLoginGoogle.setOnTouchListener(buttonAnimator);
+        btnLoginFB.setOnTouchListener(buttonAnimator);
+        btnLogin1.setOnTouchListener(buttonAnimator);
     }
 // chuyển trang đăng kí
     public void addEvents() {

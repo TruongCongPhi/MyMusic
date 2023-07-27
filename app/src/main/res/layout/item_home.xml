@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/bg_color"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="20dp"
-    android:id="@+id/linear_layout"
-    >
-        <ImageView
-            android:id="@+id/img_item"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/mck" />
+    android:background="@color/bg_color"
+    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_tilte1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/tilte_item"
-            android:text="" />
+    <ImageView
+        android:id="@+id/img_item"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mck" />
 
-        <TextView
-            android:id="@+id/tv_tilte2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/tilte_item" />
+    <TextView
+        android:id="@+id/tv_tilte1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/tilte_item"
+        android:textSize="12sp" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_tilte2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tilte_item"
+        android:textSize="12sp" />
+
+</LinearLayout>
