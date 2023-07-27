@@ -242,9 +242,9 @@ public class PlaySongActivity extends AppCompatActivity {
         userRef.child("name").setValue("Bài hát ưa thích");
         userRef.child("songs").setValue(likedSongs);
     }
-    private void checkLikeSong(){
+    private void checkLikeSong(int po){
         List<String> likedSongs = sessionManager.getLikedSongs();
-        String songId = songArrayList.get(position).getSongID();
+        String songId = songArrayList.get(po).getSongID();
         boolean isLiked = likedSongs.contains(songId);
 
         if (isLiked) {
@@ -490,7 +490,7 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     public void playSong(int po) {
-//        checkLikeSong();
+        checkLikeSong(po);
         if (songArrayList.size() > 0) {
             // Thêm điều kiện này để chỉ phát bài hát mới khi mediaPlayer đang không phát bài hát nào
             if (mediaPlayer == null || mediaPlayer.isPlaying() || !mediaPlayer.isPlaying()) {
@@ -534,13 +534,14 @@ public class PlaySongActivity extends AppCompatActivity {
         imgTym = findViewById(R.id.imgbtn_tym);
         imgRandom = findViewById(R.id.imgbtn_random);
         imgSongBack = findViewById(R.id.img_song_back);
+        sessionManager = new SessionManager(this);
 
         viewPagerPlaySong = findViewById(R.id.viewpager_play_song);
         adapterSong = new ViewPagerPlaylistSong(this,songArrayList,position);
         viewPagerPlaySong.setAdapter(adapterSong);
         playSong(position);
         viewPagerPlaySong.setCurrentItem(position);
-        sessionManager = new SessionManager(this);
+
 
 
     }

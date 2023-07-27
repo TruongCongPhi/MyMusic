@@ -32,10 +32,13 @@ public class NotificationUtils extends Application {
             notificationManager.createNotificationChannel(channel);
         }
 
-        // Tạo PendingIntent để khi người dùng nhấn vào thông báo sẽ mở ứng dụng
+//         Tạo PendingIntent để khi người dùng nhấn vào thông báo sẽ mở ứng dụng
         Intent intent = new Intent(context, PlaySongActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent intent = new Intent(context, PlaySongActivity.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(
+//                context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         // Tạo thông báo
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, channelId)
