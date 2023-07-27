@@ -6,7 +6,7 @@
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
     android:paddingRight="16dp"
-    android:background="@drawable/layout_bg"
+    android:background="@drawable/custom_button_click"
     >
 
     <ImageView

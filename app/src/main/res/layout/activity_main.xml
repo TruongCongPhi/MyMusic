@@ -19,6 +19,7 @@
             app:menu="@menu/bottom_navigation_menu"
             android:layout_alignParentBottom="true"
             style="@style/BottomNavigationStyle"
+
             ></com.google.android.material.bottomnavigation.BottomNavigationView>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

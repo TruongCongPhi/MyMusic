@@ -137,8 +137,8 @@ public class ListSongActivity extends AppCompatActivity {
                     .into(this.imgList);
 
         }
-        collapsingToolbarLayout.setTitle(title);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
+        collapsingToolbarLayout.setTitle(title);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
 

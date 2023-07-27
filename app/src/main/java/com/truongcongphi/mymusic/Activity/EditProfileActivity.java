@@ -75,6 +75,8 @@ public class EditProfileActivity extends AppCompatActivity {
         addControls();
         loadUserData();
 
+        getWindow().setStatusBarColor(ContextCompat.getColor(EditProfileActivity.this, R.color.bg_color));
+
         addEvents();
     }
 

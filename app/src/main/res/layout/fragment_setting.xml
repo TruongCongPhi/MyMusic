@@ -45,13 +45,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp"
+        android:background="@drawable/custom_button_click"
 
         >
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avt"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/ic_user"
-            ></ImageButton>
+            ></de.hdodenhof.circleimageview.CircleImageView>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +62,7 @@
             android:layout_gravity="center"
             >
         <TextView
+            android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ten account"
@@ -70,7 +73,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xem hồ sơ"
+                android:text="Chỉnh sửa hồ sơ"
                 android:textColor="@color/tilte_item"
                 android:textSize="15dp"
                 />
@@ -100,6 +103,13 @@
             android:textSize="17dp"
             android:textColor="@color/white"
             />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/custom_button_click"
+            >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,6 +127,14 @@
             android:textColor="@color/tilte_item"
             android:layout_marginTop="5dp"
             />
+        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ln_phanmembent3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/custom_button_click"
+                >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,6 +152,14 @@
             android:textColor="@color/tilte_item"
             android:layout_marginTop="5dp"
             />
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ln_dieukien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,6 +177,14 @@
             android:textColor="@color/tilte_item"
             android:layout_marginTop="5dp"
             />
+                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ln_chinhsach"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/custom_button_click"
+                        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -168,6 +202,14 @@
             android:textColor="@color/tilte_item"
             android:layout_marginTop="5dp"
             />
+                    </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/ln_hotro"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/custom_button_click"
+                            >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -185,6 +227,9 @@
             android:textColor="@color/tilte_item"
             android:layout_marginTop="5dp"
             />
+
+                        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -192,13 +237,14 @@
             android:textStyle="bold"
             android:textSize="17dp"
             android:textColor="@color/white"
-           android:layout_marginTop="15dp"
+            android:layout_marginTop="15dp"
             />
         <LinearLayout
             android:id="@+id/ln_dangxuat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@drawable/custom_button_click"
             >
         <TextView
             android:layout_width="match_parent"

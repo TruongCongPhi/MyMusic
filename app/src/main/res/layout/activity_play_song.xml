@@ -197,16 +197,16 @@
                 android:background="@null"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_skip_next"></ImageButton>
+
             <ImageButton
                 android:id="@+id/imgbtn_repeat_song"
-                android:background="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_repeat_off"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                ></ImageButton>
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_repeat_off"></ImageButton>
         </RelativeLayout>
 
     </LinearLayout>

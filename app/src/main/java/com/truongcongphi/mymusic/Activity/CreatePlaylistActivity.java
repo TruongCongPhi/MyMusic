@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +37,9 @@ public class CreatePlaylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_playlist);
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(CreatePlaylistActivity.this, R.color.mau_nen_play_nhac));
+
         edtPlaylistName = findViewById(R.id.edt_playlist_name);
          btnSave = findViewById(R.id.btn_save);
          btnExit = findViewById(R.id.btn_exit);

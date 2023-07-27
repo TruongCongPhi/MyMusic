@@ -23,7 +23,7 @@ import com.truongcongphi.mymusic.R;
 public class AccountFragment extends Fragment {
     ImageButton ic_search, imgAdd, imgSetting;
     ImageView img_avt;
-    Button btnSignOut;
+
     private SessionManager sessionManager;
     private FirebaseAuth mAuth;
 
@@ -37,7 +37,6 @@ public class AccountFragment extends Fragment {
 
         img_avt = view.findViewById(R.id.img_avt);
         imgAdd = view.findViewById(R.id.img_add_playlist);
-        btnSignOut = view.findViewById(R.id.btn_sign_out);
         imgSetting = view.findViewById(R.id.img_setting);
 
         mAuth = FirebaseAuth.getInstance();
