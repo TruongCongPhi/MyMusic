@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.truongcongphi.mymusic.Activity.EditProfileActivity;
 import com.truongcongphi.mymusic.Activity.SendEmailActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
@@ -39,7 +38,7 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+        View view = inflater.inflate(R.layout.activity_ben_thu_ba, container, false);
         btn_back = view.findViewById(R.id.btn_back);
         ln_dangxuat = view.findViewById(R.id.ln_dangxuat);
         img_avt = view.findViewById(R.id.img_avt);

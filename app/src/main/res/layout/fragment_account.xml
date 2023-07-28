@@ -61,13 +61,7 @@
                             android:layout_height="23dp"
                             android:background="@drawable/ic_add"
                             />
-                        <ImageButton
-                            android:id="@+id/img_setting"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            android:layout_marginLeft="18dp"
-                            android:background="@drawable/icon_setting"
-                            />
+
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout

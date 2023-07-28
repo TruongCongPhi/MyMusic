@@ -31,10 +31,10 @@
             android:layout_marginLeft="180dp"
             >
             <ImageButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/notification"
-
+                android:id="@+id/img_setting"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:background="@drawable/icon_setting"
                 />
         </LinearLayout>
     </LinearLayout>

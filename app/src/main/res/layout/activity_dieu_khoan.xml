@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarlist"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:elevation="6dp"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        android:background="@color/colorGrayLight"
+        >
+
+
+        <ImageButton
+            android:id="@+id/ic_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/ic_back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phần mềm bên thứ ba"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Truy cập liên kết sau để biết thêm thông tin chi tiết :"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="https://www.spotify.com/vn-vi/legal/end-user-agreement/plain/"
+            android:textColor="@color/colorGrayLight"
+            android:inputType="textUri"
+            />
+    </LinearLayout>
+
+</LinearLayout>

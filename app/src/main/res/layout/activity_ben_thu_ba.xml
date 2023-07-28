@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.SettingFragment"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarlist"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:elevation="6dp"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        android:background="@color/colorGrayLight"
+        >
+
+
+            <ImageButton
+                android:id="@+id/ic_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_back" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phần mềm bên thứ ba"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Giấy phép của bên thứ ba
+
+Một số phần mềm mã nguồn mở và miễn phí tuyệt vời đã thực sự giúp đưa Spotify đến vị trí như ngày nay. Một số yêu cầu chúng tôi bao gồm các thỏa thuận cấp phép của họ trong sản phẩm của chúng tôi. Coi như xong. Vì chúng tôi muốn cung cấp tín dụng khi đến hạn, chúng tôi đã bao gồm toàn bộ danh sách bên dưới. Điều này có nghĩa là bạn không chỉ có thể xem phần mềm nào chúng tôi đang sử dụng mà còn cả các điều khoản của giấy phép. Tất cả chúng tôi tại Spotify xin chân thành cảm ơn những người thông minh đứng sau các chương trình tuyệt vời được liệt kê. Cố lên!
+Bạn có thể tải xuống mã nguồn cho Khung nhúng Chromium được Spotify sử dụng tại đây: https://www.spotify.com/opensource/
+Phần mềm của bên thứ ba là một phần của ứng dụng khách Android:"
+            android:textColor="@color/colorGrayLight"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/youtube"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/spotify"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/soundcloud"
+            android:layout_marginLeft="10dp"
+            />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
