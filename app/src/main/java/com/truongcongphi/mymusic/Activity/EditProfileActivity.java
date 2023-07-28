@@ -84,7 +84,6 @@ public class EditProfileActivity extends AppCompatActivity {
         edtName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Không cần thực hiện thay đổi trước khi người dùng nhập
             }
 
             @Override
@@ -100,7 +99,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Không cần thực hiện thay đổi sau khi người dùng nhập
             }
         });
 
@@ -129,7 +127,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (isProfileUpdated ) {
                     saveProfile();
                 } else {
-                    // Hiển thị thông báo cho người dùng rằng không có gì để cập nhật
                     Toast.makeText(EditProfileActivity.this, "Không có gì để cập nhật", Toast.LENGTH_SHORT).show();
                 }
             }

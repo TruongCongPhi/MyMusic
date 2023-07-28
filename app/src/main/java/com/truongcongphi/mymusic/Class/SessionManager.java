@@ -80,8 +80,6 @@ public class SessionManager {
         return new ArrayList<>(playlistSet);
     }
 
-
-
     public String getEmail() {
         return sharedPreferences.getString(KEY_EMAIL, "");
     }

@@ -78,7 +78,6 @@ public class CreatePlaylistActivity extends AppCompatActivity {
                                         songIds.add(songId);
                                     }
                                 }
-                                // Thêm songId mới vào danh sách songIds
                                 songIds.add(song.getSongID());
 
                                 // Lưu danh sách songIds đã cập nhật lên Firebase

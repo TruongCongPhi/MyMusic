@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
+import com.truongcongphi.mymusic.ButtonAnimator.ButtonAnimator;
 import com.truongcongphi.mymusic.Class.DaiyMix;
 import com.truongcongphi.mymusic.R;
 
@@ -45,6 +46,7 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
 
             Glide.with(holder.itemView.getContext())
                     .load(daiyMix.getUrl())
+                    .error(R.drawable.music_note)
                     .into(holder.imgDailyMix);
 
         holder.tvDailyMix.setText(daiyMix.getMixName());
@@ -70,7 +72,8 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
             super(itemView);
             imgDailyMix = itemView.findViewById(R.id.img_item);
             tvDailyMix = itemView.findViewById(R.id.tv_tilte1);
-
+            ButtonAnimator buttonAnimator = new ButtonAnimator();
+            itemView.setOnTouchListener(buttonAnimator);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -9,11 +9,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.truongcongphi.mymusic.Fragment.AccountFragment;
 import com.truongcongphi.mymusic.Fragment.AccountFragment2;
 import com.truongcongphi.mymusic.Fragment.HomeFragment;
@@ -25,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private AccountFragment accountFragment;
-    private Fragment currentFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

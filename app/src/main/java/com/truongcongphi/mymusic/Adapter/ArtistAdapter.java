@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
+import com.truongcongphi.mymusic.ButtonAnimator.ButtonAnimator;
 import com.truongcongphi.mymusic.Class.Artist;
 import com.truongcongphi.mymusic.R;
 
@@ -50,24 +51,15 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             return;
         }
 
-        // Hiển thị ảnh ca sĩ
-        boolean isValidUrl = isValidUrl(artist.getImgURL());
-
-        if (isValidUrl) {
             // Nếu URL hợp lệ, hiển thị ảnh từ URL bằng Glide
             Glide.with(holder.itemView.getContext())
                     .load(artist.getImgURL())
                     .apply(new RequestOptions()
                             .transform(new CenterCrop())
                             .transform(new RoundedCorners(1000)))
+                    .error(R.drawable.music_note)
                     .into(holder.imgItem);
-        } else {
-            // Nếu URL không hợp lệ, hiển thị ảnh từ Drawable
-            Glide.with(holder.imgItem)
-                    .load(R.drawable.music_note)
-                    .apply(new RequestOptions().transform(new CenterCrop())
-                    .transform(new RoundedCorners(1000)))
-                    .into(holder.imgItem);        }
+
 
         // Hiển thị tên ca sĩ
         holder.tvArtistName.setText(artist.getName());
@@ -93,6 +85,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             tvArtistName = itemView.findViewById(R.id.tv_tilte1);
             LinearLayout linearLayout = itemView.findViewById(R.id.linear_layout);
             linearLayout.setGravity(Gravity.CENTER);
+            ButtonAnimator buttonAnimator = new ButtonAnimator();
+            itemView.setOnTouchListener(buttonAnimator);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

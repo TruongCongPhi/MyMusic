@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/bg_color">
+    android:background="@color/black">
 
 
 
@@ -61,7 +61,13 @@
                             android:layout_height="23dp"
                             android:background="@drawable/ic_add"
                             />
-
+                        <ImageButton
+                            android:id="@+id/img_setting"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginLeft="18dp"
+                            android:background="@drawable/icon_setting"
+                            />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout

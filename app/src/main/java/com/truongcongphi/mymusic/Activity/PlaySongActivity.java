@@ -141,14 +141,13 @@ public class PlaySongActivity extends AppCompatActivity {
                         updateTimeSong();
                     }
                     checkClick = false;
+
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
-
 
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -492,7 +491,6 @@ public class PlaySongActivity extends AppCompatActivity {
     public void playSong(int po) {
         checkLikeSong(po);
         if (songArrayList.size() > 0) {
-            // Thêm điều kiện này để chỉ phát bài hát mới khi mediaPlayer đang không phát bài hát nào
             if (mediaPlayer == null || mediaPlayer.isPlaying() || !mediaPlayer.isPlaying()) {
                 stopCurrentSong();
                 new PlayMp3().execute(songArrayList.get(po).getUrl());

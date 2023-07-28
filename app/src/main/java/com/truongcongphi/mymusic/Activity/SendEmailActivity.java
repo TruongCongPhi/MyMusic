@@ -103,7 +103,6 @@ public class SendEmailActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         // Email gửi thành công
-                                        // Bạn có thể hiển thị Toast hoặc xử lý thành công tùy ý
                                         Toast.makeText(SendEmailActivity.this,"Đã gửi thành công",Toast.LENGTH_SHORT).show();
                                         loadingDialog.dismissDialog();
                                     }
@@ -113,7 +112,6 @@ public class SendEmailActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        // Xử lý lỗi ở đây (ví dụ: hiển thị thông báo lỗi)
                                         Toast.makeText(SendEmailActivity.this,"Không thể gửi",Toast.LENGTH_SHORT).show();
                                         loadingDialog.dismissDialog();
                                     }

@@ -45,6 +45,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
         Glide.with(holder.itemView.getContext())
                 .load(song.getImageSong())
+                .error(R.drawable.music_note)
                 .into(holder.imgSong);
     }
 

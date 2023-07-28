@@ -50,9 +50,12 @@ public class AccountFragment extends Fragment {
     }
 
     private void addEvents() {
-        String imageUrl = sessionManager.getImage(); // Lấy địa chỉ ảnh từ SessionManager
+        String imageUrl = sessionManager.getImage();
         if (imageUrl != null && !imageUrl.isEmpty()) {
-            Glide.with(this).load(imageUrl).into(img_avt); // Tải ảnh bằng Glide nếu địa chỉ ảnh khác null
+            Glide.with(this)
+                    .load(imageUrl)
+                    .error(R.drawable.music_note)
+                    .into(img_avt);
         }
         img_avt.setOnClickListener(new View.OnClickListener() {
             @Override

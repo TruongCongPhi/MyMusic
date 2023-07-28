@@ -35,8 +35,6 @@ public class AlbumFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album, container, false);
-
-
         albums = new ArrayList<>();
         albumRecyclerView = view.findViewById(R.id.album_rcv);
         albumAdapter = new AlbumAdapter(getActivity(),albums);
