@@ -48,6 +48,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
 
         Glide.with(holder.itemView.getContext())
                 .load(top.getTopUrl())
+                .error(R.drawable.music_note)
                 .into(holder.imgTop);
 
         holder.tvTop.setText(top.getTopName());

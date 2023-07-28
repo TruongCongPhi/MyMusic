@@ -307,11 +307,9 @@ public class ListSongActivity extends AppCompatActivity {
                 .child(currentUser.getUid())
                 .child("playlists")
                 .child(id);
-        // Lưu thông tin chung cho playlist
         databaseReference.child("name").setValue(name);
         databaseReference.child("img").setValue(img);
 
-        // Lưu danh sách bài hát của nghệ sĩ
         databaseReference.child("songs").setValue(songPlaylist);
     }
     private void removeFromUserPlaylist(String playlistId) {

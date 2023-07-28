@@ -47,6 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.itemTitle2.setText(TextUtils.join(", ", song.getSingerName()));
         Glide.with(holder.itemView.getContext())
                 .load(song.getImageSong())
+                .error(R.drawable.music_note)
                 .into(holder.imgItem);
     }
 

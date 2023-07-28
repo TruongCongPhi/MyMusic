@@ -46,6 +46,7 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
 
             Glide.with(holder.itemView.getContext())
                     .load(daiyMix.getUrl())
+                    .error(R.drawable.music_note)
                     .into(holder.imgDailyMix);
 
         holder.tvDailyMix.setText(daiyMix.getMixName());

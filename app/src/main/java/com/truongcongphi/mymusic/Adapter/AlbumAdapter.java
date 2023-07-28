@@ -64,6 +64,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             // Nếu URL hợp lệ, hiển thị ảnh từ URL bằng Glide
             Glide.with(holder.itemView.getContext())
                     .load(album.getAlbumURL())
+                    .error(R.drawable.music_note)
                     .into(holder.imgAlbum);
         } else {
             // Nếu URL không hợp lệ, hiển thị ảnh từ Drawable
@@ -107,27 +108,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
                         v.getContext().startActivity(intent);
                     }
             });
-
-
-
-//             hiệu ứng item
-//            itemView.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    switch (event.getAction()) {
-//                        case MotionEvent.ACTION_DOWN:
-//                            // Thu nhỏ và làm mờ itemView khi chạm
-//                            v.animate().scaleX(0.95f).scaleY(0.95f).alpha(0.5f).setDuration(200).start();
-//                            break;
-//                        case MotionEvent.ACTION_UP:
-//                        case MotionEvent.ACTION_CANCEL:
-//                            // Đưa itemView trở lại kích thước và độ trong suốt ban đầu khi thả ra
-//                            v.animate().scaleX(1f).scaleY(1f).alpha(1f).setDuration(200).start();
-//                            break;
-//                    }
-//                    return true; // Chỉ ra rằng sự kiện chạm đã được xử lý
-//                }
-//            });
         }
     }
 

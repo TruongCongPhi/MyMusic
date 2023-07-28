@@ -49,7 +49,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         if(playList == null){
             return;
         }
-        Glide.with(context).load(playList.getImg()).into(holder.imgPlaylist);
+        Glide.with(context)
+                .load(playList.getImg())
+                .error(R.drawable.music_note)
+                .into(holder.imgPlaylist);
         holder.tvPlaylist1.setText(playList.getName());
         List<String> list = holder.sessionManager.getmyPlaylist();
         if(list.contains(playList.getName())){
