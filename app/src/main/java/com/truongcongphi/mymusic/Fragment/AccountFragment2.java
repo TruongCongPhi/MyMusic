@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.truongcongphi.mymusic.Activity.EditProfileActivity;
 import com.truongcongphi.mymusic.Activity.PlaySongActivity;
+import com.truongcongphi.mymusic.Activity.SendEmailActivity;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.Class.User;
 import com.truongcongphi.mymusic.R;
@@ -27,7 +30,10 @@ public class AccountFragment2 extends Fragment {
     TextView tvName, tvGmail;
     ImageButton ic_back;
     Button btn_edit;
+
+    LinearLayout ln_dangxuat, ln_phanmem, ln_dieukien, ln_chinhsach, ln_hotro;
     private SessionManager sessionManager;
+    private FirebaseAuth mAuth;
 
 
 
@@ -41,6 +47,11 @@ public class AccountFragment2 extends Fragment {
         tvGmail = view.findViewById(R.id.txt_gmail);
         ic_back = view.findViewById(R.id.ic_back);
         btn_edit = view.findViewById(R.id.btn_edit);
+        ln_phanmem = view.findViewById(R.id.ln_phanmembent3);
+        ln_dieukien = view.findViewById(R.id.ln_dieukien);
+        ln_chinhsach = view.findViewById(R.id.ln_chinhsach);
+        ln_hotro = view.findViewById(R.id.ln_hotro);
+        mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(getActivity());
 
 
@@ -85,6 +96,40 @@ public class AccountFragment2 extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
+            }
+        });
+
+//        ln_dangxuat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAuth.signOut();
+//                sessionManager.logoutUser();
+//                getActivity().finish();
+//            }
+//        });
+        ln_phanmem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        ln_dieukien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        ln_chinhsach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        ln_hotro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(requireContext(), SendEmailActivity.class));
             }
         });
 

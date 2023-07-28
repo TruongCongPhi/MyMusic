@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,10 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(requireContext(), R.color.bg_color));
+
+
         recyclerView = view.findViewById(R.id.recycler_view);
         editTextSearch = view.findViewById(R.id.search_box);
         textView = view.findViewById(R.id.tv_not);

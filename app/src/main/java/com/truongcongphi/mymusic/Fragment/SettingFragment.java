@@ -30,7 +30,7 @@ public class SettingFragment extends Fragment {
 
     CircleImageView img_avt;
     TextView txt_name;
-    LinearLayout ln_taikhoan;
+
     private SessionManager sessionManager;
     private FirebaseAuth mAuth;
 
@@ -44,7 +44,6 @@ public class SettingFragment extends Fragment {
         ln_dangxuat = view.findViewById(R.id.ln_dangxuat);
         img_avt = view.findViewById(R.id.img_avt);
         txt_name = view.findViewById(R.id.txt_name);
-        ln_taikhoan = view.findViewById(R.id.ln_taikhoan);
         ln_phanmem = view.findViewById(R.id.ln_phanmembent3);
         ln_dieukien = view.findViewById(R.id.ln_dieukien);
         ln_chinhsach = view.findViewById(R.id.ln_chinhsach);
@@ -62,14 +61,7 @@ public class SettingFragment extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
-        ln_dangxuat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                sessionManager.logoutUser();
-                getActivity().finish();
-            }
-        });
+
         ln_phanmem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +88,6 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        ln_taikhoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(requireContext(), EditProfileActivity.class));
-            }
-        });
 
     }
     public void onResume() {

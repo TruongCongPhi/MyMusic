@@ -40,6 +40,15 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/ic_back" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cài đặt"
+                            android:textSize="20dp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            />
 
 
                     </LinearLayout>
@@ -106,13 +115,188 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <fragment
-                android:id="@+id/fragment_playlist"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/bg_color"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="com.truongcongphi.mymusic.Fragment.PlaylistFragment"
-                ></fragment>
+                android:orientation="vertical"
+                android:padding="15dp"
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giới thiệu"
+                    android:textStyle="bold"
+                    android:textSize="17dp"
+                    android:textColor="@color/white"
+                    />
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phiên bản"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0.0.00.1"
+                        android:textSize="15dp"
+                        android:textColor="@color/tilte_item"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ln_phanmembent3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phần mềm của bên thứ ba"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Những phần mềm tuyệt vời đã giúp đỡ chùng tôi"
+                        android:textSize="15dp"
+                        android:textColor="@color/tilte_item"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ln_dieukien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Điều khoản và điều kiện"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tất cả những gì bạn cần biết"
+                        android:textSize="15dp"
+                        android:textColor="@color/tilte_item"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ln_chinhsach"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chính sách và quyền riêng tư"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Quan trọng đối với cả bạn và chùng tôi"
+                        android:textSize="15dp"
+                        android:textColor="@color/tilte_item"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ln_hotro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hỗ trợ"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hãy liên hệ với chúng tôi khi bạn cần trợ giúp"
+                        android:textSize="15dp"
+                        android:textColor="@color/tilte_item"
+                        android:layout_marginTop="5dp"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Khác"
+                    android:textStyle="bold"
+                    android:textSize="17dp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
+                    />
+                <LinearLayout
+                    android:id="@+id/ln_dangxuat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_button_click"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Đăng xuất"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bạn sẽ đăng nhập với tài khoản khác"
+                        android:textSize="15dp"
+                        android:textColor="@color/tilte_item"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
 
         </androidx.core.widget.NestedScrollView>

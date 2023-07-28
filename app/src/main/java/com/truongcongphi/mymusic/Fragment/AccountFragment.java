@@ -3,6 +3,8 @@ package com.truongcongphi.mymusic.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -21,7 +23,7 @@ import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
 public class AccountFragment extends Fragment {
-    ImageButton ic_search, imgAdd, imgSetting;
+    ImageButton ic_search, imgAdd;
     ImageView img_avt;
 
     private SessionManager sessionManager;
@@ -37,12 +39,13 @@ public class AccountFragment extends Fragment {
 
         img_avt = view.findViewById(R.id.img_avt);
         imgAdd = view.findViewById(R.id.img_add_playlist);
-        imgSetting = view.findViewById(R.id.img_setting);
-
         mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(getActivity());
-        addEvents();
 
+        requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(requireContext(), R.color.bg_color));
+
+
+        addEvents();
         return view;
     }
 
@@ -66,18 +69,7 @@ public class AccountFragment extends Fragment {
         });
 
 
-        imgSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SettingFragment newFragment = new SettingFragment();
 
-                // Chuyển đổi sang fragment mới bằng FragmentTransaction
-                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, newFragment); // fragment_container là ID của container chứa fragment
-                fragmentTransaction.addToBackStack(null); // (Tùy chọn) Đưa fragment hiện tại vào stack để quay lại khi nhấn nút Back
-                fragmentTransaction.commit();
-            }
-        });
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
