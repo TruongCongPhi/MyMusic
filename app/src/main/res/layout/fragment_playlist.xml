@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg_color"
     >
-
     <TextView
+        android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Danh sách tổng hợp"
         android:textSize="20sp"
-        android:layout_marginStart="10dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/tilte_item"
         android:textStyle="bold"
         />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlist_rcv"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/playlist_rcv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.core.widget.NestedScrollView>
 
 
 
-</LinearLayout>
+</RelativeLayout>
