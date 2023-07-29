@@ -26,7 +26,7 @@
 
             <ImageButton
                 android:id="@+id/img_setting"
-                android:src="@drawable/setting"
+                android:src="@drawable/icon_setting"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"

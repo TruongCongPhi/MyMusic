@@ -10,19 +10,18 @@
             android:id="@+id/ablayout"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:backgroundTint="#4DCDDC39"
             android:backgroundTintMode="screen"
             android:fitsSystemWindows="true"
+            android:background="@drawable/mau_nen_list_nhac"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsingtoolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/mau_nen_list_nhac"
+                android:layout_height="260dp"
                 android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:contentScrim="@color/colorGrayLight">
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbarlist"
                     android:layout_width="match_parent"
@@ -49,8 +48,6 @@
                             android:textStyle="bold"
                             android:layout_gravity="center"
                             />
-
-
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
 
@@ -88,9 +85,8 @@
                     android:layout_height="wrap_content"
                     android:text="ten gmail"
                     android:textColor="@color/tilte_item"
-                    android:textSize="17dp"
+                    android:textSize="18dp"
                     android:textStyle="italic"
-
                     />
                 </LinearLayout>
 
@@ -108,13 +104,15 @@
                     android:textSize="10dp"
                     android:textStyle="bold"
                     app:backgroundTint="@null"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+
                     ></Button>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/bg_color"
             >
