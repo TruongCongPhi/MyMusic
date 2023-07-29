@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,8 @@ import com.truongcongphi.mymusic.R;
 
 
 public class HomeLoginActivity extends AppCompatActivity {
-    Button btnLoginFB, btnLoginPhoneNumber , btnRegister, btnLoginGoogle, btnLogin1;
+    Button btnLoginFB, btnLoginPhoneNumber , btnRegister, btnLoginGoogle;
+    TextView btnLogin1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class HomeLoginActivity extends AppCompatActivity {
         btnLoginFB = (Button) findViewById(R.id.btn_loginFacebook);
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnLoginGoogle = (Button) findViewById(R.id.btn_login_accountgoogle);
-        btnLogin1 = (Button) findViewById(R.id.btn_login1);
+        btnLogin1 =  findViewById(R.id.btn_login1);
     }
 
     //set các hiệu cho button

@@ -5,14 +5,13 @@
     android:id="@+id/lnl_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mau_nen_list_nhac"
+    android:background="@color/bg_color"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/_32dp"
     tools:ignore="MissingConstraints"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp">
-
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -28,23 +27,21 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"></TextView>
-
     <Button
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_marginBottom="6dp"
         android:backgroundTint="#73BBC9"
         android:text="Đăng kí miễn phí"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold" />
-
     <Button
         android:id="@+id/btn_login_accountgoogle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="7dp"
         android:background="@drawable/custom_button_login_home"
         android:drawableLeft="@drawable/ic_google"
         android:text="Tiếp tục bằng Google"
@@ -52,12 +49,10 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         app:backgroundTint="@null" />
-
     <Button
         android:id="@+id/btn_loginFacebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
         android:background="@drawable/custom_button_login_home"
         android:text="Tiếp tục bằng Facebook"
         android:textSize="@dimen/_16sp"
@@ -66,20 +61,17 @@
         app:backgroundTint="@null"
         android:drawableLeft="@drawable/ic_facebook" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_login1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/button_dang_nhap"
         android:text="Đăng nhập"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        app:backgroundTint="@null"
-        ></Button>
-
-
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        ></TextView>
 </LinearLayout>
 
 

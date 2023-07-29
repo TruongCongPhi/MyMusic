@@ -40,17 +40,17 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         />
+
     <EditText
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_edttext"
-        app:backgroundTint="@null"
         android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edttext"
         android:inputType="textEmailAddress"
         android:padding="8dp"
-        ></EditText>
+        android:textSize="20dp"
+        app:backgroundTint="@null"></EditText>
 
     <TextView
         android:layout_marginTop="10dp"
