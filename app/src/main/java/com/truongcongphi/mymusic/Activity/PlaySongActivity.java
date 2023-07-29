@@ -47,8 +47,7 @@ public class PlaySongActivity extends AppCompatActivity {
     TextView tvSingerName;
     static TextView tvSongStartTime;
     static SeekBar seekBarTime;
-    ImageButton imgRepeat, imgPlay, imgNext, imgPre, imgTym, imgRandom;
-    ImageView imgSongBack;
+    ImageButton imgRepeat, imgPlay, imgNext, imgPre, imgTym, imgRandom, imgSongBack;
     ViewPager viewPagerPlaySong;
     public static ArrayList<Song> songArrayList = new ArrayList<>();
     Song selectedSong;

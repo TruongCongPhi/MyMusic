@@ -9,32 +9,33 @@
     android:orientation="vertical"
     >
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="70dp"
+        android:elevation="6dp"
+        app:layout_collapseMode="pin"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/img_song_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_back"></ImageView>
+            android:background="@drawable/ic_back"></ImageButton>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:gravity="center">
+            android:layout_gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:text="ĐANG PHÁT TỪ DANH SÁCH PHÁT"></TextView>
+                android:text="ĐANG PHÁT TỪ DANH SÁCH PHÁT"
+
+                ></TextView>
             <TextView
                 android:id="@+id/tv_album_name"
                 android:layout_width="wrap_content"
@@ -42,11 +43,11 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:text="tên album"></TextView>
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,12 +80,13 @@
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/tv_play_song_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:text="Tên bài hát"
                         android:textStyle="bold"
                         android:textSize="25dp"
                         android:textColor="@color/white"
+                        android:maxLines="1"
                         ></TextView>
                     <TextView
                         android:id="@+id/tv_song_singer_name"

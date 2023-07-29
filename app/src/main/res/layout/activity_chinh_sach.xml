@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chính sách quyền riêng tư của Music"
+            android:text="Quyền riêng tư của Music"
             android:textSize="18dp"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -48,12 +48,13 @@
             android:textColor="@color/white"
             />
         <TextView
+            android:id="@+id/txt_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="https://www.spotify.com/vn-vi/legal/end-user-agreement/plain/"
             android:textColor="@color/colorGrayLight"
-            android:inputType="textUri"
+            android:maxLines="2"
             />
     </LinearLayout>
 

@@ -41,7 +41,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarlist"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="70dp"
                 android:elevation="6dp"
                 app:layout_collapseMode="pin"
                 android:theme="@style/ThemeOverlay.AppCompat.Light">
@@ -60,18 +60,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingactionbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#73bbc9"
-        android:scaleType="fitXY"
-        android:src="@drawable/play"
-        app:fabSize="normal"
-        app:layout_anchor="@id/appbarlayout"
-        app:layout_anchorGravity="bottom|end"
-        android:layout_marginRight="70dp"
-        app:layout_behavior="@string/bottom_sheet_behavior" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

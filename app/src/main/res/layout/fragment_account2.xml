@@ -39,7 +39,10 @@
                             android:id="@+id/ic_back"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:background="@drawable/ic_back" />
+                            android:background="@drawable/ic_back"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentLeft="true"
+                            />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -122,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="15dp"
+
 
                 >
                 <TextView
@@ -132,12 +135,14 @@
                     android:textStyle="bold"
                     android:textSize="17dp"
                     android:textColor="@color/white"
+                    android:padding="10dp"
                     />
                 <LinearLayout
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:padding="10dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -147,7 +152,7 @@
                         android:textStyle="bold"
                         android:textSize="17dp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="15dp"
+
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -163,6 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:padding="10dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -172,7 +178,7 @@
                         android:textStyle="bold"
                         android:textSize="17dp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="15dp"
+
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -188,6 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:padding="10dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -197,7 +204,7 @@
                         android:textStyle="bold"
                         android:textSize="17dp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="15dp"
+
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -213,6 +220,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:padding="10dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -222,7 +230,7 @@
                         android:textStyle="bold"
                         android:textSize="17dp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="15dp"
+
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -238,6 +246,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:padding="10dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -247,7 +256,7 @@
                         android:textStyle="bold"
                         android:textSize="17dp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="15dp"
+
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -267,13 +276,14 @@
                     android:textStyle="bold"
                     android:textSize="17dp"
                     android:textColor="@color/white"
-                    android:layout_marginTop="15dp"
+                    android:padding="10dp"
                     />
                 <LinearLayout
                     android:id="@+id/ln_dangxuat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:padding="10dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -283,7 +293,7 @@
                         android:textStyle="bold"
                         android:textSize="17dp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="15dp"
+
                         />
                     <TextView
                         android:layout_width="match_parent"

@@ -77,6 +77,9 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.EditProfileActivity" />
+        <activity android:name=".Activity.BenThuBaActivity"/>
+        <activity android:name=".Activity.ChinhSachActivity"/>
+        <activity android:name=".Activity.DieuKhoanActivity"/>
     </application>
 
 </manifest>
