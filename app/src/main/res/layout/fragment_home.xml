@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <RelativeLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -24,16 +24,20 @@
             android:textStyle="bold|italic"
             android:textColor="@color/white"
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="180dp"
+            >
             <ImageButton
                 android:id="@+id/img_setting"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
                 android:background="@drawable/icon_setting"
-                android:layout_alignParentEnd="true"
                 />
-        </RelativeLayout>
-
-
+        </LinearLayout>
+    </LinearLayout>
 
         <fragment
             android:id="@+id/fragment_album"

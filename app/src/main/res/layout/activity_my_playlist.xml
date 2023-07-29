@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/mau_nen_list_nhac">
+    android:background="@color/bg_color">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
@@ -40,13 +40,26 @@
                 app:layout_collapseMode="pin"
                 android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-                <ImageButton
-                    android:id="@+id/btn_back"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/ic_back"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_back" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Danh sách phát của bạn"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_centerInParent="true"></TextView>
+                </RelativeLayout>
 
             </androidx.appcompat.widget.Toolbar>
 
