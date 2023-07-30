@@ -12,13 +12,15 @@
         android:text="Daily Mix"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
         android:textColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/daily_mix_rcv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         />
 
 

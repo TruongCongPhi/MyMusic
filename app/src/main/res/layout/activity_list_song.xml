@@ -46,13 +46,17 @@
                 app:layout_collapseMode="pin"
                 android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-                <ImageButton
-                    android:id="@+id/btn_back"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/ic_back"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/ic_back"
+                        android:layout_marginLeft="-10dp"/>
+                </RelativeLayout>
 
             </androidx.appcompat.widget.Toolbar>
 

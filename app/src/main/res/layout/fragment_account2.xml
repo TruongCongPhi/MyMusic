@@ -5,74 +5,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablayout"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:backgroundTintMode="screen"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/mau_nen_list_nhac"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/ablayout"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingtoolbar"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:backgroundTintMode="screen"
             android:fitsSystemWindows="true"
-            android:background="@drawable/mau_nen_list_nhac"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/colorGrayLight">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsingtoolbar"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarlist"
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:contentScrim="@color/colorGrayLight">
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbarlist"
+                android:layout_height="70dp"
+                android:elevation="6dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.AppCompat.Light">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:elevation="6dp"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/Theme.AppCompat.Light">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/ic_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/ic_back"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="-10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cài đặt"
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
 
-                        <ImageButton
-                            android:id="@+id/ic_back"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:background="@drawable/ic_back"
-                            android:layout_centerInParent="true"
-                            android:layout_alignParentLeft="true"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cài đặt"
-                            android:textSize="20dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_gravity="center"
-                            />
-                    </LinearLayout>
-                </androidx.appcompat.widget.Toolbar>
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/img_avt"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_user"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="16dp"
+                android:scaleType="centerCrop"
+                />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/img_avt"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_user"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginLeft="10dp"
-                    android:scaleType="centerCrop"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-
-                    >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                >
                 <TextView
                     android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
@@ -91,28 +91,26 @@
                     android:textSize="18dp"
                     android:textStyle="italic"
                     />
-                </LinearLayout>
+            </LinearLayout>
 
 
-                <Button
-                    android:id="@+id/btn_edit"
-                    android:layout_width="100dp"
-                    android:layout_height="38dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/button_edit"
-                    android:text="Chỉnh sửa"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@null"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-
-                    ></Button>
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_edit"
+                android:text="Chỉnh sửa"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                app:layout_collapseMode="pin"
+                ></Button>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -127,20 +125,21 @@
 
                 >
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Giới thiệu"
                     android:textStyle="bold"
                     android:textSize="17dp"
+                    android:layout_marginStart="16dp"
                     android:textColor="@color/white"
-                    android:padding="10dp"
                     />
                 <LinearLayout
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingVertical="7dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -158,7 +157,7 @@
                         android:text="0.0.00.1"
                         android:textSize="15dp"
                         android:textColor="@color/tilte_item"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -166,7 +165,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingVertical="7dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -184,7 +184,7 @@
                         android:text="Những phần mềm tuyệt vời đã giúp đỡ chùng tôi"
                         android:textSize="15dp"
                         android:textColor="@color/tilte_item"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -192,7 +192,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingVertical="7dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -210,7 +211,7 @@
                         android:text="Tất cả những gì bạn cần biết"
                         android:textSize="15dp"
                         android:textColor="@color/tilte_item"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -218,7 +219,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingVertical="7dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -236,7 +238,7 @@
                         android:text="Quan trọng đối với cả bạn và chùng tôi"
                         android:textSize="15dp"
                         android:textColor="@color/tilte_item"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -244,7 +246,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingVertical="7dp"
                     android:background="@drawable/custom_button_click"
                     >
                     <TextView
@@ -262,47 +265,25 @@
                         android:text="Hãy liên hệ với chúng tôi khi bạn cần trợ giúp"
                         android:textSize="15dp"
                         android:textColor="@color/tilte_item"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         />
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Khác"
-                    android:textStyle="bold"
-                    android:textSize="17dp"
-                    android:textColor="@color/white"
-                    android:padding="10dp"
-                    />
-                <LinearLayout
-                    android:id="@+id/ln_dangxuat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    android:background="@drawable/custom_button_click"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Đăng xuất"
-                        android:textStyle="bold"
-                        android:textSize="17dp"
-                        android:textColor="@color/white"
 
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Bạn sẽ đăng nhập với tài khoản khác"
-                        android:textSize="15dp"
-                        android:textColor="@color/tilte_item"
-                        android:layout_marginTop="5dp"
-                        />
-                </LinearLayout>
 
+                <Button
+                    android:id="@+id/btn_dangxuat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng xuất"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/button_login_custom_on"
+                    app:backgroundTint="@null"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:paddingHorizontal="20dp"/>
 
             </LinearLayout>
 

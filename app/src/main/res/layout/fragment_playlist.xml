@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Danh sách tổng hợp"
         android:textSize="20sp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="16dp"
         android:textColor="@color/tilte_item"
         android:textStyle="bold"
         />

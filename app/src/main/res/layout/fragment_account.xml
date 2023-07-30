@@ -1,80 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_color">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:padding="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avt"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_user" />
+
+            <TextView
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="60dp"
+                android:text="Thư viện của bạn"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-                >
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    >
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/img_avt"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_user"
-                        android:scaleType="centerCrop"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerInParent="true"
-                        />
+            <ImageButton
+                android:id="@+id/img_add_playlist"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_add" />
+        </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/test"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thư viện của bạn"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:layout_centerInParent="true"
-                        />
-
-
-                        <ImageButton
-                            android:id="@+id/img_add_playlist"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            android:background="@drawable/ic_add"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerInParent="true"
-
-                            />
-
-                </RelativeLayout>
-            </LinearLayout>
-            <fragment
-                android:id="@+id/fragment_playlist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="com.truongcongphi.mymusic.Fragment.PlaylistFragment"
-                android:layout_marginTop="10dp"
-               ></fragment>
-
-
-        </LinearLayout>
-
+        <fragment
+            android:id="@+id/fragment_playlist"
+            android:name="com.truongcongphi.mymusic.Fragment.PlaylistFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"></fragment>
+    </LinearLayout>
 
 
 </FrameLayout>

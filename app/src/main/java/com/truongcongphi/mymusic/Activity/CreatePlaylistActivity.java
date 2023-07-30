@@ -87,11 +87,9 @@ public class CreatePlaylistActivity extends AppCompatActivity {
                                 Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                                 if (song != null) {
                                     intent.putExtra("myplaylist", song);
-                                    intent.putExtra("nameplaylist",namePlaylist);
                                 }
                                 intent.putExtra("nameplaylist", namePlaylist);
                                 v.getContext().startActivity(intent);
-
                                 finish();
                             }
 

@@ -93,7 +93,6 @@ public class ListSongActivity extends AppCompatActivity {
         rcvSongs.setLayoutManager(linearLayoutManager);
         rcvSongs.setAdapter(songAdapter);
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
-        floatingActionButton = findViewById(R.id.floatingactionbutton);
         toolbar = findViewById(R.id.toolbarlist);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));

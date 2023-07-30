@@ -53,6 +53,18 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
                 .load(playList.getImg())
                 .error(R.drawable.music_note)
                 .into(holder.imgPlaylist);
+
+        int WidthInDp = 65;
+        int HeightInDp = 65;
+        int desiredWidthInPixels = (int) (WidthInDp * context.getResources().getDisplayMetrics().density);
+        int desiredHeightInPixels = (int) (HeightInDp * context.getResources().getDisplayMetrics().density);
+
+        // Set the layout parameters for the ImageView
+        ViewGroup.LayoutParams layoutParams = holder.imgPlaylist.getLayoutParams();
+        layoutParams.width = desiredWidthInPixels;
+        layoutParams.height = desiredHeightInPixels;
+        holder.imgPlaylist.setLayoutParams(layoutParams);
+
         holder.tvPlaylist1.setText(playList.getName());
         List<String> list = holder.sessionManager.getmyPlaylist();
         if(list.contains(playList.getName())){
