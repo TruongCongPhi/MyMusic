@@ -33,7 +33,7 @@ import java.util.List;
 
 public class AddSongToPlaylist extends AppCompatActivity {
     private ImageView imgExit;
-    private Button btnAddToPlaylists,btnAddPlaylistNew;
+    private Button btnAddToPlaylists, btnAddPlaylistNew;
     private ListView listView;
     private ArrayList<String> playlist;
     private ArrayAdapter<String> adapter;
@@ -43,6 +43,7 @@ public class AddSongToPlaylist extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference databaseReference;
     Song song;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class AddSongToPlaylist extends AppCompatActivity {
 
     private void addViews() {
 
-        imgExit =findViewById(R.id.img_exit);
+        imgExit = findViewById(R.id.img_exit);
         btnAddToPlaylists = findViewById(R.id.btn_add_playlist);
         btnAddPlaylistNew = findViewById(R.id.btn_add_playlist_new);
         listView = findViewById(R.id.listview_playlist);
@@ -166,6 +167,7 @@ public class AddSongToPlaylist extends AppCompatActivity {
         }
         finish();
     }
+
     private void getAllSongIdsInPlaylists() {
         databaseReference.child("playlists").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -185,12 +187,14 @@ public class AddSongToPlaylist extends AppCompatActivity {
                     updateCheckBoxStateForPlaylist(playlistName, songIds.contains(currentSongId));
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(AddSongToPlaylist.this, "Đã xảy ra lỗi khi đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void updateCheckBoxStateForPlaylist(String playlistName, boolean isChecked) {
         int itemCount = listView.getCount();
         for (int i = 0; i < itemCount; i++) {

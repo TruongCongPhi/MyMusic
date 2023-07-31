@@ -28,7 +28,7 @@ import com.truongcongphi.mymusic.R;
 public class AccountFragment2 extends Fragment {
     ImageView imgUser;
     TextView tvName, tvGmail;
-    ImageButton ic_back;
+    ImageView ic_back;
     Button btn_edit, btnSignOut;
 
     LinearLayout ln_phanmem, ln_dieukien, ln_chinhsach, ln_hotro;

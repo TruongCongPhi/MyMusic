@@ -21,6 +21,7 @@ public class BenThuBaActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(BenThuBaActivity.this, R.color.bg_color));
         addEvents();
     }
+
     private void addEvents() {
         ic_back.setOnClickListener(new View.OnClickListener() {
             @Override

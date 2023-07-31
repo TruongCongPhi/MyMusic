@@ -17,8 +17,9 @@ import com.truongcongphi.mymusic.R;
 
 
 public class HomeLoginActivity extends AppCompatActivity {
-    Button btnLoginFB, btnLoginPhoneNumber , btnRegister, btnLoginGoogle;
+    Button btnLoginFB, btnLoginPhoneNumber, btnRegister, btnLoginGoogle;
     TextView btnLogin1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class HomeLoginActivity extends AppCompatActivity {
         btnLoginFB = (Button) findViewById(R.id.btn_loginFacebook);
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnLoginGoogle = (Button) findViewById(R.id.btn_login_accountgoogle);
-        btnLogin1 =  findViewById(R.id.btn_login1);
+        btnLogin1 = findViewById(R.id.btn_login1);
     }
 
     //set các hiệu cho button
@@ -44,6 +45,7 @@ public class HomeLoginActivity extends AppCompatActivity {
         btnLoginFB.setOnTouchListener(buttonAnimator);
         btnLogin1.setOnTouchListener(buttonAnimator);
     }
+
     public void addEvents() {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +70,9 @@ public class HomeLoginActivity extends AppCompatActivity {
         });
 
     }
+
     public void onBackPressed() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(HomeLoginActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeLoginActivity.this);
         builder.setTitle("Bạn có chắc chắn muốn thoát");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override

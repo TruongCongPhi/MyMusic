@@ -49,7 +49,7 @@ public class PlaylistFragment extends Fragment {
 
         playLists = new ArrayList<>();
         playlistRcv = view.findViewById(R.id.playlist_rcv);
-        playlistAdapter = new PlaylistAdapter(getActivity(),playLists);
+        playlistAdapter = new PlaylistAdapter(getActivity(), playLists);
         LinearLayoutManager artistLinearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         playlistRcv.setLayoutManager(artistLinearLayoutManager);
         playlistRcv.setAdapter(playlistAdapter);
