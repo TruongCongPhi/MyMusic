@@ -45,21 +45,23 @@ public class PlaylistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_playlist, container, false);
+        playlistRcv = view.findViewById(R.id.playlist_rcv);
+        return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPlaylistData();
+    }
+    private void getPlaylistData() {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         playLists = new ArrayList<>();
-        playlistRcv = view.findViewById(R.id.playlist_rcv);
+
         playlistAdapter = new PlaylistAdapter(getActivity(), playLists);
         LinearLayoutManager artistLinearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         playlistRcv.setLayoutManager(artistLinearLayoutManager);
         playlistRcv.setAdapter(playlistAdapter);
-
-        getPlaylistData();
-
-        return view;
-    }
-
-    private void getPlaylistData() {
         if (currentUser != null) {
             String userId = currentUser.getUid();
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()

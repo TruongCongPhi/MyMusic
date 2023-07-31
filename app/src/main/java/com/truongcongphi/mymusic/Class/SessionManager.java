@@ -79,6 +79,13 @@ public class SessionManager {
         Set<String> playlistSet = sharedPreferences.getStringSet(KEY_PLAYLISTS, new HashSet<>());
         return new ArrayList<>(playlistSet);
     }
+    public void removePlaylist(String playlistName) {
+        List<String> myPlaylist = getmyPlaylist();
+        if (myPlaylist != null) {
+            myPlaylist.remove(playlistName);
+            saveMyPlaylist(myPlaylist);
+        }
+    }
 
     public String getEmail() {
         return sharedPreferences.getString(KEY_EMAIL, "");

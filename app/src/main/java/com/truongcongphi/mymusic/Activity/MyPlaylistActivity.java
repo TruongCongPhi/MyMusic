@@ -68,8 +68,6 @@ public class MyPlaylistActivity extends AppCompatActivity {
         getData();
         getTilteAndImage();
         setupListeners();
-
-
     }
 
     private void setupListeners() {
@@ -88,8 +86,8 @@ public class MyPlaylistActivity extends AppCompatActivity {
                 builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (song != null && namePlaylist != null) {
-                            DatabaseReference playlistRef = databaseReference.child("playlist_my").child(namePlaylist);
+                        if (namePlaylist != null) {
+                            DatabaseReference playlistRef = databaseReference.child("playlists").child(namePlaylist);
                             playlistRef.removeValue()
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -104,14 +102,14 @@ public class MyPlaylistActivity extends AppCompatActivity {
                                             Toast.makeText(MyPlaylistActivity.this, "Failed to delete playlist!", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                            sessionManager.removePlaylist(namePlaylist);
+                            databaseReference.child("playlist_my").setValue(sessionManager.getmyPlaylist());
                         } else if (playList != null) {
-                            // If it's a predefined playlist, remove it from playlists
                             DatabaseReference playlistRef = databaseReference.child("playlists").child(playList.getId());
                             playlistRef.removeValue()
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-
                                             finish();
                                         }
                                     })
@@ -121,7 +119,11 @@ public class MyPlaylistActivity extends AppCompatActivity {
                                             Toast.makeText(MyPlaylistActivity.this, "Failed to delete playlist!", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                            sessionManager.removePlaylist(playList.getName());
+                            databaseReference.child("playlist_my").setValue(sessionManager.getmyPlaylist());
                         }
+
+
                     }
                 });
                 builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
