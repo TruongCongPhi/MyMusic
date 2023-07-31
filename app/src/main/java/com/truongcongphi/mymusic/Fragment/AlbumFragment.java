@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ import java.util.List;
 
 public class AlbumFragment extends Fragment {
     View view;
+    TextView tvTitleAlbum;
     ArrayList<Album> albums;
     private RecyclerView albumRecyclerView;
     private AlbumAdapter albumAdapter;
@@ -35,6 +37,7 @@ public class AlbumFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album, container, false);
+        tvTitleAlbum = view.findViewById(R.id.tv_title_album);
         albums = new ArrayList<>();
         albumRecyclerView = view.findViewById(R.id.album_rcv);
         albumAdapter = new AlbumAdapter(getActivity(),albums);
@@ -63,6 +66,7 @@ public class AlbumFragment extends Fragment {
 
                 }
                 albumAdapter.setData((ArrayList<Album>) albums);
+                tvTitleAlbum.setText("Album nổi bật");
 
             }
 

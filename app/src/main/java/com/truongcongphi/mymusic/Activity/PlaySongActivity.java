@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Random;
 
 public class PlaySongActivity extends AppCompatActivity {
-    private boolean isFromNotificationClick = false;
 
     TextView tvAlbumName;
     TextView tvSongName;

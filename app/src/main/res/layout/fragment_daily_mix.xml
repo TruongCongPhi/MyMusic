@@ -7,9 +7,10 @@
     >
 
     <TextView
+        android:id="@+id/tv_title_dailymix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daily Mix"
+        android:text=""
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginStart="14dp"

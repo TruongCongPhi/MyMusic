@@ -5,6 +5,7 @@
     android:scrollbars="none"
     android:background="@color/bg_color"
     >
+
     <LinearLayout
         android:id="@+id/linerlayout"
         android:layout_width="match_parent"

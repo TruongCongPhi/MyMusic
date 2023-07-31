@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DailyMixFragment extends Fragment {
+    TextView tvTitleDailyMix;
     ArrayList<DaiyMix> dailyMixes ;
     RecyclerView dailyMixRecyclerView;
     DailyMixAdapter dailyMixAdapter;
@@ -35,7 +37,7 @@ public class DailyMixFragment extends Fragment {
     @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_daily_mix, container, false);
-
+        tvTitleDailyMix = view.findViewById(R.id.tv_title_dailymix);
         dailyMixes = new ArrayList<>();
         dailyMixRecyclerView = view.findViewById(R.id.daily_mix_rcv);
         dailyMixAdapter = new DailyMixAdapter(getActivity(),dailyMixes);
@@ -64,6 +66,7 @@ public class DailyMixFragment extends Fragment {
 
                 }
                 dailyMixAdapter.setData((ArrayList<DaiyMix>) daiyMixList);
+                tvTitleDailyMix.setText("Daily Mix");
 
             }
 

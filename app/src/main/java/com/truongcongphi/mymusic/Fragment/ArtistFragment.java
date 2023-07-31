@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistFragment extends Fragment {
+    TextView tvTitleArtist;
     private RecyclerView artistRecyclerView;
     private ArtistAdapter artistAdapter;
     ArrayList<Artist> artists;
@@ -32,7 +34,7 @@ public class ArtistFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_artist, container, false);
-
+        tvTitleArtist = view.findViewById(R.id.tv_title_artist);
         artists = new ArrayList<>();
         artistRecyclerView = view.findViewById(R.id.artist_rcv);
         artistAdapter = new ArtistAdapter();
@@ -66,6 +68,7 @@ public class ArtistFragment extends Fragment {
                 }
 
                 artistAdapter.setData(artists);
+                tvTitleArtist.setText("Nghệ sĩ nổi bật");
             }
 
             @Override
