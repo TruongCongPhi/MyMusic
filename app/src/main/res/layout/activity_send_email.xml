@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp"
+        android:padding="16dp"
         android:layout_gravity="center"
         >
     <TextView
@@ -49,8 +49,9 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:textSize="18sp"
-        android:text="Tiêu đề"
+        android:text="Tiêu đề:"
         android:textColor="@color/white"
+        android:textStyle="bold"
         >
     </TextView>
     <EditText
@@ -65,14 +66,15 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:textSize="18sp"
-        android:text="Nội dung"
+        android:text="Nội dung:"
         android:textColor="@color/white"
+        android:textStyle="bold"
         >
     </TextView>
     <EditText
         android:id="@+id/edt_noidung"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/white"
 
@@ -85,7 +87,7 @@
         android:text="Gửi"
         android:textColor="@color/black"
         android:layout_gravity="center"
-        android:background="@drawable/custom_button_send"
+        android:background="@drawable/button_login_custom_on"
         app:backgroundTint="@null"
         ></Button>
     </LinearLayout>
