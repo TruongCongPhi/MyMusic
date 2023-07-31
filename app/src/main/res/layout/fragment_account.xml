@@ -12,7 +12,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="14dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avt"
@@ -47,7 +47,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="14dp"
             android:text="Danh sách phát"
             android:textColor="@color/tilte_item"
             android:textSize="20sp"
