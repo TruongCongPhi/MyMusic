@@ -99,11 +99,6 @@ public class ListSongActivity extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         sessionManager = new SessionManager(this);
 
-
-
-
-
-
     }
 
     private void getTilteAndImage() {

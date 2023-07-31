@@ -95,8 +95,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             imgAlbum = itemView.findViewById(R.id.img_item);
             tvAlbumName = itemView.findViewById(R.id.tv_tilte1);
             tvSingerName = itemView.findViewById(R.id.tv_tilte2);
-            ButtonAnimator buttonAnimator = new ButtonAnimator();
-            itemView.setOnTouchListener(buttonAnimator);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

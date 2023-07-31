@@ -76,8 +76,6 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
             super(itemView);
             imgDailyMix = itemView.findViewById(R.id.img_item);
             tvDailyMix = itemView.findViewById(R.id.tv_tilte1);
-            ButtonAnimator buttonAnimator = new ButtonAnimator();
-            itemView.setOnTouchListener(buttonAnimator);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

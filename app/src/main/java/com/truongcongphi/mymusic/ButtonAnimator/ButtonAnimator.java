@@ -13,9 +13,6 @@ public class ButtonAnimator implements View.OnTouchListener {
 
     public ButtonAnimator() {
     }
-    public ButtonAnimator(float scaleFactor) {
-        this.scaleFactor = scaleFactor;
-    }
     private void applyScaleEffect(View view, float scale) {
         scaleDownX = ObjectAnimator.ofFloat(view, "scaleX", scale);
         scaleDownY = ObjectAnimator.ofFloat(view, "scaleY", scale);

@@ -12,8 +12,8 @@
         android:text="Album nổi bật"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="15dp"
         android:textColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView

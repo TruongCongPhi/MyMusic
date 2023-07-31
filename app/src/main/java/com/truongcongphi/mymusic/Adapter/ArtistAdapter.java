@@ -86,9 +86,6 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             tvArtistName = itemView.findViewById(R.id.tv_tilte1);
             LinearLayout linearLayout = itemView.findViewById(R.id.linear_layout);
             linearLayout.setGravity(Gravity.CENTER);
-            ButtonAnimator buttonAnimator = new ButtonAnimator();
-            itemView.setOnTouchListener(buttonAnimator);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

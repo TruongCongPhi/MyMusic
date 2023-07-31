@@ -19,6 +19,7 @@ import com.truongcongphi.mymusic.Fragment.MyBottomSheetDialogSongFragment;
 import com.truongcongphi.mymusic.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
     private ArrayList<Song> mSongs;
@@ -39,6 +40,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     @Override
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
         Song song = mSongs.get(position);
+        List<String> topName = new ArrayList<>();
+        topName.add("Top 50 Việt Nam");
+        topName.add("Top 50 Toàn cầu");
+        topName.add("Top 50 Korea");
+        topName.add("Top hits 2023");
+        if(topName.contains(playlistName)){
+            holder.tvBXH.setVisibility(View.VISIBLE);
+            holder.tvBXH.setText(String.valueOf(position + 1));
+        }
+
+
         holder.tvSongName.setText(song.getSongName());
         holder.tvSingerName.setText(TextUtils.join(", ", song.getSingerName()));
 
@@ -58,7 +70,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgSong, songOptions;
-        private TextView tvSongName, tvSingerName;
+        private TextView tvSongName, tvSingerName, tvBXH;
 
         public SongViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +78,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             tvSongName = itemView.findViewById(R.id.tv_song_name);
             tvSingerName = itemView.findViewById(R.id.tv_singer_name);
             songOptions = itemView.findViewById(R.id.song_options);
+            tvBXH = itemView.findViewById(R.id.tv_bxh);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

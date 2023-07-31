@@ -7,11 +7,6 @@ public class DaiyMix implements Serializable {
     private String mixName;
     private String url;
 
-    public DaiyMix(String mixId, String mixName, String url) {
-        this.mixId = mixId;
-        this.mixName = mixName;
-        this.url = url;
-    }
 
     public DaiyMix() {
     }
