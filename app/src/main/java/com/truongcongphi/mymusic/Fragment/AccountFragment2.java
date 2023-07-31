@@ -28,10 +28,11 @@ import com.truongcongphi.mymusic.R;
 public class AccountFragment2 extends Fragment {
     ImageView imgUser;
     TextView tvName, tvGmail;
-    ImageButton ic_back;
-    Button btn_edit;
+    ImageView ic_back;
+    Button btn_edit, btnSignOut;
 
-    LinearLayout ln_dangxuat, ln_phanmem, ln_dieukien, ln_chinhsach, ln_hotro;
+    LinearLayout ln_phanmem, ln_dieukien, ln_chinhsach, ln_hotro;
+
     private SessionManager sessionManager;
 
     private FirebaseAuth mAuth;
@@ -51,7 +52,7 @@ public class AccountFragment2 extends Fragment {
         ln_dieukien = view.findViewById(R.id.ln_dieukien);
         ln_chinhsach = view.findViewById(R.id.ln_chinhsach);
         ln_hotro = view.findViewById(R.id.ln_hotro);
-        ln_dangxuat = view.findViewById(R.id.ln_dangxuat);
+        btnSignOut = view.findViewById(R.id.btn_dangxuat);
         mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(getActivity());
 
@@ -100,7 +101,7 @@ public class AccountFragment2 extends Fragment {
             }
         });
 
-        ln_dangxuat.setOnClickListener(new View.OnClickListener() {
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();

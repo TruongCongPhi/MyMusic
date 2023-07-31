@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private SessionManager sessionManager;
     private boolean passwordVisible = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-
 
 
         btnLogin2.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                                             finish();
                                         }
                                     }
+
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                         // Xử lý khi có lỗi truy cập cơ sở dữ liệu
@@ -192,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,HomeLoginActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeLoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
@@ -225,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
         getPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,GetPasswordActivity.class);
+                Intent intent = new Intent(LoginActivity.this, GetPasswordActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -239,12 +240,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
     private boolean isInputValid(String email, String password) {
         return !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password);
     }
+
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -252,8 +256,10 @@ public class LoginActivity extends AppCompatActivity {
             btnLogin2.setEnabled(isEnabled);
             btnLogin2.setBackgroundTintList(ColorStateList.valueOf(isEnabled ? Color.parseColor("#ffffff") : Color.parseColor("#423F3E")));
         }
+
         @Override
-        public void afterTextChanged(Editable s) {}
+        public void afterTextChanged(Editable s) {
+        }
     };
 
     private void addViews() {

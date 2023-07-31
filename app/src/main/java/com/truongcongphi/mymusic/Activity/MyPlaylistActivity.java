@@ -12,8 +12,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -82,14 +84,11 @@ public class MyPlaylistActivity extends AppCompatActivity {
         rcvSongs.setLayoutManager(linearLayoutManager);
         rcvSongs.setAdapter(songAdapter);
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
-        floatingActionButton = findViewById(R.id.floatingactionbutton);
         toolbar = findViewById(R.id.toolbarlist);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         sessionManager = new SessionManager(this);
-
-
     }
     private void getTilteAndImage() {
         if(playList != null){
@@ -158,11 +157,11 @@ public class MyPlaylistActivity extends AppCompatActivity {
         }
         if (intent.hasExtra("nameplaylist")) {
              namePlaylist = intent.getStringExtra("nameplaylist");
+            Toast.makeText(this,namePlaylist,Toast.LENGTH_SHORT).show();
+
         }
         if (intent.hasExtra("myplaylist")) {
             song =  getIntent().getParcelableExtra("myplaylist");
-            if(song!=null){
-            }
         }
     }
 }

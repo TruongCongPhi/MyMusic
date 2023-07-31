@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +26,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingFragment extends Fragment {
 
     ImageButton btn_back;
-    LinearLayout ln_dangxuat, ln_phanmem, ln_dieukien, ln_chinhsach, ln_hotro;
+    LinearLayout  ln_phanmem, ln_dieukien, ln_chinhsach, ln_hotro;
+    Button btnSignOut;
 
     CircleImageView img_avt;
     TextView txt_name;
@@ -40,13 +42,13 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_ben_thu_ba, container, false);
         btn_back = view.findViewById(R.id.btn_back);
-        ln_dangxuat = view.findViewById(R.id.ln_dangxuat);
         img_avt = view.findViewById(R.id.img_avt);
         txt_name = view.findViewById(R.id.txt_name);
         ln_phanmem = view.findViewById(R.id.ln_phanmembent3);
         ln_dieukien = view.findViewById(R.id.ln_dieukien);
         ln_chinhsach = view.findViewById(R.id.ln_chinhsach);
         ln_hotro = view.findViewById(R.id.ln_hotro);
+        btnSignOut = view.findViewById(R.id.btn_dangxuat);
         mAuth = FirebaseAuth.getInstance();
         sessionManager = new SessionManager(getActivity());
         addEvents();

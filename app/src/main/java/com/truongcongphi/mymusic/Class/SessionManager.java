@@ -107,7 +107,6 @@ public class SessionManager {
 
     public void logoutUser() {
         clearUserCredentials();
-
         Intent intent = new Intent(context, HomeLoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -28,11 +28,12 @@ import java.util.List;
 
 public class CreatePlaylistActivity extends AppCompatActivity {
     private EditText edtPlaylistName;
-    Button btnSave,btnExit;
+    Button btnSave, btnExit;
     SessionManager sessionManager;
     FirebaseUser user;
     DatabaseReference databaseReference;
     Song song;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +42,8 @@ public class CreatePlaylistActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(CreatePlaylistActivity.this, R.color.mau_nen_play_nhac));
 
         edtPlaylistName = findViewById(R.id.edt_playlist_name);
-         btnSave = findViewById(R.id.btn_save);
-         btnExit = findViewById(R.id.btn_exit);
+        btnSave = findViewById(R.id.btn_save);
+        btnExit = findViewById(R.id.btn_exit);
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         sessionManager = new SessionManager(this);
@@ -59,7 +60,7 @@ public class CreatePlaylistActivity extends AppCompatActivity {
 
                 List<String> myPlaylistId = sessionManager.getmyPlaylist();
 
-                if(!myPlaylistId.contains(namePlaylist)){
+                if (!myPlaylistId.contains(namePlaylist)) {
                     myPlaylistId.add(namePlaylist);
                     sessionManager.saveMyPlaylist(myPlaylistId);
 
@@ -87,11 +88,9 @@ public class CreatePlaylistActivity extends AppCompatActivity {
                                 Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                                 if (song != null) {
                                     intent.putExtra("myplaylist", song);
-                                    intent.putExtra("nameplaylist",namePlaylist);
                                 }
                                 intent.putExtra("nameplaylist", namePlaylist);
                                 v.getContext().startActivity(intent);
-
                                 finish();
                             }
 
@@ -102,13 +101,14 @@ public class CreatePlaylistActivity extends AppCompatActivity {
                             }
                         });
 
-                    }else {
+                    } else {
                         Intent intent = new Intent(v.getContext(), MyPlaylistActivity.class);
                         intent.putExtra("nameplaylist", namePlaylist);
                         v.getContext().startActivity(intent);
                         finish();
                     }
-                }else Toast.makeText(CreatePlaylistActivity.this,"Tên play list đã tồn tại",Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(CreatePlaylistActivity.this, "Tên play list đã tồn tại", Toast.LENGTH_SHORT).show();
             }
         });
         btnExit.setOnClickListener(new View.OnClickListener() {
