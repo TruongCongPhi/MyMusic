@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.truongcongphi.mymusic.Activity.ListSongActivity;
 import com.truongcongphi.mymusic.ButtonAnimator.ButtonAnimator;
@@ -31,7 +33,7 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
     @Override
     public DailyMixViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_home,parent,false);
+        View view = inflater.inflate(R.layout.item_home, parent, false);
 
         return new DailyMixViewHolder(view);
     }
@@ -39,35 +41,37 @@ public class DailyMixAdapter extends RecyclerView.Adapter<DailyMixAdapter.DailyM
     @Override
     public void onBindViewHolder(@NonNull DailyMixViewHolder holder, int position) {
         DaiyMix daiyMix = list.get(position);
-        if(daiyMix == null){
+        if (daiyMix == null) {
             return;
         }
 
 
-            Glide.with(holder.itemView.getContext())
-                    .load(daiyMix.getUrl())
-                    .error(R.drawable.music_note)
-                    .into(holder.imgDailyMix);
+        Glide.with(holder.itemView.getContext())
+                .load(daiyMix.getUrl())
+                .error(R.drawable.music_note)
+                .into(holder.imgDailyMix);
 
         holder.tvDailyMix.setText(daiyMix.getMixName());
     }
 
     @Override
     public int getItemCount() {
-        if(list != null){
+        if (list != null) {
             return list.size();
         }
         return 0;
     }
+
     public void setData(ArrayList<DaiyMix> dailyMixs) {
 
         this.list = dailyMixs;
         notifyDataSetChanged();
     }
 
-    public class DailyMixViewHolder extends RecyclerView.ViewHolder{
+    public class DailyMixViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgDailyMix;
         private TextView tvDailyMix;
+
         public DailyMixViewHolder(@NonNull View itemView) {
             super(itemView);
             imgDailyMix = itemView.findViewById(R.id.img_item);

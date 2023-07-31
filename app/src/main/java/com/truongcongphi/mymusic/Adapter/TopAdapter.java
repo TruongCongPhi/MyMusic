@@ -83,6 +83,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
                     Intent intent = new Intent(v.getContext(), ListSongActivity.class);
                     // Gắn dữ liệu album vào Intent
                     intent.putExtra("top", list.get(getAdapterPosition()));
+                    intent.putExtra("playlistname", list.get(getAdapterPosition()).getTopName());
+
                     v.getContext().startActivity(intent);
                 }
             });

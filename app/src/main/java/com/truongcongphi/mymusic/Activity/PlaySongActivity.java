@@ -61,6 +61,7 @@ public class PlaySongActivity extends AppCompatActivity {
     static boolean next = false;
     private boolean checkClick = false;
     SessionManager sessionManager;
+    String playlistName;
 
 
     private static PlaySongActivity instance;
@@ -77,15 +78,12 @@ public class PlaySongActivity extends AppCompatActivity {
         getDataFromIntent();
         initView();
         eventClick();
-        imgBack();
 
     }
 
     public static PlaySongActivity getInstance() {
         return instance;
     }
-
-
     private void stopCurrentSong() {
         if (mediaPlayer != null) {
             if (mediaPlayer.isPlaying()) {
@@ -97,16 +95,15 @@ public class PlaySongActivity extends AppCompatActivity {
         }
     }
 
-    private void imgBack() {
+
+
+    private void eventClick() {
         imgSongBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-    }
-
-    private void eventClick() {
         viewPagerPlaySong.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -140,7 +137,6 @@ public class PlaySongActivity extends AppCompatActivity {
                         updateTimeSong();
                     }
                     checkClick = false;
-
                 }
             }
 
@@ -516,11 +512,14 @@ public class PlaySongActivity extends AppCompatActivity {
         if (intent.hasExtra("vitribaihat")) {
             position = intent.getIntExtra("vitribaihat", 0);
         }
+        playlistName = intent.getStringExtra("playlistname");
+
 
     }
 
     private void initView() {
-        tvAlbumName = findViewById(R.id.tv_album_name);
+        tvAlbumName = findViewById(R.id.tv_playlist_name);
+        tvAlbumName.setText(playlistName);
         tvSongName = findViewById(R.id.tv_play_song_name);
         tvSingerName = findViewById(R.id.tv_song_singer_name);
         tvSongEndTime = findViewById(R.id.tv_song_end_time);

@@ -32,7 +32,7 @@ import java.util.List;
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
     private List<Artist> listArtist;
 
-    public void setData(List<Artist> list){
+    public void setData(List<Artist> list) {
         this.listArtist = list;
         this.notifyDataSetChanged();
     }
@@ -40,7 +40,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     @NonNull
     @Override
     public ArtistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home, parent, false);
         return new ArtistViewHolder(view);
     }
 
@@ -51,14 +51,14 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             return;
         }
 
-            // Nếu URL hợp lệ, hiển thị ảnh từ URL bằng Glide
-            Glide.with(holder.itemView.getContext())
-                    .load(artist.getImgURL())
-                    .apply(new RequestOptions()
-                            .transform(new CenterCrop())
-                            .transform(new RoundedCorners(1000)))
-                    .error(R.drawable.music_note)
-                    .into(holder.imgItem);
+        // Nếu URL hợp lệ, hiển thị ảnh từ URL bằng Glide
+        Glide.with(holder.itemView.getContext())
+                .load(artist.getImgURL())
+                .apply(new RequestOptions()
+                        .transform(new CenterCrop())
+                        .transform(new RoundedCorners(1000)))
+                .error(R.drawable.music_note)
+                .into(holder.imgItem);
 
 
         // Hiển thị tên ca sĩ
@@ -70,15 +70,16 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
 
     @Override
     public int getItemCount() {
-        if(listArtist != null){
+        if (listArtist != null) {
             return listArtist.size();
         }
         return 0;
     }
 
-    public class ArtistViewHolder extends RecyclerView.ViewHolder{
+    public class ArtistViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgItem;
         private TextView tvArtistName;
+
         public ArtistViewHolder(@NonNull View itemView) {
             super(itemView);
             imgItem = itemView.findViewById(R.id.img_item);
@@ -93,7 +94,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
                 public void onClick(View v) {
 
                     Intent intent = new Intent(v.getContext(), ListSongActivity.class);
-                    intent.putExtra("artist",listArtist.get(getAdapterPosition()));
+                    intent.putExtra("artist", listArtist.get(getAdapterPosition()));
                     v.getContext().startActivity(intent);
 
                 }

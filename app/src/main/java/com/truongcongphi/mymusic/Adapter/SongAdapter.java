@@ -22,11 +22,10 @@ import java.util.ArrayList;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
     private ArrayList<Song> mSongs;
-    private static final String CHANNEL_ID = "MyMusicNotificationChannel";
-    private static final int NOTIFICATION_ID = 1001;
-
-    public void setData(ArrayList<Song> listArrSong) {
+    String playlistName;
+    public void setData(ArrayList<Song> listArrSong, String playlistName) {
         this.mSongs = listArrSong;
+        this.playlistName = playlistName;
         notifyDataSetChanged();
     }
 
@@ -77,6 +76,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                     intent.putParcelableArrayListExtra("cacbaihat", mSongs);
                     intent.putExtra("baihat", song);
                     intent.putExtra("vitribaihat", vitri);
+                    intent.putExtra("playlistname",playlistName);
+
                     v.getContext().startActivity(intent);
 
                     // Show notification when a song is played

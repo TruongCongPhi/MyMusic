@@ -30,6 +30,13 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/music_note"
                 />
+            <ImageView
+                android:id="@+id/img_move_playlist"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/icon_move"
+                android:layout_gravity="end|bottom"
+                android:layout_marginRight="10dp"></ImageView>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarlist"
                 android:layout_width="match_parent"
@@ -37,6 +44,7 @@
                 android:elevation="6dp"
                 app:layout_collapseMode="pin"
                 android:theme="@style/ThemeOverlay.AppCompat.Light">
+
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

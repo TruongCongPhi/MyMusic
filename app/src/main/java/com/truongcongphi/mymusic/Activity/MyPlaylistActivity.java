@@ -1,6 +1,7 @@
 package com.truongcongphi.mymusic.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +43,7 @@ import java.util.List;
 public class MyPlaylistActivity extends AppCompatActivity {
     private RecyclerView rcvSongs;
     private SongAdapter songAdapter;
-    ImageView imgList, imgBack,imgAddPlayList;
+    ImageView imgList, imgBack, imgMovePlayList;
 
     PlayList playList;
     ArrayList<Song> listSong = new ArrayList<>();
@@ -47,6 +51,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
     Toolbar toolbar;
     FloatingActionButton floatingActionButton;
     FirebaseUser currentUser;
+    DatabaseReference databaseReference;
     SessionManager sessionManager;
     Song song;
     String namePlaylist;
@@ -64,12 +69,69 @@ public class MyPlaylistActivity extends AppCompatActivity {
         getTilteAndImage();
         setupListeners();
 
+
     }
+
     private void setupListeners() {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        imgMovePlayList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyPlaylistActivity.this);
+                builder.setTitle("Xoá danh sách phát này");
+                builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (song != null && namePlaylist != null) {
+                            DatabaseReference playlistRef = databaseReference.child("playlist_my").child(namePlaylist);
+                            playlistRef.removeValue()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // Failed to delete the playlist
+                                            Toast.makeText(MyPlaylistActivity.this, "Failed to delete playlist!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else if (playList != null) {
+                            // If it's a predefined playlist, remove it from playlists
+                            DatabaseReference playlistRef = databaseReference.child("playlists").child(playList.getId());
+                            playlistRef.removeValue()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+
+                                            finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(MyPlaylistActivity.this, "Failed to delete playlist!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
+                builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+
             }
         });
     }
@@ -78,9 +140,9 @@ public class MyPlaylistActivity extends AppCompatActivity {
         imgList = findViewById(R.id.img_list);
         imgBack = findViewById(R.id.btn_back);
         rcvSongs = findViewById(R.id.rcv_songs);
-
+        imgMovePlayList = findViewById(R.id.img_move_playlist);
         songAdapter = new SongAdapter();
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvSongs.setLayoutManager(linearLayoutManager);
         rcvSongs.setAdapter(songAdapter);
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
@@ -88,24 +150,26 @@ public class MyPlaylistActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.getUid());
         sessionManager = new SessionManager(this);
     }
+
     private void getTilteAndImage() {
-        if(playList != null){
+        if (playList != null) {
             collapsingToolbarLayout.setTitle(playList.getId());
             Glide.with(this)
                     .load(playList.getImg())
                     .error(R.drawable.music_note)
                     .into(imgList);
-        }else if (song!=null){
+        } else if (song != null) {
             collapsingToolbarLayout.setTitle(namePlaylist);
-        }
-        else collapsingToolbarLayout.setTitle(namePlaylist);
+        } else collapsingToolbarLayout.setTitle(namePlaylist);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBarTitleStyle);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBarTitleStyle);
     }
+
     private void getData() {
-        if(song != null ){
+        if (song != null) {
             DatabaseReference playlistRef = FirebaseDatabase.getInstance().getReference("songs");
             playlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -120,14 +184,15 @@ public class MyPlaylistActivity extends AppCompatActivity {
                             songAdapter.notifyDataSetChanged();
                         }
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong, namePlaylist);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
         }
-        if(playList != null){
+        if (playList != null) {
             DatabaseReference playlistRef = FirebaseDatabase.getInstance().getReference("songs");
             playlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -142,13 +207,16 @@ public class MyPlaylistActivity extends AppCompatActivity {
                             songAdapter.notifyDataSetChanged();
                         }
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong, playList.getName());
                 }
+
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
             });
         }
     }
+
     private void dataIntent() {
         Intent intent = getIntent();
         listSong.clear();
@@ -156,12 +224,12 @@ public class MyPlaylistActivity extends AppCompatActivity {
             playList = (PlayList) intent.getSerializableExtra("playlist");
         }
         if (intent.hasExtra("nameplaylist")) {
-             namePlaylist = intent.getStringExtra("nameplaylist");
-            Toast.makeText(this,namePlaylist,Toast.LENGTH_SHORT).show();
+            namePlaylist = intent.getStringExtra("nameplaylist");
+            Toast.makeText(this, namePlaylist, Toast.LENGTH_SHORT).show();
 
         }
         if (intent.hasExtra("myplaylist")) {
-            song =  getIntent().getParcelableExtra("myplaylist");
+            song = getIntent().getParcelableExtra("myplaylist");
         }
     }
 }

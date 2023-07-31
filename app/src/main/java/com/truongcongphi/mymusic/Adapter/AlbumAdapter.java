@@ -38,14 +38,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     }
 
 
-
-
     @NonNull
     @Override
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_home,parent,false);
-
+        View view = inflater.inflate(R.layout.item_home, parent, false);
 
 
         return new AlbumViewHolder(view);
@@ -54,7 +51,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         Album album = listAlbum.get(position);
-        if(album == null){
+        if (album == null) {
             return;
         }
 
@@ -76,11 +73,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     @Override
     public int getItemCount() {
-        if(listAlbum != null){
+        if (listAlbum != null) {
             return listAlbum.size();
         }
         return 0;
     }
+
     public void setData(ArrayList<Album> albums) {
 
         this.listAlbum = albums;
@@ -88,7 +86,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     }
 
 
-    public class AlbumViewHolder extends RecyclerView.ViewHolder{
+    public class AlbumViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgAlbum;
         private TextView tvAlbumName, tvSingerName;
 
@@ -103,10 +101,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ListSongActivity.class);
-                        // Gắn dữ liệu album vào Intent
-                        intent.putExtra("album", listAlbum.get(getAdapterPosition()));
-                        v.getContext().startActivity(intent);
-                    }
+                    // Gắn dữ liệu album vào Intent
+                    intent.putExtra("album", listAlbum.get(getAdapterPosition()));
+                    v.getContext().startActivity(intent);
+                }
             });
         }
     }

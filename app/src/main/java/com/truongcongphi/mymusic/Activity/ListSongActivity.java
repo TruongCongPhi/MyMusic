@@ -157,7 +157,7 @@ public class ListSongActivity extends AppCompatActivity {
                             songAdapter.notifyDataSetChanged();
                         }
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong,album.getAlbumName());
                     // kiểm tra album trong playlist
                     checkInPlaylist(songPlaylist, album.getAlbumID(), album.getAlbumName(), album.getAlbumURL());
                 }
@@ -181,7 +181,7 @@ public class ListSongActivity extends AppCompatActivity {
                         songPlaylist.add(song.getSongID());
                         songAdapter.notifyDataSetChanged();
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong,daiyMix.getMixName());
                     checkInPlaylist(songPlaylist,daiyMix.getMixId(), daiyMix.getMixName(), daiyMix.getUrl());
                 }
                 @Override
@@ -202,7 +202,7 @@ public class ListSongActivity extends AppCompatActivity {
                         songAdapter.notifyDataSetChanged();
                         songPlaylist.add(song.getSongID());
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong,top.getTopName());
                     checkInPlaylist(songPlaylist,top.getTopId(), top.getTopName(), top.getTopUrl());
                 }
 
@@ -228,7 +228,7 @@ public class ListSongActivity extends AppCompatActivity {
                             songAdapter.notifyDataSetChanged();
                         }
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong,artist.getName());
                     checkInPlaylist(songPlaylist, artist.getName(), artist.getName(), artist.getImgURL());
                 }
 
@@ -254,7 +254,7 @@ public class ListSongActivity extends AppCompatActivity {
                             songAdapter.notifyDataSetChanged();
                         }
                     }
-                    songAdapter.setData(listSong);
+                    songAdapter.setData(listSong,playList.getName());
                     checkInPlaylist(songPlaylist, playList.getId(), playList.getName(), playList.getImg());
 
                 }
@@ -337,9 +337,7 @@ public class ListSongActivity extends AppCompatActivity {
         if (intent.hasExtra("playlist")) {
             playList = (PlayList) intent.getSerializableExtra("playlist");
         }
-        if (intent.hasExtra("myplaylist")) {
-            String namePlaylist = getIntent().getStringExtra("myplaylist");
-        }
+
     }
 
 
