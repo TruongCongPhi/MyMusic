@@ -16,7 +16,6 @@
         android:elevation="6dp"
         app:layout_collapseMode="pin"
         android:theme="@style/ThemeOverlay.AppCompat.Light">
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
