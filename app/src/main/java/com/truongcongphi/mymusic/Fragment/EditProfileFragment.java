@@ -26,7 +26,6 @@ public class EditProfileFragment extends AppCompatActivity {
         addControls();
         addEvents();
     }
-
     private void addEvents() {
         img_avt.setOnClickListener(new View.OnClickListener() {
             @Override

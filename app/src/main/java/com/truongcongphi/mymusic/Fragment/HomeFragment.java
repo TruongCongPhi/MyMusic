@@ -32,8 +32,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         img_setting = view.findViewById(R.id.img_setting);
-
-
         requireActivity().getWindow().setStatusBarColor(ContextCompat.getColor(requireContext(), R.color.bg_color));
 
 

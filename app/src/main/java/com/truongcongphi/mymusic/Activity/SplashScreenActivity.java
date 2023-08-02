@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.truongcongphi.mymusic.Class.SessionManager;
 import com.truongcongphi.mymusic.R;
 
@@ -14,6 +15,7 @@ import com.truongcongphi.mymusic.R;
 public class SplashScreenActivity extends AppCompatActivity {
     private static final int SPLASH_TIME_OUT = 2000; // Thời gian chờ đợi trước khi chuyển hướng (tính bằng mili giây)
     private SessionManager sessionManager;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(SplashScreenActivity.this, R.color.black));
 
         sessionManager = new SessionManager(this);
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override

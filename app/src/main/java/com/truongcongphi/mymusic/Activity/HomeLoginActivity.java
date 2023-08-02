@@ -17,7 +17,7 @@ import com.truongcongphi.mymusic.R;
 
 
 public class HomeLoginActivity extends AppCompatActivity {
-    Button btnLoginFB, btnLoginPhoneNumber, btnRegister, btnLoginGoogle;
+    Button btnLoginFB, btnRegister, btnLoginGoogle;
     TextView btnLogin1;
 
     @Override
@@ -27,7 +27,7 @@ public class HomeLoginActivity extends AppCompatActivity {
         addViews();
         addEvents();
         addButtonAnimator();
-        getWindow().setStatusBarColor(ContextCompat.getColor(HomeLoginActivity.this, R.color.mau_nen_play_nhac));
+        getWindow().setStatusBarColor(ContextCompat.getColor(HomeLoginActivity.this, R.color.bg_color));
     }
 
     private void addViews() {
